@@ -10,6 +10,7 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import PostsPage, {postsLoader} from "./pages/PostsPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import SinglePostPage, {singlePostLoader} from "./pages/SinglePostPage.jsx";
+import NewPostForm, {addPostAction} from "./features/posts/NewPostForm.jsx";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
                 path: "/posts/:id",
                 element: <SinglePostPage/>,
                 loader: singlePostLoader
+            },
+            {
+                path: "/posts/new",
+                element: <NewPostForm/>,
+                action: addPostAction
             }
         ]
     },
