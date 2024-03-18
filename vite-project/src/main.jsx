@@ -7,7 +7,7 @@ import {
 import "./assets/index.css";
 import Layout from "./pages/Layout.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
-import PostsPage from "./pages/PostsPage.jsx";
+import PostsPage, {postsLoader} from "./pages/PostsPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 
 const router = createBrowserRouter([
@@ -22,7 +22,8 @@ const router = createBrowserRouter([
             },
             {
                 path: "/posts",
-                element: <PostsPage/>
+                element: <PostsPage/>,
+                loader: postsLoader
             }
         ]
     },
