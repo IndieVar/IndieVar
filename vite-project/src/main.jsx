@@ -9,6 +9,7 @@ import Layout from "./pages/Layout.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import PostsPage, {postsLoader} from "./pages/PostsPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import SinglePostPage, {singlePostLoader} from "./pages/SinglePostPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
                 path: "/posts",
                 element: <PostsPage/>,
                 loader: postsLoader
+            },
+            {
+                path: "/posts/:id",
+                element: <SinglePostPage/>,
+                loader: singlePostLoader
             }
         ]
     },

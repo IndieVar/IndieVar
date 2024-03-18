@@ -1,6 +1,6 @@
 export default function PostsList({posts}) {
     return (
-        <div className="bg-gray-100 py-6">
+        <div className="py-6">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:mx-0">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">From the blog</h2>
@@ -16,7 +16,7 @@ export default function PostsList({posts}) {
                                     {'18.03.2024'}
                                 </time>
                                 <a
-                                    href={'#'}
+                                    href={`posts/${post.id}`}
                                     className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                                 >
                                     {'Development'}
@@ -24,7 +24,7 @@ export default function PostsList({posts}) {
                             </div>
                             <div className="group relative">
                                 <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                                    <a href={'#'}>
+                                    <a href={`posts/${post.id}`}>
                                         <span className="absolute inset-0" />
                                         {post.title}
                                     </a>
