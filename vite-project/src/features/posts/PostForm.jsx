@@ -2,7 +2,7 @@ import {Form, redirect} from "react-router-dom";
 import axios from "axios";
 import {API_URL} from "../../constants.js";
 
-export const addPostAction = async ({request, params}) => {
+export const postActions = async ({request, params}) => {
     switch (request.method) {
         case 'POST': {
             const formData = await request.formData();
@@ -24,7 +24,7 @@ export const addPostAction = async ({request, params}) => {
     }
 }
 
-export default function NewPostForm() {
+export default function PostForm() {
     return (
         <Form
             method={'post'}
@@ -39,7 +39,7 @@ export default function NewPostForm() {
 
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div className="sm:col-span-4">
-                            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+                            <label htmlFor="title" className="block text-sm font-medium leading-6 text-gray-900">
                                 Title
                             </label>
                             <div className="mt-2">
@@ -48,8 +48,8 @@ export default function NewPostForm() {
                                     <input
                                         type="text"
                                         name="title"
-                                        id="username"
-                                        autoComplete="username"
+                                        id="title"
+                                        autoComplete="title"
                                         className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                         placeholder="indiDev"
                                     />
