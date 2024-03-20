@@ -1,8 +1,8 @@
+import HeroComponent from "../features/home/HeroComponent.jsx";
+
 const HomePage = () => {
     return (
-        <h1 className="text-3xl font-bold underline">
-            You are welcome to IndieVar development
-        </h1>
+        <HeroComponent/>
     )
 }
 export default HomePage;
