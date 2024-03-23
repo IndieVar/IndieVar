@@ -1,6 +1,8 @@
-// export const API_URL =
-//     process.env.NODE_ENV === "test"
-//         ? "https://jsonplaceholder.typicode.com/"
-//         : import.meta.env.VITE_API_URL;
+export const API_URL =
+    process.env.NODE_ENV === "test"
+        ? "https://jsonplaceholder.typicode.com/"
+        : import.meta.env.VITE_API_URL;
 
-export const API_URL = "https://jsonplaceholder.typicode.com";
+export const AUTH_API_URL = "http://127.0.0.1:3000/admins/tokens/sign_in"
+
+export const TEST_API_URL = "https://jsonplaceholder.typicode.com";
