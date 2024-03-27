@@ -15,11 +15,11 @@ export default function LoginPage() {
                     if (signIn({
                         auth: {
                             token: res.data.token,
-                            type: 'Admin'
+                            type: 'Bearer'
                         },
                         userState: res.data.resource_owner
                     }))
-                        console.log(res.data)
+                        console.log(res)
                 } else {
                     console.log('Not valid email or password')
                 }
