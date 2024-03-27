@@ -11,8 +11,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 gem "rack-cors"
-gem "devise", "~> 4.9"
-gem "devise-api", "~> 0.1.3"
+gem "devise"
+# gem "devise-jwt"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
