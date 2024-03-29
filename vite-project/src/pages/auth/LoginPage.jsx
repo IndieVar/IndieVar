@@ -9,7 +9,7 @@ export default function LoginPage() {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        axios.post(AUTH_API_URL, formData)
+        axios.post(`${AUTH_API_URL}/sign_in`, formData)
             .then((res) => {
                 if (res.status === 200) {
                     if (signIn({
@@ -17,6 +17,7 @@ export default function LoginPage() {
                             token: res.data.token,
                             type: 'Bearer'
                         },
+                        // refresh: res.data.refresh_token,
                         userState: res.data.resource_owner
                     }))
                         console.log(res)
