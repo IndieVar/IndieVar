@@ -2,8 +2,8 @@ import {useState} from 'react'
 import {Dialog, Popover} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon,} from '@heroicons/react/24/outline'
 import {Link, NavLink} from "react-router-dom";
-import useSignOut from "react-auth-kit/hooks/useSignOut";
-import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
+import axios from "axios";
+import {AUTH_API_URL} from "../constants.js";
 
 const navigations = [
     {name: 'Home', href: '/'},
@@ -102,18 +102,25 @@ const MobileVersion = ({mobileMenuOpen, setMobileMenuOpen}) => (
 )
 
 const LoginBtn = ({type}) => {
-    const isAuthenticated = useIsAuthenticated()
+    const isAuthenticated = localStorage.getItem('current_user')
+    const signOutHandler = () => {
+        axios.post(`${AUTH_API_URL}/revoke`, {headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },}).then('Signout successfuly')
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('current_user')
+    }
     const className = type === "desktop"
         ? "text-sm font-semibold leading-6 text-gray-500 hover:text-gray-900"
         : "-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-500 hover:text-gray-900 hover:bg-gray-50"
 
     if (isAuthenticated) {
         console.log('true')
-        const signOutBtn = useSignOut()
         return (
             <button
                 className={className}
-                onClick={() => signOut()}
+                onClick={() => signOutHandler()}
             >
                 Sign Out
             </button>

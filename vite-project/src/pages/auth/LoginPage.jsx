@@ -1,10 +1,8 @@
 import React from "react"
 import axios from "axios";
-import useSignIn from "react-auth-kit/hooks/useSignIn";
 import {AUTH_API_URL} from "../../constants.js";
 
 export default function LoginPage() {
-    const signIn = useSignIn()
     const [formData, setFormData] = React.useState({email: '', password: ''})
 
     const onSubmit = (e) => {
@@ -12,15 +10,10 @@ export default function LoginPage() {
         axios.post(`${AUTH_API_URL}/sign_in`, formData)
             .then((res) => {
                 if (res.status === 200) {
-                    if (signIn({
-                        auth: {
-                            token: res.data.token,
-                            type: 'Bearer'
-                        },
-                        // refresh: res.data.refresh_token,
-                        userState: res.data.resource_owner
-                    }))
-                        console.log(res)
+                    console.log(res)
+                    localStorage.setItem('access_token', res.data.token)
+                    localStorage.setItem('refresh_token', res.data.refresh_token)
+                    localStorage.setItem('current_user', JSON.stringify(res.data.resource_owner))
                 } else {
                     console.log('Not valid email or password')
                 }
