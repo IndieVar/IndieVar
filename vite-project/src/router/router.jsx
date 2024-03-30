@@ -7,6 +7,7 @@ import SinglePostPage, {singlePostLoader} from "../pages/SinglePostPage.jsx";
 import * as React from "react";
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
 import LoginPage from "../pages/auth/LoginPage.jsx";
+import AdminProvider from "../providers/AdminProvider.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -16,8 +17,11 @@ export const router = createBrowserRouter(
                 <Route path="/posts" element={<PostsPage/>} loader={postsLoader}/>
                 <Route path="/posts/:id" element={<SinglePostPage/>} loader={singlePostLoader}/>
                 <Route path="/login" element={<LoginPage/>}/>
-                <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+                <Route element={<AdminProvider/>}>
+                    <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+                </Route>
             </Route>
         </>
     )
 );
+

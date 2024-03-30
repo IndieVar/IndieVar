@@ -1,9 +1,13 @@
 import React from "react"
 import axios from "axios";
 import {AUTH_API_URL} from "../../constants.js";
+import {Navigate} from "react-router-dom";
+import {useAuth} from "../../providers/AuthProvider.jsx";
 
 export default function LoginPage() {
     const [formData, setFormData] = React.useState({email: '', password: ''})
+    const {isLoggedIn} = useAuth()
+    if (isLoggedIn) {return <Navigate to={'/'} replace />;}
 
     const onSubmit = (e) => {
         e.preventDefault()
