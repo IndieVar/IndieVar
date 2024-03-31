@@ -9,12 +9,16 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({children}) => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('current_user'))
 
-    const login = () => {
-        // localStorage.setItem('current_user', 'Aleks')
+    const login = (res) => {
+        localStorage.setItem('access_token', res.data.token)
+        localStorage.setItem('refresh_token', res.data.refresh_token)
+        localStorage.setItem('current_user', JSON.stringify(res.data.resource_owner))
         setIsLoggedIn(true)
     }
 
     const logout = () => {
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
         localStorage.removeItem('current_user')
         setIsLoggedIn(false)
     }

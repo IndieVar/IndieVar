@@ -1,25 +1,24 @@
 import React from "react"
 import axios from "axios";
 import {AUTH_API_URL} from "../../constants.js";
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 
 export default function LoginPage() {
+    const {isLoggedIn, login} = useAuth()
+    if (isLoggedIn) return <Navigate to={'/'} replace/>;
+    
+    const navigate = useNavigate();
     const [formData, setFormData] = React.useState({email: '', password: ''})
-    const {isLoggedIn} = useAuth()
-    if (isLoggedIn) {return <Navigate to={'/'} replace />;}
 
     const onSubmit = (e) => {
         e.preventDefault()
         axios.post(`${AUTH_API_URL}/sign_in`, formData)
             .then((res) => {
                 if (res.status === 200) {
-                    console.log(res)
-                    localStorage.setItem('access_token', res.data.token)
-                    localStorage.setItem('refresh_token', res.data.refresh_token)
-                    localStorage.setItem('current_user', JSON.stringify(res.data.resource_owner))
-                } else {
-                    console.log('Not valid email or password')
+                    login(res)
+                    if (res.data.resource_owner.email === 'aleksvarlaam@gmail.com') return navigate('/admin/dashboard');
+                    return navigate('/');
                 }
             })
     }

@@ -2,8 +2,7 @@ import {useState} from 'react'
 import {Dialog, Popover} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon,} from '@heroicons/react/24/outline'
 import {Link, NavLink} from "react-router-dom";
-import axios from "axios";
-import {AUTH_API_URL} from "../constants.js";
+import HandleLogin from "../pages/auth/HandleLogin.jsx";
 
 const navigations = [
     {name: 'Home', href: '/'},
@@ -51,7 +50,7 @@ const DesktopVersion = ({mobileMenuOpen, setMobileMenuOpen, loginBtn}) => (
             ))}
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <LoginBtn type={"desktop"}/>
+            <HandleLogin type={"desktop"}/>
         </div>
     </nav>
 )
@@ -93,47 +92,13 @@ const MobileVersion = ({mobileMenuOpen, setMobileMenuOpen}) => (
                         ))}
                     </div>
                     <div className="py-6">
-                        <LoginBtn type={"mobile"}/>
+                        <HandleLogin type={"mobile"}/>
                     </div>
                 </div>
             </div>
         </Dialog.Panel>
     </Dialog>
 )
-
-const LoginBtn = ({type}) => {
-    const isAuthenticated = localStorage.getItem('current_user')
-    const signOutHandler = () => {
-        axios.post(`${AUTH_API_URL}/revoke`, {headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-            },}).then('Signout successfuly')
-        localStorage.removeItem('access_token')
-        localStorage.removeItem('current_user')
-    }
-    const className = type === "desktop"
-        ? "text-sm font-semibold leading-6 text-gray-500 hover:text-gray-900"
-        : "-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-500 hover:text-gray-900 hover:bg-gray-50"
-
-    if (isAuthenticated) {
-        console.log('true')
-        return (
-            <button
-                className={className}
-                onClick={() => signOutHandler()}
-            >
-                Sign Out
-            </button>
-        )
-    } else {
-        console.log('false')
-        return (
-            <Link to="/login" className={className}>
-                Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
-        )
-    }
-}
 
 const linkClassName = {
     desktop: {
