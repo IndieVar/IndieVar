@@ -1,6 +1,4 @@
 import {createContext, useContext, useState} from "react";
-import axios from "axios";
-import {AUTH_API_URL} from "../constants.js";
 
 const AuthContext = createContext();
 
@@ -8,6 +6,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({children}) => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('current_user'))
+    let currentUser = JSON.parse(localStorage.getItem('current_user'))
 
     const login = (res) => {
         localStorage.setItem('access_token', res.data.token)
@@ -23,30 +22,8 @@ export const AuthProvider = ({children}) => {
         setIsLoggedIn(false)
     }
 
-
-    const refreshToken = () => {
-        axios.post(`${AUTH_API_URL}/refresh`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('refresh_token')}`,
-            },
-        }).then((res) => {
-            console.log(res)
-        })
-    }
-
-    const tokenInfo = () => {
-        axios.get(`${AUTH_API_URL}/info`, {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-            },
-        }).then((res) => {
-            return res.data
-        })
-    }
-
     return (
-        <AuthContext.Provider value={{isLoggedIn, login, logout}}>
+        <AuthContext.Provider value={{isLoggedIn, login, logout, currentUser}}>
             {children}
         </AuthContext.Provider>
     )

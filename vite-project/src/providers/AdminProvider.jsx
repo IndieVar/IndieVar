@@ -2,10 +2,10 @@ import {Navigate, Outlet} from "react-router-dom";
 import {useAuth} from "./AuthProvider.jsx";
 
 const AdminProvider = () => {
-    const {isLoggedIn, logout} = useAuth()
+    const {currentUser} = useAuth()
 
-    if (!isLoggedIn) {
-        return <Navigate to={'/login'} replace />;
+    if (currentUser?.email !== 'aleksvarlaam@gmail.com') {
+        return <Navigate to={'/login'} replace/>;
     }
 
     return <Outlet/>
