@@ -8,17 +8,21 @@ import * as React from "react";
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
 import LoginPage from "../pages/auth/LoginPage.jsx";
 import AdminProvider from "../providers/AdminProvider.jsx";
+import AuthProvider, {currentUserLoader} from "../providers/AuthProvider.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route element={<Layout/>} errorElement={<ErrorPage/>}>
-                <Route path="/" element={<HomePage/>}/>
-                <Route path="/posts" element={<PostsPage/>} loader={postsLoader}/>
-                <Route path="/posts/:id" element={<SinglePostPage/>} loader={singlePostLoader}/>
-                <Route path="/login" element={<LoginPage/>}/>
-                <Route element={<AdminProvider/>}>
-                    <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+            <Route element={<AuthProvider/>} errorElement={<ErrorPage/>}
+                   loader={currentUserLoader}>
+                <Route element={<Layout/>}>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/posts" element={<PostsPage/>} loader={postsLoader}/>
+                    <Route path="/posts/:id" element={<SinglePostPage/>} loader={singlePostLoader}/>
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route element={<AdminProvider/>}>
+                        <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+                    </Route>
                 </Route>
             </Route>
         </>

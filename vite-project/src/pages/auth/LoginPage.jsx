@@ -4,11 +4,16 @@ import {AUTH_API_URL} from "../../constants.js";
 import {Navigate, useNavigate} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 
-export default function LoginPage() {
-    const {isLoggedIn, login} = useAuth()
-    if (isLoggedIn) return <Navigate to={'/'} replace/>;
+const roleRedirect = {
+    user: '/',
+    moderator: '/',
+    admin: '/admin/dashboard'
+}
 
-    const navigate = useNavigate();
+export default function LoginPage() {
+    const {login, currentUser} = useAuth()
+    if (currentUser) return <Navigate to={roleRedirect[currentUser.role]} replace/>;
+
     const [formData, setFormData] = React.useState({email: '', password: ''})
     const [isLoginFailed, setIsLoginFailed] = useState(false)
 
@@ -18,8 +23,7 @@ export default function LoginPage() {
             .then((res) => {
                 if (res.status === 200) {
                     login(res)
-                    if (res.data.resource_owner.email === 'aleksvarlaam@gmail.com') return navigate('/admin/dashboard');
-                    return navigate('/');
+                    location.reload()
                 }
             }).catch((error) => {
             setIsLoginFailed(true)

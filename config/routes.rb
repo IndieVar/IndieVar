@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       devise_for :users
+      get 'current_user', to: 'current_user#get'
     end
   end
 
