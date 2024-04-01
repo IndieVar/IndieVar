@@ -4,7 +4,7 @@ import {useAuth} from "./AuthProvider.jsx";
 const AdminProvider = () => {
     const {currentUser} = useAuth()
 
-    if (currentUser?.email !== 'aleksvarlaam@gmail.com') {
+    if (currentUser?.role !== 'admin') {
         return <Navigate to={'/login'} replace/>;
     }
 
