@@ -1,7 +1,9 @@
+
 const HomePage = () => {
+
     return (
         <h1 className="text-3xl font-bold underline">
-            You are welcome to IndieVar development
+            You are welcome to IndieVar development <br/>
         </h1>
     )
 }

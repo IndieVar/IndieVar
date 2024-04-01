@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {Dialog, Popover} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon,} from '@heroicons/react/24/outline'
 import {Link, NavLink} from "react-router-dom";
+import HandleLogin from "../pages/auth/HandleLogin.jsx";
 
 const navigations = [
     {name: 'Home', href: '/'},
@@ -19,7 +20,7 @@ export default function Header() {
     )
 }
 
-const DesktopVersion = ({mobileMenuOpen, setMobileMenuOpen}) => (
+const DesktopVersion = ({mobileMenuOpen, setMobileMenuOpen, loginBtn}) => (
     <nav className="mx-auto flex items-center justify-between p-3 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
             <Link to="/" className="-m-1.5 p-1.5">
@@ -49,9 +50,7 @@ const DesktopVersion = ({mobileMenuOpen, setMobileMenuOpen}) => (
             ))}
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link to="/login" className="text-sm font-semibold leading-6 text-gray-500 hover:text-gray-900">
-                Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
+            <HandleLogin type={"desktop"}/>
         </div>
     </nav>
 )
@@ -93,11 +92,7 @@ const MobileVersion = ({mobileMenuOpen, setMobileMenuOpen}) => (
                         ))}
                     </div>
                     <div className="py-6">
-                        <Link to={"/login"}
-                              className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-500 hover:text-gray-900 hover:bg-gray-50"
-                        >
-                            Log in
-                        </Link>
+                        <HandleLogin type={"mobile"}/>
                     </div>
                 </div>
             </div>
