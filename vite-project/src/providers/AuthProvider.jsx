@@ -1,23 +1,16 @@
 import {createContext, useContext, useState} from "react";
-import axios from "axios";
-import {API_URL} from "../constants.js";
 import {Outlet, useLoaderData} from "react-router-dom";
+import api from "../api.js";
 
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
-
 export const currentUserLoader = async ({request, params}) => {
     if (!localStorage.getItem('access_token')) return null
 
-    const {data} = await axios.get(`${API_URL}/current_user`, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`
-        }
-    });
+    const {data} = await api.get('/current_user')
     return data
 }
-
 export const AuthProvider = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('access_token'))
     let currentUser = useLoaderData();
