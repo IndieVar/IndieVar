@@ -1,5 +1,5 @@
 import axios from "axios";
-import {AUTH_API_URL} from "../../constants.js";
+import {AUTH_API_URL} from "../../config/constants.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 

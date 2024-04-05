@@ -1,28 +1,28 @@
 import {createContext, useContext, useState} from "react";
 import {Outlet, useLoaderData} from "react-router-dom";
-import api from "../api.js";
+import api from "../config/api.jsx";
 
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 export const currentUserLoader = async ({request, params}) => {
-    if (!localStorage.getItem('access_token')) return null
+    if (!localStorage.getItem('token')) return null
 
     const {data} = await api.get('/current_user')
     return data
 }
 export const AuthProvider = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('access_token'))
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'))
     let currentUser = useLoaderData();
 
-    const login = (res) => {
-        localStorage.setItem('access_token', res.data.token)
-        localStorage.setItem('refresh_token', res.data.refresh_token)
+    const login = ({token, refresh_token}) => {
+        localStorage.setItem('token', token)
+        localStorage.setItem('refresh_token', refresh_token)
         setIsLoggedIn(true)
     }
 
     const logout = () => {
-        localStorage.removeItem('access_token')
+        localStorage.removeItem('token')
         localStorage.removeItem('refresh_token')
         currentUser = null
         setIsLoggedIn(false)
