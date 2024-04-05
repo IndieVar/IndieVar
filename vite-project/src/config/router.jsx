@@ -1,9 +1,9 @@
 import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
 import Layout from "../pages/Layout.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
-import HomePage from "../pages/HomePage.jsx";
-import PostsPage, {postsLoader} from "../pages/PostsPage.jsx";
-import SinglePostPage, {singlePostLoader} from "../pages/SinglePostPage.jsx";
+import HomePage from "../pages/home/HomePage.jsx";
+import PostsPage, {postsLoader} from "../pages/posts/PostsPage.jsx";
+import SinglePostPage, {singlePostLoader} from "../pages/posts/SinglePostPage.jsx";
 import * as React from "react";
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
 import LoginPage from "../pages/auth/LoginPage.jsx";
