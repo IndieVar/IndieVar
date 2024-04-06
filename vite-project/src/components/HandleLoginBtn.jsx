@@ -1,9 +1,9 @@
 import axios from "axios";
-import {AUTH_API_URL} from "../../config/constants.jsx";
 import {Link, useNavigate} from "react-router-dom";
-import {useAuth} from "../../providers/AuthProvider.jsx";
+import {useAuth} from "../providers/AuthProvider.jsx";
+import {AUTH_API_URL} from "../config/constants.jsx";
 
-const HandleLogin = ({type}) => {
+const HandleLoginBtn = ({type}) => {
     const {isLoggedIn, logout} = useAuth();
     const navigate = useNavigate();
     const logoutHandler = () => {
@@ -37,4 +37,4 @@ const HandleLogin = ({type}) => {
     )
 }
 
-export default HandleLogin;
+export default HandleLoginBtn;
