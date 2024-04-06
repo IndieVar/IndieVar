@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_URL} from "./constants.jsx";
 import {redirect} from "react-router-dom";
 
+
 const api = axios.create({
     baseURL: API_URL,
 });
