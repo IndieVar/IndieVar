@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {Dialog, Popover} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon,} from '@heroicons/react/24/outline'
 import {Link, NavLink} from "react-router-dom";
-import HandleLogin from "../pages/auth/HandleLogin.jsx";
+import HandleLoginBtn from "./HandleLoginBtn.jsx";
 
 const navigations = [
     {name: 'Home', href: '/'},
@@ -50,7 +50,7 @@ const DesktopVersion = ({mobileMenuOpen, setMobileMenuOpen, loginBtn}) => (
             ))}
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <HandleLogin type={"desktop"}/>
+            <HandleLoginBtn type={"desktop"}/>
         </div>
     </nav>
 )
@@ -92,7 +92,7 @@ const MobileVersion = ({mobileMenuOpen, setMobileMenuOpen}) => (
                         ))}
                     </div>
                     <div className="py-6">
-                        <HandleLogin type={"mobile"}/>
+                        <HandleLoginBtn type={"mobile"}/>
                     </div>
                 </div>
             </div>

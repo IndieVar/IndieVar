@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 import axios from "axios";
-import {AUTH_API_URL} from "../../constants.js";
-import {Navigate, useNavigate} from "react-router-dom";
+import {AUTH_API_URL} from "../../config/constants.jsx";
+import {Navigate} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 
 const roleRedirect = {
@@ -22,7 +22,7 @@ export default function LoginPage() {
         axios.post(`${AUTH_API_URL}/sign_in`, formData)
             .then((res) => {
                 if (res.status === 200) {
-                    login(res)
+                    login(res.data)
                     location.reload()
                 }
             }).catch((error) => {
