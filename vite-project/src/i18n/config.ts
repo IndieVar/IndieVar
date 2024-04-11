@@ -14,7 +14,7 @@ i18n
     .use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        // Comment lng param to turn on automatically language detect
+        // Comment lng param to turn on automatically language detector
         lng: "en",
         fallbackLng: "en",
         supportedLngs: Object.keys(supportedLngs),
