@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {Dialog, Popover} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon,} from '@heroicons/react/24/outline'
 import {Link, NavLink} from "react-router-dom";
-import HandleLoginBtn from "./HandleLoginBtn.jsx";
+import HandleLoginBtn from "../pages/auth/HandleLoginBtn.jsx";
 import LocaleSwitcher from "../i18n/LocaleSwitcher.jsx";
 
 const navigations = [
