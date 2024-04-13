@@ -1,10 +1,10 @@
 import axios from "axios";
-import {API_URL} from "../constants.js";
+import {API_URL, TEST_API_URL} from "../../config/constants.jsx";
 import {useLoaderData} from "react-router-dom";
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 
 export const singlePostLoader = async ({request, params}) => {
-    const {data} = await axios.get(`${API_URL}/posts/${params.id}`);
+    const {data} = await axios.get(`${TEST_API_URL}/posts/${params.id}`);
     return data
 }
 
