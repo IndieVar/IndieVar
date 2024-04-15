@@ -1,7 +1,7 @@
 import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
 import Layout from "../pages/Layout.jsx";
 import ErrorPage from "../pages/ErrorPage.jsx";
-import HomePage from "../pages/home/HomePage.jsx";
+import HomePage, {quoteLoader} from "../pages/home/HomePage.jsx";
 import PostsPage, {postsLoader} from "../pages/posts/PostsPage.jsx";
 import SinglePostPage, {singlePostLoader} from "../pages/posts/SinglePostPage.jsx";
 import * as React from "react";
@@ -16,7 +16,7 @@ export const router = createBrowserRouter(
             <Route element={<AuthProvider/>} errorElement={<ErrorPage/>}
                    loader={currentUserLoader}>
                 <Route element={<Layout/>}>
-                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/" element={<HomePage/>} loader={quoteLoader}/>
                     <Route path="/posts" element={<PostsPage/>} loader={postsLoader}/>
                     <Route path="/posts/:id" element={<SinglePostPage/>} loader={singlePostLoader}/>
                     <Route path="/login" element={<LoginPage/>}/>

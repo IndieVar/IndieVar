@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       devise_for :users
       get 'current_user', to: 'current_user#get'
+      resources :quotes
     end
   end
 

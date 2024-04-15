@@ -8,7 +8,7 @@ const Layout = () => {
     return (
         <div className={"min-h-screen font-roboto pv-20"}>
             <Header/>
-            <div className={"container mx-auto py-6"}>
+            <div className={"container mx-auto py-20"}>
                 <Outlet/>
             </div>
         </div>
