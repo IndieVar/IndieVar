@@ -1,6 +1,7 @@
 import axios from "axios";
 import {API_URL} from "./constants.jsx";
-import {useNavigate} from "react-router-dom";
+import {redirect} from "react-router-dom";
+
 
 const api = axios.create({
     baseURL: API_URL,
@@ -23,7 +24,6 @@ api.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
-        const navigate = useNavigate();
 
         // If the error status is 401 and there is no originalRequest._retry flag,
         // it means the token has expired and we need to refresh it
@@ -45,7 +45,8 @@ api.interceptors.response.use(
                 originalRequest.headers.Authorization = `Bearer ${token}`;
                 return axios(originalRequest);
             } catch (error) {
-                return navigate('/login')
+                // Handle refresh token error or redirect to login
+                return redirect("/login");
             }
         }
 
