@@ -30,7 +30,7 @@ class Api::V1::QuotesController < ApplicationController
 
   # PATCH/PUT /quotes/1
   def update
-    if current_devise_api_token && params[:quote].present?
+    if current_devise_api_user.role == 'admin' && params[:quote].present?
       if @quote.update(quote_params)
         render json: @quote
       end

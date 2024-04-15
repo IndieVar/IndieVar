@@ -4,7 +4,7 @@ class Api::V1::CurrentUserController < ApplicationController
 
   def get
     if current_devise_api_token
-      render json: User.find_by(id: current_devise_api_token.resource_owner.id)
+      render json: current_devise_api_user
     else
       render json: { message: 'You are not logged in' }, status: :unauthorized
     end
