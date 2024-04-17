@@ -1,8 +1,10 @@
 import {useState} from "react";
 import axios from "axios";
 import {API_URL} from "../../config/constants.jsx";
+import {useTranslation} from "react-i18next";
 
 export default function HeroComponent({quote}) {
+    const {i18n, t} = useTranslation();
     const [window, setWindow] = useState('quote')
     const windowClass = (active) => (
         active
@@ -77,7 +79,7 @@ export default function HeroComponent({quote}) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {window === 'quote' && <QuoteComponent quote={quote}/>}
+                                            {window === 'quote' && <QuoteComponent quote={quote} locale={i18n.language}/>}
                                         </div>
                                     </div>
                                     <div
@@ -95,14 +97,14 @@ export default function HeroComponent({quote}) {
     )
 }
 
-function QuoteComponent({quote}) {
+function QuoteComponent({quote, locale}) {
     const quoteHandler = () => {
         axios.put(`${API_URL}/quotes/${quote.id}`, {}, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
-        return alert(quote.ru)
+        return alert(quote[locale])
     }
     return (
         <div className="px-6 pb-14 pt-6">
