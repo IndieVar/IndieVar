@@ -75,11 +75,13 @@ export default function HeroComponent({quote}) {
                                                         className={windowClass(window === 'controller')}
                                                         onClick={() => setWindow('controller')}
                                                     >
-                                                        App.jsx
+                                                        QuotesController.rb
                                                     </div>
                                                 </div>
                                             </div>
-                                            {window === 'quote' && <QuoteComponent quote={quote} locale={i18n.language}/>}
+                                            {window === 'quote' &&
+                                                <QuoteComponent quote={quote} locale={i18n.language}/>}
+                                            {window === 'controller' && <ControllerComponent quote={quote}/>}
                                         </div>
                                     </div>
                                     <div
@@ -138,6 +140,57 @@ function QuoteComponent({quote, locale}) {
                   {"\t"}{"\t"}&lt;/<span className="text-indigo-400">div</span>&gt;{"\n"}
                   {"\t"}){"\n"}
                   {"}"}
+              </code>
+            </pre>
+            </x-placeholder>
+        </div>
+    )
+}
+
+function ControllerComponent() {
+
+    return (
+        <div className="px-6 pb-14 pt-6">
+            <x-placeholder message="Your code example">
+            <pre
+                className="text-[0.8125rem] leading-6 text-gray-300"
+                style={{tabSize: 2}}
+            >
+              <code>
+                  <span className={"text-yellow-600"}>class </span>
+                  <span className={"text-gray-100"}>Api</span><span className={"text-gray-300"}>::</span>
+                  <span className={"text-gray-100"}>V1</span><span className={"text-gray-300"}>::</span>
+                  <span className="text-orange-300">QuotesController</span>
+                  <span className={"text-gray-300"}> &lt; </span>
+                  <span className={"text-gray-100"}>ApplicationController</span>
+                  {"\n"}
+                  {"\n"}
+                  {"\t"}
+                  {/*Show*/}
+                  <span className="text-yellow-600">def <span className="text-orange-300">show</span></span>
+                  {"\n"}
+                  {"\t"}
+                  {"\t"}
+                  <span>@quote</span><span className={"text-gray-300"}> = </span>
+                  <span className={"text-white"}>Quote</span>
+                  <span className={"text-gray-300"}>.order(
+                      <span className={"text-lime-600"}>"RANDOM()"</span>
+                      ).limit(
+                      <span className="text-indigo-300">1</span>
+                      ).first</span>
+                  {"\n"}
+                  {"\n"}
+                  {"\t"}
+                  {"\t"}
+                  <span className={"text-orange-400"}>render</span>
+                  <span className="text-indigo-300"> json: </span>
+                  <span>@quote</span>
+                  {"\n"}
+                  {"\t"}
+                  <span className={"text-yellow-600"}>end</span>
+                  {"\n"}
+                  {"\n"}
+                  <span className={"text-yellow-600"}>end</span>
               </code>
             </pre>
             </x-placeholder>
