@@ -1,0 +1,13 @@
+{
+  "title": "Technology",
+  "subtitle": "We use only advanced and modern technologies, because technology plays a fundamental role in the development of websites, determining their functionality, performance and appearance.",
+  "ruby": "Ruby is a dynamic, object-oriented programming language that has gained popularity for its simplicity, elegance and productivity." ,
+  "ruby_on_rails": "Ruby on Rails (RoR) is an open source web framework written in the Ruby programming language. RoR provides developers with a number of advantages that made it a popular choice for fast and efficient web application development.",
+  "docker": "Docker is a platform for developing, delivering and running applications in containers. Docker provides efficiency, flexibility and simplification in application development and deployment." ,
+  "javascript": "JavaScript is a widely used programming language that is used in web development to create interactive user interfaces and dynamic content. " ,
+  "react": "React is a JavaScript library that provides efficient user interface development, providing developers with powerful tools to create scalable and high-performance web applications." ,
+  "nextJs": "Next.js is a framework for developing web applications using React. It provides additional tools and functions that facilitate the creation of scalable and fast applications. ",
+  "html": "HTML (HyperText Markup Language) is a standard markup language for creating web pages, which is an integral part of web development, and its simplicity, versatility and standardized approach make it the main tool for content creation on the Internet.",
+  "tailwind": "Tailwind CSS is a modern framework for creating a user interface that provides a set of pre-created styles that can be easily applied to HTML elements. Suitable for projects where high flexibility and fast interface development is required." ,
+  "fly": "Fly.io is a global application deployment platform using a distributed network of servers around the world, providing high performance, low latency and easy scalability. Its benefits include automatic traffic distribution, quick startup, support for multiple programming languages, and the ability to run applications close to end users for optimal performance."
+}
