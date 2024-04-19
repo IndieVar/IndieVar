@@ -4,6 +4,7 @@ import {API_URL} from "../../config/constants.jsx";
 import axios from "axios";
 import {useLoaderData} from "react-router-dom";
 import TechnologyComponent from "./TechnologyComponent.jsx";
+import BlogComponent from "./BlogComponent.jsx";
 
 export const quoteLoader = async ({request, params}) => {
     const {data} = await axios.get(`${API_URL}/quotes/1`);
@@ -17,6 +18,7 @@ export default function HomePage() {
         <>
             <HeroComponent quote={quote}/>
             <TechnologyComponent/>
+            <BlogComponent/>
         </>
     )
 }
