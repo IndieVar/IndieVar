@@ -3,54 +3,54 @@ export const technologyList = [
         name: "Ruby",
         logo: "/technology/ruby.webp",
         link: "https://www.ruby-lang.org/en/",
-        text: "ruby",
+        text_key: "ruby",
     },
     {
         name: "Ruby on Rails",
         logo: "/technology/Ruby_on_Rails.webp",
         link: "https://rubyonrails.org/",
-        text: "ruby_on_rails"
+        text_key: "ruby_on_rails"
     },
     {
         name: "Docker",
         logo: "/technology/docker.webp",
         link: "https://www.docker.com/",
-        text: "docker"
+        text_key: "docker"
     },
     {
         name: "JavaScript",
         logo: "/technology/javascript.webp",
         link: "https://www.javascript.com/",
-        text: "javascript"
+        text_key: "javascript"
     },
     {
         name: "React",
         logo: "/technology/React.webp",
         link: "https://react.dev/",
-        text: "react"
+        text_key: "react"
     },
     {
         name: "Next.js",
         logo: "/technology/Next.js.webp",
         link: "https://nextjs.org/",
-        text: "nextJs"
+        text_key: "nextJs"
     },
     {
         name: "HTML",
         logo: "/technology/HTML.webp",
         link: "https://html.com/",
-        text: "html"
+        text_key: "html"
     },
     {
         name: "Tailwind CSS",
         logo: "/technology/tailwind.webp",
         link: "https://tailwindcss.com/",
-        text: "tailwind"
+        text_key: "tailwind"
     },
     {
         name: "Fly.io",
         logo: "/technology/fly.webp",
         link: "https://fly.io/",
-        text: "fly"
+        text_key: "fly"
     }
 ]

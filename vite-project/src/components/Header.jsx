@@ -4,24 +4,26 @@ import {Bars3Icon, XMarkIcon,} from '@heroicons/react/24/outline'
 import {Link, NavLink} from "react-router-dom";
 import HandleLoginBtn from "../pages/auth/HandleLoginBtn.jsx";
 import LocaleSwitcher from "../i18n/LocaleSwitcher.jsx";
+import {useTranslation} from "react-i18next";
 
 const navigations = [
-    {name: 'Home', href: '/'},
-    {name: 'Posts', href: '/posts'},
+    {name: 'header.navigation.home', href: '/'},
+    {name: 'header.navigation.blog', href: '/posts'},
 ]
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const {t} = useTranslation()
 
     return (
         <header className="bg-white fixed top-0 inset-x-0 z-50">
-            <DesktopVersion mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen}/>
-            <MobileVersion mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen}/>
+            <DesktopVersion setMobileMenuOpen={setMobileMenuOpen} t={t}/>
+            <MobileVersion mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} t={t}/>
         </header>
     )
 }
 
-const DesktopVersion = ({mobileMenuOpen, setMobileMenuOpen, loginBtn}) => (
+const DesktopVersion = ({setMobileMenuOpen, t}) => (
     <nav className="mx-auto flex items-center justify-between p-3 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
             <Link to="/" className="-m-1.5 p-1.5">
@@ -46,7 +48,7 @@ const DesktopVersion = ({mobileMenuOpen, setMobileMenuOpen, loginBtn}) => (
                              isPending ? linkClassName.desktop.pending : isActive ? linkClassName.desktop.active : linkClassName.desktop.pending
                          }
                 >
-                    {item.name}
+                    {t(item.name)}
                 </NavLink>
             ))}
         </Popover.Group>
@@ -57,7 +59,7 @@ const DesktopVersion = ({mobileMenuOpen, setMobileMenuOpen, loginBtn}) => (
     </nav>
 )
 
-const MobileVersion = ({mobileMenuOpen, setMobileMenuOpen}) => (
+const MobileVersion = ({mobileMenuOpen, setMobileMenuOpen, t}) => (
     <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10"/>
         <Dialog.Panel
@@ -89,7 +91,7 @@ const MobileVersion = ({mobileMenuOpen, setMobileMenuOpen}) => (
                                          isPending ? linkClassName.mobile.pending : isActive ? linkClassName.mobile.active : linkClassName.mobile.pending
                                      }
                             >
-                                {item.name}
+                                {t(item.name)}
                             </NavLink>
                         ))}
                     </div>

@@ -1,17 +1,5 @@
-/*
-  This example requires some changes to your config:
+import {useTranslation} from "react-i18next";
 
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 const navigation = {
     social: [
         {
@@ -57,14 +45,17 @@ const navigation = {
 }
 
 export default function Footer() {
+    const {t} = useTranslation()
+    const currentYear = new Date().getFullYear()
+
     return (
         <footer className="bg-white" aria-labelledby="footer-heading">
             <div className="mx-auto max-w-7xl px-6 pb-8 pt-24 lg:px-8">
                 <div className="border-t border-gray-900/10 pt-6 lg:flex lg:items-center lg:justify-between">
                     <div>
-                        <h3 className="text-sm font-semibold leading-6 text-gray-900">Subscribe to our newsletter</h3>
+                        <h3 className="text-sm font-semibold leading-6 text-gray-900">{t('footer.title')}</h3>
                         <p className="mt-2 text-sm leading-6 text-gray-600">
-                            The latest news, articles, and resources, sent to your inbox weekly.
+                            {t('footer.subtitle')}
                         </p>
                     </div>
                     <form className="mt-6 sm:flex sm:max-w-md lg:mt-0">
@@ -85,7 +76,7 @@ export default function Footer() {
                                 type="submit"
                                 className="flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                Subscribe
+                                {t('footer.subscribe')}
                             </button>
                         </div>
                     </form>
@@ -95,12 +86,12 @@ export default function Footer() {
                         {navigation.social.map((item) => (
                             <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
                                 <span className="sr-only">{item.name}</span>
-                                <item.icon className="h-6 w-6" aria-hidden="true" />
+                                <item.icon className="h-6 w-6" aria-hidden="true"/>
                             </a>
                         ))}
                     </div>
                     <p className="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">
-                        &copy; 2020 Your Company, Inc. All rights reserved.
+                        &copy; {currentYear !== 2024 && '2024 - '}{currentYear} {t('footer.rights')}
                     </p>
                 </div>
             </div>
