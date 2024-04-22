@@ -1,5 +1,6 @@
 import {Navigate, Outlet} from "react-router-dom";
 import {useAuth} from "./AuthProvider.jsx";
+import AdminLayout from "../pages/admin/AdminLayout.jsx";
 
 const AdminProvider = () => {
     const {currentUser} = useAuth()
@@ -8,7 +9,13 @@ const AdminProvider = () => {
         return <Navigate to={'/login'} replace/>;
     }
 
-    return <Outlet/>
+    return (
+        <>
+            <AdminLayout>
+                <Outlet/>
+            </AdminLayout>
+        </>
+    )
 }
 
 export default AdminProvider;
