@@ -11,18 +11,20 @@ import {
 } from '@heroicons/react/24/outline'
 import {classNames} from "../../config/functions.js";
 import {TbBlockquote} from "react-icons/tb";
+import {NavLink, useLocation} from "react-router-dom";
 
 const navigation = [
-    {name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true},
-    {name: 'Quotes', href: '/quotes', icon: TbBlockquote, current: false},
-    {name: 'Projects', href: '#', icon: FolderIcon, current: false},
-    {name: 'Calendar', href: '#', icon: CalendarIcon, current: false},
-    {name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false},
-    {name: 'Reports', href: '#', icon: ChartPieIcon, current: false},
+    {name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon},
+    {name: 'Quotes', href: '/admin/quotes', icon: TbBlockquote},
+    {name: 'Projects', href: '#', icon: FolderIcon},
+    {name: 'Calendar', href: '#', icon: CalendarIcon},
+    {name: 'Documents', href: '#', icon: DocumentDuplicateIcon},
+    {name: 'Reports', href: '#', icon: ChartPieIcon},
 ]
 
 export default function AdminLayout({children}) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const location = useLocation()
 
     return (
         <>
@@ -76,10 +78,10 @@ export default function AdminLayout({children}) {
                                             <ul role="list" className="-mx-2 flex-1 space-y-1">
                                                 {navigation.map((item) => (
                                                     <li key={item.name}>
-                                                        <a
-                                                            href={'/admin' + item.href}
+                                                        <NavLink
+                                                            to={item.href}
                                                             className={classNames(
-                                                                item.current
+                                                                item.href === location.pathname
                                                                     ? 'bg-gray-800 text-white'
                                                                     : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                                                 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -87,7 +89,7 @@ export default function AdminLayout({children}) {
                                                         >
                                                             <item.icon className="h-6 w-6 shrink-0" aria-hidden="true"/>
                                                             {item.name}
-                                                        </a>
+                                                        </NavLink>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -106,16 +108,17 @@ export default function AdminLayout({children}) {
                         <ul role="list" className="flex flex-col items-center space-y-1">
                             {navigation.map((item) => (
                                 <li key={item.name}>
-                                    <a
-                                        href={'/admin' + item.href}
+                                    <NavLink
+                                        to={item.href}
                                         className={classNames(
-                                            item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800',
+                                            item.href === location.pathname
+                                                ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                             'group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold'
                                         )}
                                     >
                                         <item.icon className="h-6 w-6 shrink-0" aria-hidden="true"/>
                                         <span className="sr-only">{item.name}</span>
-                                    </a>
+                                    </NavLink>
                                 </li>
                             ))}
                         </ul>

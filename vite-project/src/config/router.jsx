@@ -9,6 +9,7 @@ import DashboardPage from "../pages/admin/dashboard/DashboardPage.jsx";
 import LoginPage from "../pages/auth/LoginPage.jsx";
 import AdminProvider from "../providers/AdminProvider.jsx";
 import AuthProvider, {currentUserLoader} from "../providers/AuthProvider.jsx";
+import QuotesPage from "../pages/admin/quotes/QuotesPage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -22,6 +23,7 @@ export const router = createBrowserRouter(
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<AdminProvider/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
+                        <Route path='/admin/quotes' element={<QuotesPage/>}/>
                     </Route>
                 </Route>
             </Route>

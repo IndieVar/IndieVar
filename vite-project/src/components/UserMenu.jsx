@@ -1,7 +1,7 @@
 import {Menu, Transition} from "@headlessui/react";
 import {Fragment} from "react";
 import {useAuth} from "../providers/AuthProvider.jsx";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {AUTH_API_URL} from "../config/constants.jsx";
 import {BellIcon} from "@heroicons/react/24/outline/index.js";
@@ -61,15 +61,15 @@ export default function UserMenu() {
                             <Menu.Item key={item.name}>
                                 {({active}) => (
                                     <>
-                                        <a
-                                            href={item.href}
+                                        <NavLink
+                                            to={item.href}
                                             className={classNames(
                                                 active ? 'bg-gray-50' : '',
                                                 navItemClassName
                                             )}
                                         >
                                             {item.name}
-                                        </a>
+                                        </NavLink>
                                         <hr/>
                                         <button
                                             className={navItemClassName}
