@@ -5,14 +5,11 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {AUTH_API_URL} from "../config/constants.jsx";
 import {BellIcon} from "@heroicons/react/24/outline/index.js";
+import {classNames} from "../config/functions.js";
 
 const userNavigation = [
     {name: 'Dashboard', href: '/admin/dashboard'},
 ]
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
 
 export default function UserMenu() {
     const {isLoggedIn, logout} = useAuth();
@@ -45,7 +42,7 @@ export default function UserMenu() {
                     <span className="sr-only">Open user menu</span>
                     <img
                         className="h-8 w-8 rounded-full bg-gray-50"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="https://scontent.fhfa1-1.fna.fbcdn.net/v/t39.30808-6/432159240_1613594752510741_1851465287878911651_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=mPXjmiarIu8Ab4F99RR&_nc_ht=scontent.fhfa1-1.fna&oh=00_AfAOPXDZ8ToupjhbqCYkaRWo3HpgzcF11TxRw1d4H0jvwQ&oe=662C45D4"
                         alt=""
                     />
                 </Menu.Button>

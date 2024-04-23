@@ -2,6 +2,7 @@ import {useState} from "react";
 import axios from "axios";
 import {API_URL} from "../../config/constants.jsx";
 import {useTranslation} from "react-i18next";
+import {FaBattleNet} from "react-icons/fa";
 
 export default function HeroComponent({quote}) {
     const {i18n, t} = useTranslation();
@@ -20,11 +21,7 @@ export default function HeroComponent({quote}) {
                     <div className="px-6 lg:px-0 lg:pt-4">
                         <div className="mx-auto max-w-2xl">
                             <div className="max-w-lg">
-                                <img
-                                    className="h-11"
-                                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                    alt="IndieVar"
-                                />
+                                <FaBattleNet className={"h-11 w-11"}/>
 
                                 <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                                     {t('hero.title')}

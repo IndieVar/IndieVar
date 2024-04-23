@@ -58,13 +58,9 @@ export default function Header() {
                 <Dialog.Panel
                     className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div className="flex items-center justify-between">
-                        <Link to={"/"} className="-m-1.5 p-1.5">
-                            <span className="sr-only">IndieVar</span>
-                            <img
-                                className="h-14 w-auto"
-                                src="/Logotype.png"
-                                alt="IndieVar Logotype"
-                            />
+                        <Link to={"/"} onClick={() => setMobileMenuOpen(false)}
+                              className="-m-1.5 p-1.5">
+                            <span className="text-xl font-semibold text-gray-800">Menu</span>
                         </Link>
                         <button
                             type="button"
@@ -80,6 +76,7 @@ export default function Header() {
                             <div className="space-y-2 py-6">
                                 {navigations.map((item) => (
                                     <NavLink to={item.href} key={item.name}
+                                             onClick={() => setMobileMenuOpen(false)}
                                              className={({isActive, isPending}) =>
                                                  isPending ? linkClassName.mobile.pending : isActive ? linkClassName.mobile.active : linkClassName.mobile.pending
                                              }

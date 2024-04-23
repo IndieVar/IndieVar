@@ -5,7 +5,7 @@ import HomePage, {quoteLoader} from "../pages/home/HomePage.jsx";
 import PostsPage, {postsLoader} from "../pages/posts/PostsPage.jsx";
 import SinglePostPage, {singlePostLoader} from "../pages/posts/SinglePostPage.jsx";
 import * as React from "react";
-import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
+import DashboardPage from "../pages/admin/dashboard/DashboardPage.jsx";
 import LoginPage from "../pages/auth/LoginPage.jsx";
 import AdminProvider from "../providers/AdminProvider.jsx";
 import AuthProvider, {currentUserLoader} from "../providers/AuthProvider.jsx";
@@ -21,7 +21,7 @@ export const router = createBrowserRouter(
                     <Route path="/posts/:id" element={<SinglePostPage/>} loader={singlePostLoader}/>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<AdminProvider/>}>
-                        <Route path='/admin/dashboard' element={<AdminDashboard/>}/>
+                        <Route path='/admin/dashboard' element={<DashboardPage/>}/>
                     </Route>
                 </Route>
             </Route>

@@ -7,22 +7,19 @@ import {
     DocumentDuplicateIcon,
     FolderIcon,
     HomeIcon,
-    UsersIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
+import {classNames} from "../../config/functions.js";
+import {TbBlockquote} from "react-icons/tb";
 
 const navigation = [
-    {name: 'Dashboard', href: '#', icon: HomeIcon, current: true},
-    {name: 'Team', href: '#', icon: UsersIcon, current: false},
+    {name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true},
+    {name: 'Quotes', href: '/quotes', icon: TbBlockquote, current: false},
     {name: 'Projects', href: '#', icon: FolderIcon, current: false},
     {name: 'Calendar', href: '#', icon: CalendarIcon, current: false},
     {name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false},
     {name: 'Reports', href: '#', icon: ChartPieIcon, current: false},
 ]
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
 
 export default function AdminLayout({children}) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -80,7 +77,7 @@ export default function AdminLayout({children}) {
                                                 {navigation.map((item) => (
                                                     <li key={item.name}>
                                                         <a
-                                                            href={item.href}
+                                                            href={'/admin' + item.href}
                                                             className={classNames(
                                                                 item.current
                                                                     ? 'bg-gray-800 text-white'
@@ -110,7 +107,7 @@ export default function AdminLayout({children}) {
                             {navigation.map((item) => (
                                 <li key={item.name}>
                                     <a
-                                        href={item.href}
+                                        href={'/admin' + item.href}
                                         className={classNames(
                                             item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                             'group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold'
