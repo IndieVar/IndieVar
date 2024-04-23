@@ -9,7 +9,7 @@ import DashboardPage from "../../src/pages/admin/dashboard/DashboardPage.jsx";
 import LoginPage from "../../src/pages/auth/LoginPage.jsx";
 import AdminProvider from "../../src/providers/AdminProvider.jsx";
 import AuthProvider, {currentUserLoader} from "../../src/providers/AuthProvider.jsx";
-import QuotesPage from "../../src/pages/admin/quotes/QuotesPage.jsx";
+import QuotesPage, {quotesLoader} from "../../src/pages/admin/quotes/QuotesPage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -23,7 +23,7 @@ export const router = createBrowserRouter(
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<AdminProvider/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
-                        <Route path='/admin/quotes' element={<QuotesPage/>}/>
+                        <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>
                     </Route>
                 </Route>
             </Route>

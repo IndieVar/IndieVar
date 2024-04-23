@@ -127,7 +127,7 @@ export default function AdminLayout({children}) {
                     </nav>
                 </div>
 
-                <main className="p-10 lg:py-6 relative">
+                <main className="p-6 pl-12 relative">
                     <button type="button"
                             className="fixed left-0 inset-y-1/2 p-2.5 text-gray-700 lg:hidden"
                             onClick={() => setSidebarOpen(true)}>
