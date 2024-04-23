@@ -1,15 +1,15 @@
-import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
-import Layout from "../pages/Layout.jsx";
-import ErrorPage from "../pages/ErrorPage.jsx";
-import HomePage, {quoteLoader} from "../pages/home/HomePage.jsx";
-import PostsPage, {postsLoader} from "../pages/posts/PostsPage.jsx";
-import SinglePostPage, {singlePostLoader} from "../pages/posts/SinglePostPage.jsx";
 import * as React from "react";
-import DashboardPage from "../pages/admin/dashboard/DashboardPage.jsx";
-import LoginPage from "../pages/auth/LoginPage.jsx";
-import AdminProvider from "../providers/AdminProvider.jsx";
-import AuthProvider, {currentUserLoader} from "../providers/AuthProvider.jsx";
-import QuotesPage from "../pages/admin/quotes/QuotesPage.jsx";
+import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
+import Layout from "../../src/pages/Layout.jsx";
+import ErrorPage from "../../src/pages/ErrorPage.jsx";
+import HomePage, {quoteLoader} from "../../src/pages/home/HomePage.jsx";
+import PostsPage, {postsLoader} from "../../src/pages/posts/PostsPage.jsx";
+import SinglePostPage, {singlePostLoader} from "../../src/pages/posts/SinglePostPage.jsx";
+import DashboardPage from "../../src/pages/admin/dashboard/DashboardPage.jsx";
+import LoginPage from "../../src/pages/auth/LoginPage.jsx";
+import AdminProvider from "../../src/providers/AdminProvider.jsx";
+import AuthProvider, {currentUserLoader} from "../../src/providers/AuthProvider.jsx";
+import QuotesPage from "../../src/pages/admin/quotes/QuotesPage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(

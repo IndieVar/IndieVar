@@ -1,6 +1,6 @@
 
 import HeroComponent from "./HeroComponent.jsx";
-import {API_URL} from "../../config/constants.jsx";
+import {API_URL} from "../../../app/constants.js";
 import axios from "axios";
 import {useLoaderData} from "react-router-dom";
 import TechnologyComponent from "./TechnologyComponent.jsx";

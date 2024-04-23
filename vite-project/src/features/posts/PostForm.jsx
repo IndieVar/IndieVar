@@ -1,6 +1,6 @@
 import {Form, redirect} from "react-router-dom";
 import axios from "axios";
-import {API_URL} from "../../config/constants.jsx";
+import {API_URL} from "../../../app/constants.js";
 
 export const postActions = async ({request, params}) => {
     switch (request.method) {

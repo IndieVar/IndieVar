@@ -1,6 +1,6 @@
 import {createContext, useContext, useState} from "react";
 import {Outlet, useLoaderData} from "react-router-dom";
-import api from "../config/api.jsx";
+import api from "../../app/config/api.jsx";
 
 const AuthContext = createContext();
 

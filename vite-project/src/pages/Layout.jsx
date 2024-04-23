@@ -1,6 +1,6 @@
 import Header from "../components/Header.jsx";
 import {Outlet} from "react-router-dom";
-import useLocalizeDocumentAttributes from "../i18n/useLocalizeDocumentAttributes.js";
+import useLocalizeDocumentAttributes from "../../app/i18n/useLocalizeDocumentAttributes.js";
 import Footer from "../components/Footer.jsx";
 
 const Layout = () => {

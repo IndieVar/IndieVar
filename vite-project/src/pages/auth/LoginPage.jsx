@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import axios from "axios";
-import {AUTH_API_URL} from "../../config/constants.jsx";
+import {AUTH_API_URL} from "../../../app/constants.js";
 import {Navigate} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 

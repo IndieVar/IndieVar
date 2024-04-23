@@ -1,6 +1,6 @@
 import {useState} from "react";
 import axios from "axios";
-import {API_URL} from "../../config/constants.jsx";
+import {API_URL} from "../../../app/constants.js";
 import {useTranslation} from "react-i18next";
 import {FaBattleNet} from "react-icons/fa";
 

@@ -9,7 +9,7 @@ import {
     HomeIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
-import {classNames} from "../../config/functions.js";
+import {classNames} from "../../../app/functions.js";
 import {TbBlockquote} from "react-icons/tb";
 import {NavLink, useLocation} from "react-router-dom";
 
@@ -80,6 +80,7 @@ export default function AdminLayout({children}) {
                                                     <li key={item.name}>
                                                         <NavLink
                                                             to={item.href}
+                                                            onClick={() => setSidebarOpen(false)}
                                                             className={classNames(
                                                                 item.href === location.pathname
                                                                     ? 'bg-gray-800 text-white'
@@ -110,6 +111,7 @@ export default function AdminLayout({children}) {
                                 <li key={item.name}>
                                     <NavLink
                                         to={item.href}
+                                        onClick={() => setSidebarOpen(false)}
                                         className={classNames(
                                             item.href === location.pathname
                                                 ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800',

@@ -3,9 +3,9 @@ import {Fragment} from "react";
 import {useAuth} from "../providers/AuthProvider.jsx";
 import {NavLink, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {AUTH_API_URL} from "../config/constants.jsx";
+import {AUTH_API_URL} from "../../app/constants.js";
 import {BellIcon} from "@heroicons/react/24/outline/index.js";
-import {classNames} from "../config/functions.js";
+import {classNames} from "../../app/functions.js";
 
 const userNavigation = [
     {name: 'Dashboard', href: '/admin/dashboard'},
