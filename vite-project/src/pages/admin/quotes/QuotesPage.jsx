@@ -1,11 +1,12 @@
 import axios from "axios";
 import {API_URL} from "../../../../app/constants.js";
-import {NavLink, useLoaderData} from "react-router-dom";
+import {Form, NavLink, useLoaderData} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import QuoteComponent from "./QuoteComponent.jsx";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
+import {IoEyeOutline} from "react-icons/io5";
 
-export const quotesLoader = async ({request, params}) => {
+export const quotesLoader = async () => {
     const {data} = await axios.get(`${API_URL}/quotes`);
     return data
 }
@@ -37,6 +38,44 @@ export default function QuotesPage() {
                 {quotes.map((quote) => (
                     <QuoteComponent key={quote.id} quote={quote} locale={i18n.language}/>
                 ))}
+            </div>
+        </div>
+    )
+}
+
+export function QuoteComponent({quote, locale}) {
+    const [lang, setLang] = useState()
+
+    useEffect(() => {
+        setLang(locale)
+    }, [locale]);
+
+    return (
+        <div className={'group relative bg-white p-6'}>
+            <div className="pb-6 flex justify-end items-center divide-x">
+                {/*Lang*/}
+                <button onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
+                        className={"mr-3 text-gray-500 hover:text-gray-700 hover:underline"}>
+                    {lang === 'ru' ? 'En' : 'Ru'}
+                </button>
+                {/*Edit*/}
+                <button className={"text-gray-500 hover:text-blue-700"}>
+                    <MdOutlineEditNote className={"w-6 h-6 mx-3"}/>
+                </button>
+                {/*Delete*/}
+                <Form method="delete" action={`/admin/quotes/${quote.id}`}
+                      className={"text-gray-500 hover:text-red-700"}>
+                    <button type="submit">
+                        <MdPlaylistRemove className={"w-6 h-6 ml-3"}/>
+                    </button>
+                </Form>
+            </div>
+            <p className="pb-6 text-base text-gray-500 group-hover:text-gray-700">
+                {quote[lang]}
+            </p>
+            <div className={"absolute bottom-4 inset-x-1/2 w-full flex items-center space-x-2 text-gray-500 text-xs"}>
+                <span>{quote.views}</span>
+                <IoEyeOutline className={"w-4 h-4"}/>
             </div>
         </div>
     )

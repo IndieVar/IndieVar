@@ -3,28 +3,24 @@ import {Fragment} from "react";
 import {useAuth} from "../providers/AuthProvider.jsx";
 import {NavLink, useNavigate} from "react-router-dom";
 import axios from "axios";
-import {AUTH_API_URL} from "../../app/constants.js";
+import {AUTH_API_URL, authHeader} from "../../app/constants.js";
 import {BellIcon} from "@heroicons/react/24/outline/index.js";
 import {classNames} from "../../app/functions.js";
+import avatar from "../../app/assets/avatar-m.png"
 
 const userNavigation = [
     {name: 'Dashboard', href: '/admin/dashboard'},
 ]
 
 export default function UserMenu() {
-    const {isLoggedIn, logout} = useAuth();
+    const {isLoggedIn, currentUser, logout} = useAuth();
     if (!isLoggedIn) return
 
     const navigate = useNavigate();
     const navItemClassName = 'block px-3 py-1 text-sm leading-6 text-gray-900 hover:bg-gray-100 w-full text-start'
 
     const logoutHandler = () => {
-        axios.post(`${AUTH_API_URL}/revoke`, {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-            },
-        }).then(() => {
+        axios.post(`${AUTH_API_URL}/revoke`, authHeader).then(() => {
             logout()
             return navigate('/')
         })
@@ -42,8 +38,8 @@ export default function UserMenu() {
                     <span className="sr-only">Open user menu</span>
                     <img
                         className="h-8 w-8 rounded-full bg-gray-50"
-                        src="https://scontent.fhfa1-1.fna.fbcdn.net/v/t39.30808-6/432159240_1613594752510741_1851465287878911651_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=mPXjmiarIu8Ab4F99RR&_nc_ht=scontent.fhfa1-1.fna&oh=00_AfAOPXDZ8ToupjhbqCYkaRWo3HpgzcF11TxRw1d4H0jvwQ&oe=662C45D4"
-                        alt=""
+                        src={currentUser?.avatar || avatar}
+                        alt="User avatar"
                     />
                 </Menu.Button>
                 <Transition

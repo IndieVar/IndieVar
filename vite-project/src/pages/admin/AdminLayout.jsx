@@ -9,9 +9,9 @@ import {
     HomeIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
-import {classNames} from "../../../app/functions.js";
+import {classNames, isActiveLink} from "../../../app/functions.js";
 import {TbBlockquote} from "react-icons/tb";
-import {NavLink, useLocation} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 const navigation = [
     {name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon},
@@ -24,7 +24,6 @@ const navigation = [
 
 export default function AdminLayout({children}) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    const location = useLocation()
 
     return (
         <>
@@ -82,7 +81,7 @@ export default function AdminLayout({children}) {
                                                             to={item.href}
                                                             onClick={() => setSidebarOpen(false)}
                                                             className={classNames(
-                                                                item.href === location.pathname
+                                                                isActiveLink(item.href)
                                                                     ? 'bg-gray-800 text-white'
                                                                     : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                                                 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
@@ -113,7 +112,7 @@ export default function AdminLayout({children}) {
                                         to={item.href}
                                         onClick={() => setSidebarOpen(false)}
                                         className={classNames(
-                                            item.href === location.pathname
+                                            isActiveLink(item.href)
                                                 ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                             'group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold'
                                         )}

@@ -5,6 +5,7 @@ import {Link, NavLink} from "react-router-dom";
 import LocaleSwitcher from "./LocaleSwitcher.jsx";
 import {useTranslation} from "react-i18next";
 import UserMenu from "./UserMenu.jsx";
+import {isActiveLink} from "../../app/functions.js";
 
 const navigations = [
     {name: 'header.navigation.home', href: '/'},
@@ -39,8 +40,8 @@ export default function Header() {
                 <Popover.Group className="hidden lg:flex lg:gap-x-12">
                     {navigations.map((item) => (
                         <NavLink to={item.href} key={item.name}
-                                 className={({isActive, isPending}) =>
-                                     isPending ? linkClassName.desktop.pending : isActive ? linkClassName.desktop.active : linkClassName.desktop.pending
+                                 className={
+                                     isActiveLink(item.href) ? linkClassName.desktop.active : linkClassName.desktop.pending
                                  }
                         >
                             {t(item.name)}
@@ -77,8 +78,8 @@ export default function Header() {
                                 {navigations.map((item) => (
                                     <NavLink to={item.href} key={item.name}
                                              onClick={() => setMobileMenuOpen(false)}
-                                             className={({isActive, isPending}) =>
-                                                 isPending ? linkClassName.mobile.pending : isActive ? linkClassName.mobile.active : linkClassName.mobile.pending
+                                             className={
+                                                 isActiveLink(item.href) ? linkClassName.mobile.active : linkClassName.mobile.pending
                                              }
                                     >
                                         {t(item.name)}
