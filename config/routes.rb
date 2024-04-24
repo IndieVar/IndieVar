@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       devise_for :users
       get 'current_user', to: 'current_user#get'
       resources :quotes
+      get 'random_quote', to: 'quotes#random'
     end
   end
 

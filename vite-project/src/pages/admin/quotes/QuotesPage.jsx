@@ -59,11 +59,11 @@ export function QuoteComponent({quote, locale}) {
                     {lang === 'ru' ? 'En' : 'Ru'}
                 </button>
                 {/*Edit*/}
-                <button className={"text-gray-500 hover:text-blue-700"}>
+                <NavLink to={`/admin/quotes/${quote.id}/update`} className={"text-gray-500 hover:text-blue-700"}>
                     <MdOutlineEditNote className={"w-6 h-6 mx-3"}/>
-                </button>
+                </NavLink>
                 {/*Delete*/}
-                <Form method="delete" action={`/admin/quotes/${quote.id}`}
+                <Form method="delete" action={`/admin/quotes/${quote.id}/delete`}
                       className={"text-gray-500 hover:text-red-700"}>
                     <button type="submit">
                         <MdPlaylistRemove className={"w-6 h-6 ml-3"}/>

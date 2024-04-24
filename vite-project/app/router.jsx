@@ -2,7 +2,7 @@ import * as React from "react";
 import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
 import Layout from "../src/pages/Layout.jsx";
 import ErrorPage from "../src/pages/ErrorPage.jsx";
-import HomePage, {quoteLoader} from "../src/pages/home/HomePage.jsx";
+import HomePage, {randomQuoteLoader} from "../src/pages/home/HomePage.jsx";
 import PostsPage, {postsLoader} from "../src/pages/posts/PostsPage.jsx";
 import SinglePostPage, {singlePostLoader} from "../src/pages/posts/SinglePostPage.jsx";
 import DashboardPage from "../src/pages/admin/dashboard/DashboardPage.jsx";
@@ -11,7 +11,7 @@ import AdminProvider from "../src/providers/AdminProvider.jsx";
 import AuthProvider, {currentUserLoader} from "../src/providers/AuthProvider.jsx";
 import QuotesPage, {QuoteComponent, quotesLoader} from "../src/pages/admin/quotes/QuotesPage.jsx";
 import {quotesAction} from "./actions.js";
-import {CreateQuote} from "../src/pages/admin/quotes/CreateQuote.jsx";
+import {QuoteForm, quoteLoader} from "../src/pages/admin/quotes/QuoteForm.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -19,15 +19,16 @@ export const router = createBrowserRouter(
             <Route element={<AuthProvider/>} errorElement={<ErrorPage/>}
                    loader={currentUserLoader}>
                 <Route element={<Layout/>}>
-                    <Route path="/" element={<HomePage/>} loader={quoteLoader}/>
+                    <Route path="/" element={<HomePage/>} loader={randomQuoteLoader}/>
                     <Route path="/posts" element={<PostsPage/>} loader={postsLoader}/>
                     <Route path="/posts/:id" element={<SinglePostPage/>} loader={singlePostLoader}/>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<AdminProvider/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
                         <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>
-                        <Route path='/admin/quotes/new' element={<CreateQuote/>} action={quotesAction}/>
-                        <Route path='/admin/quotes/:id' element={<QuoteComponent/>} action={quotesAction}/>
+                        <Route path='/admin/quotes/new' element={<QuoteForm/>} action={quotesAction}/>
+                        <Route path='/admin/quotes/:id/update' element={<QuoteForm/>} loader={quoteLoader} action={quotesAction}/>
+                        <Route path='/admin/quotes/:id/delete' element={<QuoteComponent/>} action={quotesAction}/>
                     </Route>
                 </Route>
             </Route>

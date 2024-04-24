@@ -163,7 +163,7 @@ function ControllerComponent() {
                   {"\n"}
                   {"\t"}
                   {/*Show*/}
-                  <span className="text-yellow-600">def <span className="text-orange-300">show</span></span>
+                  <span className="text-yellow-600">def <span className="text-orange-300">get_random_quote</span></span>
                   {"\n"}
                   {"\t"}
                   {"\t"}

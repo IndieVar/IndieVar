@@ -1,5 +1,5 @@
 class Api::V1::QuotesController < ApplicationController
-  before_action :set_quote, only: %i[ update destroy ]
+  before_action :set_quote, only: %i[ show update destroy ]
   skip_before_action :verify_authenticity_token, raise: false
   before_action :authenticate_devise_api_token!, only: %i[create destroy]
 
@@ -10,10 +10,14 @@ class Api::V1::QuotesController < ApplicationController
     render json: @quotes
   end
 
-  # GET /quotes/1
-  def show
+  def random
     @quote = Quote.order("RANDOM()").limit(1).first
 
+    render json: @quote
+  end
+
+  # GET /quotes/1
+  def show
     render json: @quote
   end
 
