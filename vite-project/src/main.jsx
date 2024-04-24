@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import "../app/assets/index.css";
-import {router} from "../app/config/router.jsx";
+import {router} from "../app/router.jsx";
 import {RouterProvider} from "react-router-dom";
 import "../app/i18n/config.ts";
 

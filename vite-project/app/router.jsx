@@ -1,15 +1,16 @@
 import * as React from "react";
 import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
-import Layout from "../../src/pages/Layout.jsx";
-import ErrorPage from "../../src/pages/ErrorPage.jsx";
-import HomePage, {quoteLoader} from "../../src/pages/home/HomePage.jsx";
-import PostsPage, {postsLoader} from "../../src/pages/posts/PostsPage.jsx";
-import SinglePostPage, {singlePostLoader} from "../../src/pages/posts/SinglePostPage.jsx";
-import DashboardPage from "../../src/pages/admin/dashboard/DashboardPage.jsx";
-import LoginPage from "../../src/pages/auth/LoginPage.jsx";
-import AdminProvider from "../../src/providers/AdminProvider.jsx";
-import AuthProvider, {currentUserLoader} from "../../src/providers/AuthProvider.jsx";
-import QuotesPage, {quotesLoader} from "../../src/pages/admin/quotes/QuotesPage.jsx";
+import Layout from "../src/pages/Layout.jsx";
+import ErrorPage from "../src/pages/ErrorPage.jsx";
+import HomePage, {quoteLoader} from "../src/pages/home/HomePage.jsx";
+import PostsPage, {postsLoader} from "../src/pages/posts/PostsPage.jsx";
+import SinglePostPage, {singlePostLoader} from "../src/pages/posts/SinglePostPage.jsx";
+import DashboardPage from "../src/pages/admin/dashboard/DashboardPage.jsx";
+import LoginPage from "../src/pages/auth/LoginPage.jsx";
+import AdminProvider from "../src/providers/AdminProvider.jsx";
+import AuthProvider, {currentUserLoader} from "../src/providers/AuthProvider.jsx";
+import QuotesPage, {quotesLoader} from "../src/pages/admin/quotes/QuotesPage.jsx";
+import QuoteComponent, {CreateQuote, quoteAction} from "../src/pages/admin/quotes/QuoteComponent.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -24,6 +25,8 @@ export const router = createBrowserRouter(
                     <Route element={<AdminProvider/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
                         <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>
+                        <Route path='/admin/quotes/new' element={<CreateQuote/>} action={quoteAction}/>
+                        <Route path='/admin/quotes/:id' element={<QuoteComponent/>} action={quoteAction}/>
                     </Route>
                 </Route>
             </Route>
