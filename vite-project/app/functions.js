@@ -9,3 +9,11 @@ export function isActiveLink(href) {
     if (location.pathname === href) return true
     if (href !== '/') return location.pathname.includes(href)
 }
+
+export function capitalized(word) {
+    return (word.charAt(0).toUpperCase() + word.slice(1))
+}
+
+export function printError(error) {
+    return capitalized(error.filter(Boolean).join('; '))
+}
