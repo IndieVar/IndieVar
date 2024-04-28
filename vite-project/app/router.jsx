@@ -7,11 +7,11 @@ import PostsPage, {postsLoader} from "../src/pages/posts/PostsPage.jsx";
 import SinglePostPage, {singlePostLoader} from "../src/pages/posts/SinglePostPage.jsx";
 import DashboardPage from "../src/pages/admin/dashboard/DashboardPage.jsx";
 import LoginPage from "../src/pages/auth/LoginPage.jsx";
-import AdminProvider from "../src/providers/AdminProvider.jsx";
 import AuthProvider, {currentUserLoader} from "../src/providers/AuthProvider.jsx";
 import QuotesPage, {QuoteComponent, quotesLoader} from "../src/pages/admin/quotes/QuotesPage.jsx";
 import {quotesAction} from "./actions.js";
 import {QuoteForm, quoteLoader} from "../src/pages/admin/quotes/QuoteForm.jsx";
+import AdminLayout from "../src/pages/admin/AdminLayout.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -23,7 +23,7 @@ export const router = createBrowserRouter(
                     <Route path="/posts" element={<PostsPage/>} loader={postsLoader}/>
                     <Route path="/posts/:id" element={<SinglePostPage/>} loader={singlePostLoader}/>
                     <Route path="/login" element={<LoginPage/>}/>
-                    <Route element={<AdminProvider/>}>
+                    <Route element={<AdminLayout/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
                         <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>
                         <Route path='/admin/quotes/new' element={<QuoteForm/>} action={quotesAction}/>
