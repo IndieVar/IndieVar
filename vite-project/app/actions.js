@@ -13,7 +13,7 @@ export const quotesAction = async ({request, params}) => {
         case 'POST': {
             return await axios.post(`${API_URL}/quotes`, data, authHeader)
                 .then(() => json({
-                    data: { alert: "Success" },
+                    data: { alert: "Successfully uploaded" },
                     redirect: "/admin/quotes"
                 }))
                 .catch((err) => json({
@@ -24,7 +24,7 @@ export const quotesAction = async ({request, params}) => {
         case 'PATCH': {
            return await axios.patch(`${API_URL}/quotes/${params.id}`, data, authHeader)
                .then(() => json({
-                   data: { alert: "Success" },
+                   data: { alert: "Successfully updated" },
                    redirect: "/admin/quotes"
                }))
                .catch((err) => json({
@@ -33,9 +33,13 @@ export const quotesAction = async ({request, params}) => {
                }))
         }
         case 'DELETE': {
-            await axios.delete(`${API_URL}/quotes/${params.id}`, authHeader)
+            if (!window.confirm('Are you sure?')) return redirect('/admin/quotes')
 
-            return redirect('/admin/quotes')
+            return await axios.delete(`${API_URL}/quotes/${params.id}`, authHeader)
+                .then(() => json({
+                    data: { alert: "Successfully deleted" },
+                    redirect: "/admin/quotes"
+                }))
         }
     }
 

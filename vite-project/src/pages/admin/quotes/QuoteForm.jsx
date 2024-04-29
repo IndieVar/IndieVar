@@ -18,7 +18,6 @@ export function QuoteForm() {
     const {state} = useLocation()
 
     useEffect(() => {
-        console.log(actionData)
         if (actionData) {
             const { data, redirect } = actionData;
             navigate(redirect, { state: data, replace: true });

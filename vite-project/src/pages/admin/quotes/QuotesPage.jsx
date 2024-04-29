@@ -1,6 +1,6 @@
 import axios from "axios";
 import {API_URL} from "../../../../app/constants.js";
-import {Form, NavLink, useLoaderData} from "react-router-dom";
+import {Form, NavLink, useActionData, useLoaderData, useLocation, useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import React, {useEffect, useState} from "react";
 import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
@@ -45,6 +45,17 @@ export default function QuotesPage() {
 
 export function QuoteComponent({quote, locale}) {
     const [lang, setLang] = useState()
+    const actionData = useActionData();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (actionData) {
+            const {data, redirect} = actionData;
+            navigate(redirect, {state: data, replace: true});
+        }
+    }, [actionData, navigate]);
+
+    if (!quote) return
 
     useEffect(() => {
         setLang(locale)

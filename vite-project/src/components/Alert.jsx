@@ -15,7 +15,7 @@ export default function Alert() {
 
     const closeAlert = () => {
         setAlert(null)
-        navigate(pathname, {state: '', replace: true})
+        navigate(pathname, {state: null, replace: true})
     }
 
     return (
