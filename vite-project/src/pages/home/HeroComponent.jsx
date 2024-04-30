@@ -97,13 +97,10 @@ export default function HeroComponent({quote}) {
 
 function QuoteComponent({quote, locale}) {
     const quoteHandler = () => {
-        axios.put(`${API_URL}/quotes/${quote.id}`, {}, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
+        axios.put(`${API_URL}/quotes/${quote.id}/update_views`, {})
         return alert(quote[locale])
     }
+
     return (
         <div className="px-6 pb-14 pt-6">
             <x-placeholder message="Your code example">
