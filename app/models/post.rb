@@ -3,5 +3,5 @@ class Post < ApplicationRecord
   mount_uploader :cover, CoverUploader
 
   validates :title, :category, :desc, :content, presence: true
-  validates :cover, presence: true
+  # validates :cover, presence: true
 end

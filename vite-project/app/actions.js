@@ -52,7 +52,8 @@ export const postsAction = async ({request, params}) => {
         desc: formData.get('desc'),
         category: formData.get('category'),
         content: formData.get('content'),
-        cover: formData.get('cover')
+        cover: formData.get('cover'),
+        user_id: formData.get('user_id')
     }
 
     switch (request.method) {

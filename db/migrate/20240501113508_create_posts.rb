@@ -7,6 +7,7 @@ class CreatePosts < ActiveRecord::Migration[7.1]
       t.text :content
       t.string :cover
       t.references :user, null: false, foreign_key: true
+      t.integer :views, default: 0
 
       t.timestamps
     end
