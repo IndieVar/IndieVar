@@ -1,28 +1,19 @@
-import {Form, NavLink, useActionData, useLoaderData, useLocation, useNavigate} from "react-router-dom";
+import {Form, NavLink, useLoaderData, useLocation} from "react-router-dom";
 import axios from "axios";
 import {API_URL} from "../../../../app/constants.js";
 import {classNames, printError} from "../../../../app/functions.js";
-import {useEffect} from "react";
+import {useAlert} from "../../../../app/hooks.js";
 
-export const quoteLoader = async ({request, params}) => {
+export const quoteLoader = async ({params}) => {
     const {data} = await axios.get(`${API_URL}/quotes/${params.id}`);
     return data
 }
 
 export function QuoteForm() {
     const quote = useLoaderData()
-    const formMethod = quote ? 'patch' : 'post'
-    const formAction = `/admin/quotes/${quote ? quote.id + '/update' : 'new'}`
-    const actionData = useActionData();
-    const navigate = useNavigate();
     const {state} = useLocation()
-
-    useEffect(() => {
-        if (actionData) {
-            const { data, redirect } = actionData;
-            navigate(redirect, { state: data, replace: true });
-        }
-    }, [actionData, navigate]);
+    const errors = state?.errors || false
+    useAlert()
 
     return (
         <div className="lg:ml-12 py-3 border-b border-gray-200 bg-white">
@@ -41,8 +32,8 @@ export function QuoteForm() {
                     </NavLink>
                 </div>
             </div>
-            <Form method={formMethod}
-                  action={formAction}
+            <Form method={quote ? 'patch' : 'post'}
+                  action={`/admin/quotes/${quote ? quote.id + '/update' : 'new'}`}
             >
                 <div>
                     <label htmlFor="ru" className={"font-semibold text-gray-500"}>Russian</label>
@@ -52,14 +43,14 @@ export function QuoteForm() {
                         id="ru"
                         // required
                         className={classNames(
-                            state?.errors?.ru ? "border border-red-600" : "",
-                            "mb-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            errors.ru ? "border border-red-600" : "border-0",
+                            "mb-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         )}
                         placeholder="Add your Russian text..."
                         defaultValue={quote?.ru || ''}
                     />
-                    {state?.errors?.ru && <p className="my-2 text-sm text-red-600" id="email-error">
-                        {printError(state?.errors.ru)}
+                    {errors?.ru && <p className="my-2 text-sm text-red-600" id="email-error">
+                        {printError(errors.ru)}
                     </p>}
                     <label htmlFor="en" className={"font-semibold text-gray-500"}>English</label>
                     <textarea
@@ -68,14 +59,14 @@ export function QuoteForm() {
                         id="en"
                         // required
                         className={classNames(
-                            state?.errors?.en ? "border border-red-600" : "",
-                            "mb-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            errors.en ? "border border-red-600" : "border-0",
+                            "mb-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         )}
                         placeholder="Add your English text..."
                         defaultValue={quote?.en || ''}
                     />
-                    {state?.errors?.en && <p className="my-2 text-sm text-red-600" id="email-error">
-                        {printError(state?.errors.en)}
+                    {errors?.en && <p className="my-2 text-sm text-red-600" id="email-error">
+                        {printError(errors.en)}
                     </p>}
                 </div>
                 <div className="mt-2 flex justify-end">

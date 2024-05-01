@@ -1,10 +1,11 @@
 import axios from "axios";
 import {API_URL} from "../../../../app/constants.js";
-import {Form, NavLink, useActionData, useLoaderData, useLocation, useNavigate} from "react-router-dom";
+import {Form, NavLink, useLoaderData} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import React, {useEffect, useState} from "react";
 import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
 import {IoEyeOutline} from "react-icons/io5";
+import {useAlert} from "../../../../app/hooks.js";
 
 export const quotesLoader = async () => {
     const {data} = await axios.get(`${API_URL}/quotes`);
@@ -26,7 +27,6 @@ export default function QuotesPage() {
                 <div className="ml-4 mt-2 flex-shrink-0">
                     <NavLink
                         to={'/admin/quotes/new'}
-                        type="button"
                         className="relative inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                         Create new quote
@@ -45,15 +45,7 @@ export default function QuotesPage() {
 
 export function QuoteComponent({quote, locale}) {
     const [lang, setLang] = useState()
-    const actionData = useActionData();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (actionData) {
-            const {data, redirect} = actionData;
-            navigate(redirect, {state: data, replace: true});
-        }
-    }, [actionData, navigate]);
+    useAlert()
 
     if (!quote) return
 
