@@ -12,6 +12,7 @@ import QuotesPage, {QuoteComponent, quotesLoader} from "../src/pages/admin/quote
 import {quotesAction} from "./actions.js";
 import {QuoteForm, quoteLoader} from "../src/pages/admin/quotes/QuoteForm.jsx";
 import AdminLayout from "../src/pages/admin/AdminLayout.jsx";
+import AdminPostsPage from "../src/pages/admin/posts/AdminPostsPage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -25,10 +26,13 @@ export const router = createBrowserRouter(
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<AdminLayout/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
+                        {/*Quotes*/}
                         <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>
                         <Route path='/admin/quotes/new' element={<QuoteForm/>} action={quotesAction}/>
                         <Route path='/admin/quotes/:id/update' element={<QuoteForm/>} loader={quoteLoader} action={quotesAction}/>
                         <Route path='/admin/quotes/:id/delete' element={<QuoteComponent/>} action={quotesAction}/>
+                        {/*Posts*/}
+                        <Route path='/admin/posts' element={<AdminPostsPage/>} loader={postsLoader}/>
                     </Route>
                 </Route>
             </Route>
