@@ -1,11 +1,11 @@
 import {createContext, useContext, useState} from "react";
 import {Outlet, useLoaderData} from "react-router-dom";
-import api from "../config/api.jsx";
+import api from "../../app/config/api.jsx";
 
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
-export const currentUserLoader = async ({request, params}) => {
+export const currentUserLoader = async () => {
     if (!localStorage.getItem('token')) return null
 
     const {data} = await api.get('/current_user')

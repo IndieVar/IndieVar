@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       devise_for :users
       get 'current_user', to: 'current_user#get'
       resources :quotes
+      get 'random_quote', to: 'quotes#random'
+      put 'quotes/:id/update_views', to: 'quotes#update_views'
     end
   end
 

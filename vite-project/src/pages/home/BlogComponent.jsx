@@ -1,4 +1,4 @@
-import {demoPostsList} from "../../data/demoPostsList.js";
+import {demoPostsList} from "../../../app/data/demoPostsList.js";
 import {useTranslation} from "react-i18next";
 
 export default function BlogComponent() {

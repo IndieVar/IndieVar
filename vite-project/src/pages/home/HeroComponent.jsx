@@ -1,7 +1,8 @@
 import {useState} from "react";
 import axios from "axios";
-import {API_URL} from "../../config/constants.jsx";
+import {API_URL} from "../../../app/constants.js";
 import {useTranslation} from "react-i18next";
+import {FaBattleNet} from "react-icons/fa";
 
 export default function HeroComponent({quote}) {
     const {i18n, t} = useTranslation();
@@ -20,11 +21,7 @@ export default function HeroComponent({quote}) {
                     <div className="px-6 lg:px-0 lg:pt-4">
                         <div className="mx-auto max-w-2xl">
                             <div className="max-w-lg">
-                                <img
-                                    className="h-11"
-                                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                    alt="IndieVar"
-                                />
+                                <FaBattleNet className={"h-11 w-11"}/>
 
                                 <h1 className="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                                     {t('hero.title')}
@@ -100,13 +97,10 @@ export default function HeroComponent({quote}) {
 
 function QuoteComponent({quote, locale}) {
     const quoteHandler = () => {
-        axios.put(`${API_URL}/quotes/${quote.id}`, {}, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        })
+        axios.put(`${API_URL}/quotes/${quote.id}/update_views`, {})
         return alert(quote[locale])
     }
+
     return (
         <div className="px-6 pb-14 pt-6">
             <x-placeholder message="Your code example">
@@ -166,7 +160,7 @@ function ControllerComponent() {
                   {"\n"}
                   {"\t"}
                   {/*Show*/}
-                  <span className="text-yellow-600">def <span className="text-orange-300">show</span></span>
+                  <span className="text-yellow-600">def <span className="text-orange-300">get_random_quote</span></span>
                   {"\n"}
                   {"\t"}
                   {"\t"}

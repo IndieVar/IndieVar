@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import axios from "axios";
-import {AUTH_API_URL} from "../../config/constants.jsx";
+import {AUTH_API_URL} from "../../../app/constants.js";
 import {Navigate} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 
@@ -15,7 +15,7 @@ export default function LoginPage() {
     if (currentUser) return <Navigate to={roleRedirect[currentUser.role]} replace/>;
 
     const [formData, setFormData] = React.useState({email: '', password: ''})
-    const [isLoginFailed, setIsLoginFailed] = useState(false)
+    const [isError, setIsError] = useState(false)
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -26,11 +26,11 @@ export default function LoginPage() {
                     location.reload()
                 }
             }).catch((error) => {
-            setIsLoginFailed(true)
+            setIsError(true)
         })
     }
 
-    const inputBorderColor = isLoginFailed ? 'ring-red-300 ' : 'ring-gray-300 '
+    const inputBorderColor = isError ? 'ring-red-300 ' : 'ring-gray-300 '
     const loginFailedMessage = (
         <p className={'text-red-700 text-center text lg -my-3 '}>
             Wrong email or password!
@@ -53,7 +53,7 @@ export default function LoginPage() {
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6" onSubmit={onSubmit}>
-                        {isLoginFailed && loginFailedMessage}
+                        {isError && loginFailedMessage}
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                                 Email address

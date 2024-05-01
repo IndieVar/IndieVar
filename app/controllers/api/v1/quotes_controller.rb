@@ -1,19 +1,33 @@
 class Api::V1::QuotesController < ApplicationController
-  before_action :set_quote, only: %i[ update destroy ]
+  before_action :set_quote, only: %i[ show update destroy update_views]
   skip_before_action :verify_authenticity_token, raise: false
-  before_action :authenticate_devise_api_token!, only: %i[create destroy]
+  before_action :authenticate_devise_api_token!, only: %i[create update destroy]
+
+  # GET /random_quote
+  def random
+    @quote = Quote.order("RANDOM()").limit(1).first
+
+    render json: @quote
+  end
+
+  # PUT /quotes/:id/update_views
+  def update_views
+    if @quote.update(views: @quote.views + 1)
+      render json: @quote
+    else
+      render json: @quote.errors, status: :unprocessable_entity
+    end
+  end
 
   # GET /quotes
   def index
-    @quotes = Quote.all
+    @quotes = Quote.order(created_at: :desc)
 
     render json: @quotes
   end
 
   # GET /quotes/1
   def show
-    @quote = Quote.order("RANDOM()").limit(1).first
-
     render json: @quote
   end
 
@@ -22,7 +36,7 @@ class Api::V1::QuotesController < ApplicationController
     @quote = Quote.new(quote_params)
 
     if @quote.save
-      render json: @quote, status: :created, location: @quote
+      render json: @quote, status: :created
     else
       render json: @quote.errors, status: :unprocessable_entity
     end
@@ -30,11 +44,8 @@ class Api::V1::QuotesController < ApplicationController
 
   # PATCH/PUT /quotes/1
   def update
-    if current_devise_api_user.role == 'admin' && params[:quote].present?
-      if @quote.update(quote_params)
-        render json: @quote
-      end
-    elsif @quote.update(views: @quote.views + 1)
+    if @quote.update(quote_params)
+      render json: @quote
     else
       render json: @quote.errors, status: :unprocessable_entity
     end

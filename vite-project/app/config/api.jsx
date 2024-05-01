@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_URL} from "./constants.jsx";
+import {API_URL} from "../constants.js";
 import {redirect} from "react-router-dom";
 
 

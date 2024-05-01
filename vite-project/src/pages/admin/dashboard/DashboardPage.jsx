@@ -1,6 +1,6 @@
-import {useAuth} from "../../providers/AuthProvider.jsx";
+import {useAuth} from "../../../providers/AuthProvider.jsx";
 
-const AdminDashboard = () => {
+const DashboardPage = () => {
     const {currentUser} = useAuth()
 
     return (
@@ -14,4 +14,4 @@ const AdminDashboard = () => {
         </>
     )
 }
-export default AdminDashboard;
+export default DashboardPage;
