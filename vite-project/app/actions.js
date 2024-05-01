@@ -44,3 +44,49 @@ export const quotesAction = async ({request, params}) => {
     }
 
 }
+
+export const postsAction = async ({request, params}) => {
+    const formData = await request.formData()
+    const data = {
+        title: formData.get('title'),
+        desc: formData.get('desc'),
+        category: formData.get('category'),
+        content: formData.get('content'),
+        cover: formData.get('cover')
+    }
+
+    switch (request.method) {
+        case 'POST': {
+            return await axios.post(`${API_URL}/posts`, data, authHeader)
+                .then(() => json({
+                    data: { alert: "Successfully uploaded" },
+                    redirect: "/admin/posts"
+                }))
+                .catch((err) => json({
+                    data: { errors: err.response.data },
+                    redirect: "/admin/posts/new"
+                }))
+        }
+        case 'PATCH': {
+            return await axios.patch(`${API_URL}/posts/${params.id}`, data, authHeader)
+                .then(() => json({
+                    data: { alert: "Successfully updated" },
+                    redirect: "/admin/posts"
+                }))
+                .catch((err) => json({
+                    data: { errors: err.response.data },
+                    redirect: `/admin/posts/${params.id}/update`
+                }))
+        }
+        case 'DELETE': {
+            if (!window.confirm('Are you sure?')) return redirect('/admin/posts')
+
+            return await axios.delete(`${API_URL}/posts/${params.id}`, authHeader)
+                .then(() => json({
+                    data: { alert: "Successfully deleted" },
+                    redirect: "/admin/posts"
+                }))
+        }
+    }
+
+}
