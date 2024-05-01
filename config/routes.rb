@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :quotes
       get 'random_quote', to: 'quotes#random'
       put 'quotes/:id/update_views', to: 'quotes#update_views'
+      resources :posts
     end
   end
 
