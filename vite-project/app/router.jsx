@@ -12,7 +12,7 @@ import QuotesPage, {QuoteComponent, quotesLoader} from "../src/pages/admin/quote
 import {postsAction, quotesAction} from "./actions.js";
 import {QuoteForm, quoteLoader} from "../src/pages/admin/quotes/QuoteForm.jsx";
 import AdminLayout from "../src/pages/admin/AdminLayout.jsx";
-import AdminPostsPage from "../src/pages/admin/posts/AdminPostsPage.jsx";
+import AdminPostsPage, {PostComponent} from "../src/pages/admin/posts/AdminPostsPage.jsx";
 import {PostForm} from "../src/pages/admin/posts/PostForm.jsx";
 
 export const router = createBrowserRouter(
@@ -35,6 +35,8 @@ export const router = createBrowserRouter(
                         {/*Posts*/}
                         <Route path='/admin/posts' element={<AdminPostsPage/>} loader={postsLoader}/>
                         <Route path='/admin/posts/new' element={<PostForm/>} action={postsAction}/>
+                        <Route path='/admin/posts/:id/update' element={<PostForm/>} loader={singlePostLoader} action={postsAction}/>
+                        <Route path='/admin/posts/:id/delete' element={<PostComponent/>} action={postsAction}/>
                     </Route>
                 </Route>
             </Route>
