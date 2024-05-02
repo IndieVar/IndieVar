@@ -2,8 +2,9 @@ import {Form, NavLink, useLoaderData, useLocation} from "react-router-dom";
 import {classNames, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
 import {Editor} from "@tinymce/tinymce-react";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {useAuth} from "../../../providers/AuthProvider.jsx";
+import {TINY_API_KEY} from "../../../../app/constants.js";
 
 export function PostForm() {
     const {currentUser} = useAuth()
@@ -111,14 +112,15 @@ export function PostForm() {
 function EditorComponent({initialValue}) {
     const [value, setValue] = useState(initialValue ?? '');
     useEffect(() => setValue(initialValue ?? ''), [initialValue]);
+
     return (
         <div className={"mt-1"}>
             <input type="hidden" name={"content"} defaultValue={value}/>
             <Editor
-                apiKey='x3et7zrbjm0rhi142t5cbtp2uhlkcuqnwx5loco9x0fe3l7m'
+                apiKey={TINY_API_KEY}
                 initialValue={initialValue}
                 value={value}
-                onEditorChange={(newValue, editor) => setValue(newValue)}
+                onEditorChange={(newValue) => setValue(newValue)}
                 init={{
                     height: 500,
                     menubar: false,
