@@ -5,6 +5,7 @@ import {Editor} from "@tinymce/tinymce-react";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../../providers/AuthProvider.jsx";
 import {TINY_API_KEY} from "../../../../app/constants.js";
+import {PhotoIcon} from "@heroicons/react/20/solid/index.js";
 
 export function PostForm() {
     const {currentUser} = useAuth()
@@ -32,13 +33,14 @@ export function PostForm() {
             </div>
             <Form method={post ? 'patch' : 'post'}
                   action={`/admin/posts/${post ? post.id + '/update' : 'new'}`}
+                  encType={"multipart/form-data"}
             >
-                <input type="hidden" name={"user_id"} defaultValue={currentUser?.id}/>
+                <input type="hidden" name={"post[user_id]"} defaultValue={currentUser?.id}/>
                 <div className={"space-y-6"}>
                     <div>
                         <label htmlFor="title" className={"font-semibold text-gray-500"}>Title</label>
                         <input
-                            name="title"
+                            name="post[title]"
                             id="title"
                             // required
                             className={classNames(
@@ -55,7 +57,7 @@ export function PostForm() {
                     <div>
                         <label htmlFor="category" className={"font-semibold text-gray-500"}>Category</label>
                         <input
-                            name="category"
+                            name="post[category]"
                             id="category"
                             // required
                             className={classNames(
@@ -73,7 +75,7 @@ export function PostForm() {
                         <label htmlFor="desc" className={"font-semibold text-gray-500"}>Description</label>
                         <textarea
                             rows={3}
-                            name="desc"
+                            name="post[desc]"
                             id="desc"
                             // required
                             className={classNames(
@@ -87,17 +89,17 @@ export function PostForm() {
                             {printError(errors.desc)}
                         </p>}
                     </div>
-
+                    <CoverComponent cover={post?.cover} error={errors?.cover || false}/>
                     <div>
                         <label htmlFor="desc" className={"font-semibold text-gray-500"}>Content</label>
-                        <EditorComponent initialValue={post?.content}/>
+                        <EditorComponent initialValue={post?.content} error={errors?.content}/>
                         {errors?.content && <p className="my-2 text-sm text-red-600" id="content-error">
                             {printError(errors.content)}
                         </p>}
                     </div>
                 </div>
                 <div className="mt-6 flex justify-end">
-                <button
+                    <button
                         type="submit"
                         className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
@@ -109,13 +111,16 @@ export function PostForm() {
     )
 }
 
-function EditorComponent({initialValue}) {
+function EditorComponent({initialValue, error}) {
     const [value, setValue] = useState(initialValue ?? '');
     useEffect(() => setValue(initialValue ?? ''), [initialValue]);
 
     return (
-        <div className={"mt-1"}>
-            <input type="hidden" name={"content"} defaultValue={value}/>
+        <div
+            className={classNames(
+                error ? "border border-red-600" : "",
+                "mt-2 rounded-xl")}>
+            <input type="hidden" name={"post[content]"} defaultValue={value}/>
             <Editor
                 apiKey={TINY_API_KEY}
                 initialValue={initialValue}
@@ -138,4 +143,46 @@ function EditorComponent({initialValue}) {
             />
         </div>
     );
+}
+
+function CoverComponent({cover, error}) {
+    const [file, setFile] = useState();
+    function handleChange(e) {
+        setFile(URL.createObjectURL(e.target.files[0]));
+    }
+
+    return (
+        <div className="col-span-full">
+            <label htmlFor="cover-photo" className="font-semibold text-gray-500">
+                Cover photo
+            </label>
+            <div
+                className={classNames(
+                    error ? "border-red-600" : "border-dashed border-gray-900/25 ",
+                    "mt-2 flex justify-center rounded-lg border px-6 py-10")}>
+                <div className="text-center">
+                    {file && <img src={file} className={"h-56 w-auto"}/>}
+                    {!file && cover && <img src={'http://127.0.0.1:3000/' + cover.medium.url} className={"h-56 w-auto"}/>}
+                    {!file && !cover && <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true"/>}
+                    <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                        <label
+                            htmlFor="cover"
+                            className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+                        >
+                            <span>Upload a file</span>
+                            <input id="cover" name="post[cover]" type="file" className="sr-only"
+                                   defaultValue={file}
+                                   onChange={handleChange}
+                            />
+                        </label>
+                        <p className="pl-1">or drag and drop</p>
+                    </div>
+                    <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                </div>
+            </div>
+            {error && <p className="my-2 text-sm text-red-600" id="cover-error">
+                {printError(error)}
+            </p>}
+        </div>
+    )
 }

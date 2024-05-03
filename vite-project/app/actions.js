@@ -4,14 +4,10 @@ import {json, redirect} from "react-router-dom";
 
 export const quotesAction = async ({request, params}) => {
     const formData = await request.formData()
-    const data = {
-        ru: formData.get('ru'),
-        en: formData.get('en')
-    }
 
     switch (request.method) {
         case 'POST': {
-            return await axios.post(`${API_URL}/quotes`, data, authHeader)
+            return await axios.post(`${API_URL}/quotes`, formData, authHeader)
                 .then(() => json({
                     data: { alert: "Successfully uploaded" },
                     redirect: "/admin/quotes"
@@ -22,7 +18,7 @@ export const quotesAction = async ({request, params}) => {
                 }))
         }
         case 'PATCH': {
-           return await axios.patch(`${API_URL}/quotes/${params.id}`, data, authHeader)
+           return await axios.patch(`${API_URL}/quotes/${params.id}`, formData, authHeader)
                .then(() => json({
                    data: { alert: "Successfully updated" },
                    redirect: "/admin/quotes"
@@ -47,18 +43,10 @@ export const quotesAction = async ({request, params}) => {
 
 export const postsAction = async ({request, params}) => {
     const formData = await request.formData()
-    const data = {
-        title: formData.get('title'),
-        desc: formData.get('desc'),
-        category: formData.get('category'),
-        content: formData.get('content'),
-        cover: formData.get('cover'),
-        user_id: formData.get('user_id')
-    }
 
     switch (request.method) {
         case 'POST': {
-            return await axios.post(`${API_URL}/posts`, data, authHeader)
+            return await axios.post(`${API_URL}/posts`, formData, authHeader)
                 .then(() => json({
                     data: { alert: "Successfully uploaded" },
                     redirect: "/admin/posts"
@@ -69,7 +57,7 @@ export const postsAction = async ({request, params}) => {
                 }))
         }
         case 'PATCH': {
-            return await axios.patch(`${API_URL}/posts/${params.id}`, data, authHeader)
+            return await axios.patch(`${API_URL}/posts/${params.id}`, formData, authHeader)
                 .then(() => json({
                     data: { alert: "Successfully updated" },
                     redirect: "/admin/posts"

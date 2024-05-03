@@ -1,6 +1,5 @@
 import {Form, NavLink, useLoaderData} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import React, {useEffect, useState} from "react";
 import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
 import {IoEyeOutline} from "react-icons/io5";
 import {useAlert} from "../../../../app/hooks.js";
@@ -36,7 +35,7 @@ export default function AdminPostsPage() {
     )
 }
 
-export function PostComponent({post, locale}) {
+export function PostComponent({post}) {
     useAlert()
 
     if (!post) return
@@ -59,7 +58,7 @@ export function PostComponent({post, locale}) {
             <article className="flex flex-col items-start justify-between">
                 <div className="relative w-full">
                     <img
-                        src={"https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80"}
+                        src={'http://127.0.0.1:3000/' + post.cover.medium.url}
                         alt=""
                         className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
                     />
@@ -86,7 +85,7 @@ export function PostComponent({post, locale}) {
                         </h3>
                         <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.desc}</p>
                     </div>
-                    <div className="relative mt-8 flex items-center gap-x-4">
+                    <div className="relative mt-8 mb-4 flex items-center gap-x-4">
                         <img src={"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}
                              alt="" className="h-10 w-10 rounded-full bg-gray-100"/>
                         <div className="text-sm leading-6">

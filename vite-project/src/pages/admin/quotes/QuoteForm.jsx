@@ -40,7 +40,7 @@ export function QuoteForm() {
                         <label htmlFor="ru" className={"font-semibold text-gray-500"}>Russian</label>
                         <textarea
                             rows={3}
-                            name="ru"
+                            name="quote[ru]"
                             id="ru"
                             // required
                             className={classNames(
@@ -58,7 +58,7 @@ export function QuoteForm() {
                         <label htmlFor="en" className={"font-semibold text-gray-500"}>English</label>
                         <textarea
                             rows={3}
-                            name="en"
+                            name="quote[en]"
                             id="en"
                             // required
                             className={classNames(
