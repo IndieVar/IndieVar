@@ -1,5 +1,5 @@
 import {Form, NavLink, useLoaderData, useLocation} from "react-router-dom";
-import {classNames, printError} from "../../../../app/functions.js";
+import {classNames, imageUrl, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
 import {Editor} from "@tinymce/tinymce-react";
 import {useEffect, useState} from "react";
@@ -162,7 +162,7 @@ function CoverComponent({cover, error}) {
                     "mt-2 flex justify-center rounded-lg border px-6 py-10")}>
                 <div className="text-center">
                     {file && <img src={file} className={"h-56 w-auto"}/>}
-                    {!file && cover && <img src={'http://127.0.0.1:3000/' + cover.medium.url} className={"h-56 w-auto"}/>}
+                    {!file && cover && <img src={imageUrl(cover.medium.url)} className={"h-56 w-auto"}/>}
                     {!file && !cover && <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true"/>}
                     <div className="mt-4 flex text-sm leading-6 text-gray-600">
                         <label

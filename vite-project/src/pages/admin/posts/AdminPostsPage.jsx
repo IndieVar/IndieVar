@@ -3,6 +3,7 @@ import {useTranslation} from "react-i18next";
 import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
 import {IoEyeOutline} from "react-icons/io5";
 import {useAlert} from "../../../../app/hooks.js";
+import {dateFormat, imageUrl} from "../../../../app/functions.js";
 
 export default function AdminPostsPage() {
     const posts = useLoaderData()
@@ -26,7 +27,7 @@ export default function AdminPostsPage() {
                 </div>
             </div>
             <div
-                className="divide-y divide-gray-200 overflow-hidden rounded-lg shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
+                className="divide-y divide-gray-200 overflow-hidden rounded-lg shadow sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-px sm:divide-y-0">
                 {posts.map((post) => (
                     <PostComponent key={post.id} post={post} locale={i18n.language}/>
                 ))}
@@ -58,16 +59,16 @@ export function PostComponent({post}) {
             <article className="flex flex-col items-start justify-between">
                 <div className="relative w-full">
                     <img
-                        src={'http://127.0.0.1:3000/' + post.cover.medium.url}
+                        src={imageUrl(post.cover.medium.url)}
                         alt=""
-                        className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+                        className="h-56 sm:h-72 w-full rounded-2xl bg-gray-100 object-cover"
                     />
                     <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"/>
                 </div>
                 <div className="max-w-xl">
                     <div className="mt-8 flex items-center gap-x-4 text-xs">
-                        <time dateTime={post.created_at} className="text-gray-500">
-                            {post.created_at}
+                        <time dateTime={dateFormat(post.created_at)} className="text-gray-500">
+                            {dateFormat(post.created_at)}
                         </time>
                         <a
                             href={'/'}
