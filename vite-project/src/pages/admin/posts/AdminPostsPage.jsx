@@ -1,9 +1,8 @@
 import {Form, NavLink, useLoaderData} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
-import {IoEyeOutline} from "react-icons/io5";
 import {useAlert} from "../../../../app/hooks.js";
-import {dateFormat, imageUrl} from "../../../../app/functions.js";
+import PostCard from "../../../features/PostCard.jsx";
 
 export default function AdminPostsPage() {
     const posts = useLoaderData()
@@ -56,55 +55,7 @@ export function PostComponent({post}) {
                     </button>
                 </Form>
             </div>
-            <article className="flex flex-col items-start justify-between">
-                <div className="relative w-full">
-                    <img
-                        src={imageUrl(post.cover.medium.url)}
-                        alt=""
-                        className="h-56 sm:h-72 w-full rounded-2xl bg-gray-100 object-cover"
-                    />
-                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"/>
-                </div>
-                <div className="max-w-xl">
-                    <div className="mt-8 flex items-center gap-x-4 text-xs">
-                        <time dateTime={dateFormat(post.created_at)} className="text-gray-500">
-                            {dateFormat(post.created_at)}
-                        </time>
-                        <a
-                            href={'/'}
-                            className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                        >
-                            {post.category}
-                        </a>
-                    </div>
-                    <div className="group relative">
-                        <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                            <a href={`/posts/${post.id}`}>
-                                <span className="absolute inset-0"/>
-                                {post.title}
-                            </a>
-                        </h3>
-                        <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.desc}</p>
-                    </div>
-                    <div className="relative mt-8 mb-4 flex items-center gap-x-4">
-                        <img src={"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}
-                             alt="" className="h-10 w-10 rounded-full bg-gray-100"/>
-                        <div className="text-sm leading-6">
-                            <p className="font-semibold text-gray-900">
-                                <a href={'/'}>
-                                    <span className="absolute inset-0"/>
-                                    {post.user.email}
-                                </a>
-                            </p>
-                            <p className="text-gray-600">{"Lead developer"}</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <div className={"absolute bottom-4 inset-x-1/2 w-full flex items-center space-x-2 text-gray-500 text-xs"}>
-                <span>{post.views}</span>
-                <IoEyeOutline className={"w-4 h-4"}/>
-            </div>
+            <PostCard post={post}/>
         </div>
     )
 }

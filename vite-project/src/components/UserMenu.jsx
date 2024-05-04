@@ -5,8 +5,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {AUTH_API_URL, authHeader} from "../../app/constants.js";
 import {BellIcon} from "@heroicons/react/24/outline/index.js";
-import {classNames} from "../../app/functions.js";
-import avatar from "../../app/assets/avatar-m.png"
+import {avatarUrl, classNames} from "../../app/functions.js";
 
 const userNavigation = [
     {name: 'Dashboard', href: '/admin/dashboard'},
@@ -38,7 +37,7 @@ export default function UserMenu() {
                     <span className="sr-only">Open user menu</span>
                     <img
                         className="h-8 w-8 rounded-full bg-gray-50"
-                        src={currentUser?.avatar || avatar}
+                        src={avatarUrl(currentUser?.avatar)}
                         alt="User avatar"
                     />
                 </Menu.Button>
