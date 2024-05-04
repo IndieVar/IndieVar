@@ -3,6 +3,8 @@ import axios from "axios";
 import {API_URL} from "../../../../app/constants.js";
 import {classNames, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
+import {useEffect, useState} from "react";
+import Loading from "../../../components/Loading.jsx";
 
 export const quoteLoader = async ({params}) => {
     const {data} = await axios.get(`${API_URL}/quotes/${params.id}`);
@@ -10,10 +12,17 @@ export const quoteLoader = async ({params}) => {
 }
 
 export function QuoteForm() {
+    const [isLoading, setIsLoading] = useState(true)
     const quote = useLoaderData()
     const {state} = useLocation()
     const errors = state?.errors || false
     useAlert()
+
+    useEffect(() => {
+        setIsLoading(false)
+    }, [state]);
+
+    if (isLoading) return <Loading/>
 
     return (
         <div className="lg:ml-12 py-3 border-b border-gray-200 bg-white">

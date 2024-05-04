@@ -6,13 +6,21 @@ import {useEffect, useState} from "react";
 import {useAuth} from "../../../providers/AuthProvider.jsx";
 import {TINY_API_KEY} from "../../../../app/constants.js";
 import {PhotoIcon} from "@heroicons/react/20/solid/index.js";
+import Loading from "../../../components/Loading.jsx";
 
 export function PostForm() {
+    const [isLoading, setIsLoading] = useState(true)
     const {currentUser} = useAuth()
     const post = useLoaderData()
     const {state} = useLocation()
     const errors = state?.errors || false
     useAlert()
+
+    useEffect(() => {
+        setIsLoading(false)
+    }, [state]);
+
+    if (isLoading) return <Loading/>
 
     return (
         <div className="lg:ml-12 py-3 border-b border-gray-200 bg-white">
@@ -34,6 +42,7 @@ export function PostForm() {
             <Form method={post ? 'patch' : 'post'}
                   action={`/admin/posts/${post ? post.id + '/update' : 'new'}`}
                   encType={"multipart/form-data"}
+                  onSubmit={() => setIsLoading(true)}
             >
                 <input type="hidden" name={"post[user_id]"} defaultValue={currentUser?.id}/>
                 <div className={"space-y-6"}>
