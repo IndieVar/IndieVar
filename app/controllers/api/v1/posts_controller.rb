@@ -16,12 +16,12 @@ class Api::V1::PostsController < ApplicationController
   def index
     @posts = Post.all
 
-    render json: @posts, include: [:user]
+    render json: @posts, include: [:user, :en, :ru]
   end
 
   # GET /posts/1
   def show
-    render json: @post, include: [:user]
+    render json: @post, include: [:user, :en, :ru]
   end
 
   # POST /posts
@@ -57,6 +57,7 @@ class Api::V1::PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :desc, :category, :content, :cover, :views, :user_id)
+      # params.require(:post).permit(:title, :desc, :category, :content, :cover, :views, :user_id)
+      params.require(:post).permit(:content, :cover, :views, :user_id, en: [], ru: [])
     end
 end

@@ -3,6 +3,7 @@ import {API_URL} from "../../../app/constants.js";
 import {useLoaderData} from "react-router-dom";
 import UnsafeComponent from "../../components/UnsafeComponent.jsx";
 import {imageUrl} from "../../../app/functions.js";
+import {useTranslation} from "react-i18next";
 
 export const singlePostLoader = async ({params}) => {
     const {data} = await axios.get(`${API_URL}/posts/${params.id}`);
@@ -11,6 +12,8 @@ export const singlePostLoader = async ({params}) => {
 
 export default function SinglePostPage() {
     const post = useLoaderData();
+    const {i18n} = useTranslation();
+    const locale = i18n.language
 
     return (
         <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
@@ -45,9 +48,9 @@ export default function SinglePostPage() {
                     <div className="lg:pr-4">
                         <div className="lg:max-w-lg">
                             <p className="text-base font-semibold leading-7 text-indigo-600">Deploy faster</p>
-                            <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{post.title}</h1>
+                            <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{post[locale].title}</h1>
                             <p className="mt-6 text-xl leading-8 text-gray-700">
-                                {post.desc}
+                                {post[locale].desc}
                             </p>
                         </div>
                     </div>
@@ -56,11 +59,11 @@ export default function SinglePostPage() {
                     <img
                         className="max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 w-[30rem]"
                         src={imageUrl(post.cover.large.url)}
-                        alt={post.title}
+                        alt={post[locale].title}
                     />
                 </div>
                 <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-                    <UnsafeComponent html={post.content}/>
+                    <UnsafeComponent html={post[locale].content}/>
                 </div>
             </div>
         </div>

@@ -1,14 +1,17 @@
 import {avatarUrl, dateFormat, imageUrl} from "../../app/functions.js";
 import React from "react";
 import {IoEyeOutline} from "react-icons/io5";
+import {useTranslation} from "react-i18next";
 
 export default function PostCard({post}) {
+    const {i18n} = useTranslation();
+    const locale = i18n.language
     return (
         <article className="flex flex-col items-start justify-between relative rounded-lg">
             <div className="relative w-full">
                 <img
                     src={imageUrl(post.cover.medium.url)}
-                    alt={post.title}
+                    alt={post[locale].title}
                     className="h-56 sm:h-72 w-full rounded-2xl bg-gray-100 object-cover"
                 />
                 <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"/>
@@ -22,17 +25,17 @@ export default function PostCard({post}) {
                         href={`/posts/${post.id}`}
                         className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                     >
-                        {post.category}
+                        {post[locale].category}
                     </a>
                 </div>
                 <div className="group relative">
                     <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                         <a href={`/posts/${post.id}`}>
                             <span className="absolute inset-0"/>
-                            {post.title}
+                            {post[locale].title}
                         </a>
                     </h3>
-                    <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post.desc}</p>
+                    <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{post[locale].desc}</p>
                 </div>
                 <div className="relative mt-8 mb-4 flex items-center gap-x-4">
                     <img
