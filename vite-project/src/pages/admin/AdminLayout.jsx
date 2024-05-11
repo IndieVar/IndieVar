@@ -5,7 +5,6 @@ import {
     CalendarIcon,
     ChartPieIcon,
     DocumentDuplicateIcon,
-    FolderIcon,
     HomeIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
@@ -13,11 +12,12 @@ import {classNames, isActiveLink} from "../../../app/functions.js";
 import {TbBlockquote} from "react-icons/tb";
 import {Navigate, NavLink, Outlet} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
+import {BsChatQuote} from "react-icons/bs";
 
 const navigation = [
     {name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon},
-    {name: 'Quotes', href: '/admin/quotes', icon: TbBlockquote},
-    {name: 'Projects', href: '#', icon: FolderIcon},
+    {name: 'Posts', href: '/admin/posts', icon: TbBlockquote},
+    {name: 'Quotes', href: '/admin/quotes', icon: BsChatQuote},
     {name: 'Calendar', href: '#', icon: CalendarIcon},
     {name: 'Documents', href: '#', icon: DocumentDuplicateIcon},
     {name: 'Reports', href: '#', icon: ChartPieIcon},
