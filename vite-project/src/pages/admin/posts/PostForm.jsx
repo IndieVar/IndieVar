@@ -15,6 +15,7 @@ export function PostForm() {
     const {state} = useLocation()
     const errors = state?.errors || false
     useAlert()
+    console.log(errors)
 
     useEffect(() => {
         setIsLoading(false)
@@ -49,7 +50,7 @@ export function PostForm() {
                     <div>
                         <label htmlFor="title" className={"font-semibold text-gray-500"}>Title</label>
                         <input
-                            name="post[title]"
+                            name="post[en_attributes][title]"
                             id="title"
                             // required
                             className={classNames(
@@ -66,7 +67,7 @@ export function PostForm() {
                     <div>
                         <label htmlFor="category" className={"font-semibold text-gray-500"}>Category</label>
                         <input
-                            name="post[category]"
+                            name="post[en_attributes][category]"
                             id="category"
                             // required
                             className={classNames(
@@ -84,7 +85,7 @@ export function PostForm() {
                         <label htmlFor="desc" className={"font-semibold text-gray-500"}>Description</label>
                         <textarea
                             rows={3}
-                            name="post[desc]"
+                            name="post[en_attributes][desc]"
                             id="desc"
                             // required
                             className={classNames(
@@ -129,7 +130,7 @@ function EditorComponent({initialValue, error}) {
             className={classNames(
                 error ? "border border-red-600" : "",
                 "mt-2 rounded-xl")}>
-            <input type="hidden" name={"post[content]"} defaultValue={value}/>
+            <input type="hidden" name={"post[en_attributes][content]"} defaultValue={value}/>
             <Editor
                 apiKey={TINY_API_KEY}
                 initialValue={initialValue}

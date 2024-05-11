@@ -5,9 +5,7 @@ class Api::V1::PostsController < ApplicationController
 
   # PUT /posts/:id/update_views
   def update_views
-    if @post.update(views: @post.views + 1)
-      render json: @post, include: [:user]
-    else
+    unless @post.update(views: @post.views + 1)
       render json: @post.errors, status: :unprocessable_entity
     end
   end
@@ -29,7 +27,7 @@ class Api::V1::PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      render json: @post, include: [:user], status: :created
+      render json: @post, include: [:user, :en, :ru], status: :created
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -38,7 +36,7 @@ class Api::V1::PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      render json: @post, include: [:user]
+      render json: @post, include: [:user, :en, :ru]
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -50,14 +48,18 @@ class Api::V1::PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      # params.require(:post).permit(:title, :desc, :category, :content, :cover, :views, :user_id)
-      params.require(:post).permit(:content, :cover, :views, :user_id, en: [], ru: [])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(
+      :cover, :views, :user_id,
+      en_attributes: [:title, :desc, :category, :content],
+      ru_attributes: [:title, :desc, :category, :content]
+    )
+  end
 end
