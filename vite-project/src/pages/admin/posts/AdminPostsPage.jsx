@@ -2,7 +2,7 @@ import {Form, NavLink, useLoaderData} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
 import {useAlert} from "../../../../app/hooks.js";
-import PostCard from "../../../features/PostCard.jsx";
+import PostCard from "../../../components/features/PostCard.jsx";
 
 export default function AdminPostsPage() {
     const posts = useLoaderData()

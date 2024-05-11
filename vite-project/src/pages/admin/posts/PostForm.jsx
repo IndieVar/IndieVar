@@ -1,12 +1,11 @@
 import {Form, NavLink, useLoaderData, useLocation} from "react-router-dom";
-import {classNames, imageUrl, printError} from "../../../../app/functions.js";
+import {classNames, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
-import {Editor} from "@tinymce/tinymce-react";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../../providers/AuthProvider.jsx";
-import {TINY_API_KEY} from "../../../../app/constants.js";
-import {PhotoIcon} from "@heroicons/react/20/solid/index.js";
 import Loading from "../../../components/Loading.jsx";
+import UploadImage from "../../../components/features/UploadImage.jsx";
+import EditorComponent from "../../../components/features/EditorComponent.jsx";
 
 export function PostForm() {
     const [isLoading, setIsLoading] = useState(true)
@@ -14,6 +13,7 @@ export function PostForm() {
     const post = useLoaderData()
     const {state} = useLocation()
     const errors = state?.errors || false
+    const langs = ['en', 'ru']
     useAlert()
     console.log(errors)
 
@@ -46,68 +46,12 @@ export function PostForm() {
                   onSubmit={() => setIsLoading(true)}
             >
                 <input type="hidden" name={"post[user_id]"} defaultValue={currentUser?.id}/>
-                <div className={"space-y-6"}>
-                    <div>
-                        <label htmlFor="title" className={"font-semibold text-gray-500"}>Title</label>
-                        <input
-                            name="post[en_attributes][title]"
-                            id="title"
-                            // required
-                            className={classNames(
-                                errors.title ? "border border-red-600" : "border-0",
-                                "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            )}
-                            placeholder="Title"
-                            defaultValue={post?.title || ''}
-                        />
-                        {errors?.title && <p className="my-2 text-sm text-red-600" id="title-error">
-                            {printError(errors.title)}
-                        </p>}
-                    </div>
-                    <div>
-                        <label htmlFor="category" className={"font-semibold text-gray-500"}>Category</label>
-                        <input
-                            name="post[en_attributes][category]"
-                            id="category"
-                            // required
-                            className={classNames(
-                                errors.category ? "border border-red-600" : "border-0",
-                                "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            )}
-                            placeholder="Category"
-                            defaultValue={post?.category || ''}
-                        />
-                        {errors?.category && <p className="my-2 text-sm text-red-600" id="category-error">
-                            {printError(errors.category)}
-                        </p>}
-                    </div>
-                    <div>
-                        <label htmlFor="desc" className={"font-semibold text-gray-500"}>Description</label>
-                        <textarea
-                            rows={3}
-                            name="post[en_attributes][desc]"
-                            id="desc"
-                            // required
-                            className={classNames(
-                                errors.desc ? "border border-red-600" : "border-0",
-                                "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            )}
-                            placeholder="Description"
-                            defaultValue={post?.desc || ''}
-                        />
-                        {errors?.desc && <p className="my-2 text-sm text-red-600" id="desc-error">
-                            {printError(errors.desc)}
-                        </p>}
-                    </div>
-                    <CoverComponent cover={post?.cover} error={errors?.cover || false}/>
-                    <div>
-                        <label htmlFor="desc" className={"font-semibold text-gray-500"}>Content</label>
-                        <EditorComponent initialValue={post?.content} error={errors?.content}/>
-                        {errors?.content && <p className="my-2 text-sm text-red-600" id="content-error">
-                            {printError(errors.content)}
-                        </p>}
-                    </div>
-                </div>
+                <UploadImage inputName={"post[cover]"}
+                             image={post?.cover}
+                             error={errors?.cover}/>
+                {langs.map((lang) => (
+                    <TextContent key={lang} lang={lang} post={post} errors={errors}/>
+                ))}
                 <div className="mt-6 flex justify-end">
                     <button
                         type="submit"
@@ -121,78 +65,67 @@ export function PostForm() {
     )
 }
 
-function EditorComponent({initialValue, error}) {
-    const [value, setValue] = useState(initialValue ?? '');
-    useEffect(() => setValue(initialValue ?? ''), [initialValue]);
+function TextContent({post, errors, lang}) {
 
     return (
-        <div
-            className={classNames(
-                error ? "border border-red-600" : "",
-                "mt-2 rounded-xl")}>
-            <input type="hidden" name={"post[en_attributes][content]"} defaultValue={value}/>
-            <Editor
-                apiKey={TINY_API_KEY}
-                initialValue={initialValue}
-                value={value}
-                onEditorChange={(newValue) => setValue(newValue)}
-                init={{
-                    height: 500,
-                    menubar: false,
-                    plugins: [
-                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                        'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-                    ],
-                    toolbar: 'undo redo | blocks | ' +
-                        'bold italic forecolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help',
-                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                }}
-            />
-        </div>
-    );
-}
-
-function CoverComponent({cover, error}) {
-    const [file, setFile] = useState();
-    function handleChange(e) {
-        setFile(URL.createObjectURL(e.target.files[0]));
-    }
-
-    return (
-        <div className="col-span-full">
-            <label htmlFor="cover-photo" className="font-semibold text-gray-500">
-                Cover photo
-            </label>
-            <div
-                className={classNames(
-                    error ? "border-red-600" : "border-dashed border-gray-900/25 ",
-                    "mt-2 flex justify-center rounded-lg border px-6 py-10")}>
-                <div className="text-center">
-                    {file && <img src={file} className={"h-56 w-auto"}/>}
-                    {!file && cover && <img src={imageUrl(cover.medium.url)} className={"h-56 w-auto"}/>}
-                    {!file && !cover && <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true"/>}
-                    <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                        <label
-                            htmlFor="cover"
-                            className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-                        >
-                            <span>Upload a file</span>
-                            <input id="cover" name="post[cover]" type="file" className="sr-only"
-                                   defaultValue={file}
-                                   onChange={handleChange}
-                            />
-                        </label>
-                        <p className="pl-1">or drag and drop</p>
-                    </div>
-                    <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                </div>
+        <div className={"space-y-6"}>
+            <label className="font-semibold text-gray-500 text-center text-xl">{lang === 'en' ? 'English' : 'Russian'}</label>
+            <div>
+                <label htmlFor="title" className={"font-semibold text-gray-500"}>Title</label>
+                <input
+                    name={`post[${lang}_attributes][title]`}
+                    id="title"
+                    // required
+                    className={classNames(
+                        errors.title ? "border border-red-600" : "border-0",
+                        "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    )}
+                    placeholder="Title"
+                    defaultValue={post?.title || ''}
+                />
+                {errors?.title && <p className="my-2 text-sm text-red-600" id="title-error">
+                    {printError(errors.title)}
+                </p>}
             </div>
-            {error && <p className="my-2 text-sm text-red-600" id="cover-error">
-                {printError(error)}
-            </p>}
+            <div>
+                <label htmlFor="category" className={"font-semibold text-gray-500"}>Category</label>
+                <input
+                    name={`post[${lang}_attributes][category]`}
+                    id="category"
+                    // required
+                    className={classNames(
+                        errors.category ? "border border-red-600" : "border-0",
+                        "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    )}
+                    placeholder="Category"
+                    defaultValue={post?.category || ''}
+                />
+                {errors?.category && <p className="my-2 text-sm text-red-600" id="category-error">
+                    {printError(errors.category)}
+                </p>}
+            </div>
+            <div>
+                <label htmlFor="desc" className={"font-semibold text-gray-500"}>Description</label>
+                <textarea
+                    rows={3}
+                    name={`post[${lang}_attributes][desc]`}
+                    id="desc"
+                    // required
+                    className={classNames(
+                        errors.desc ? "border border-red-600" : "border-0",
+                        "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    )}
+                    placeholder="Description"
+                    defaultValue={post?.desc || ''}
+                />
+                {errors?.desc && <p className="my-2 text-sm text-red-600" id="desc-error">
+                    {printError(errors.desc)}
+                </p>}
+            </div>
+            <EditorComponent inputName={`post[${lang}_attributes][content]`}
+                             initialValue={post?.content}
+                             error={errors?.content}/>
+            <hr/>
         </div>
     )
 }

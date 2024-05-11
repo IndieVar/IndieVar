@@ -1,7 +1,7 @@
 import axios from "axios";
 import {API_URL} from "../../../app/constants.js";
 import {useLoaderData} from "react-router-dom";
-import UnsafeComponent from "../../components/UnsafeComponent.jsx";
+import UnsafeComponent from "../../components/features/UnsafeComponent.jsx";
 import {imageUrl} from "../../../app/functions.js";
 import {useTranslation} from "react-i18next";
 

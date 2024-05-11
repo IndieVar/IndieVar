@@ -1,7 +1,7 @@
 import axios from "axios";
 import {API_URL} from "../../../app/constants.js";
 import {useLoaderData} from "react-router-dom";
-import PostCard from "../../features/PostCard.jsx";
+import PostCard from "../../components/features/PostCard.jsx";
 
 export const postsLoader = async () => {
     const {data} = await axios.get(`${API_URL}/posts`);
