@@ -15,7 +15,6 @@ export function PostForm() {
     const errors = state?.errors || false
     const langs = ['en', 'ru']
     useAlert()
-    console.log(errors)
 
     useEffect(() => {
         setIsLoading(false)
@@ -49,6 +48,7 @@ export function PostForm() {
                 <UploadImage inputName={"post[cover]"}
                              image={post?.cover}
                              error={errors?.cover}/>
+                <hr/>
                 {langs.map((lang) => (
                     <TextContent key={lang} lang={lang} post={post} errors={errors}/>
                 ))}
@@ -74,34 +74,34 @@ function TextContent({post, errors, lang}) {
                 <label htmlFor="title" className={"font-semibold text-gray-500"}>Title</label>
                 <input
                     name={`post[${lang}_attributes][title]`}
-                    id="title"
+                    id={`${lang}-title`}
                     // required
                     className={classNames(
-                        errors.title ? "border border-red-600" : "border-0",
+                        errors[`${lang}.title`] ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
                     placeholder="Title"
                     defaultValue={post?.title || ''}
                 />
-                {errors?.title && <p className="my-2 text-sm text-red-600" id="title-error">
-                    {printError(errors.title)}
+                {errors[`${lang}.title`] && <p className="my-2 text-sm text-red-600" id={`${lang}-title-error`}>
+                    {printError(errors[`${lang}.title`])}
                 </p>}
             </div>
             <div>
                 <label htmlFor="category" className={"font-semibold text-gray-500"}>Category</label>
                 <input
                     name={`post[${lang}_attributes][category]`}
-                    id="category"
+                    id={`${lang}-category`}
                     // required
                     className={classNames(
-                        errors.category ? "border border-red-600" : "border-0",
+                        errors[`${lang}.category`] ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
                     placeholder="Category"
                     defaultValue={post?.category || ''}
                 />
-                {errors?.category && <p className="my-2 text-sm text-red-600" id="category-error">
-                    {printError(errors.category)}
+                {errors[`${lang}.category`] && <p className="my-2 text-sm text-red-600" id={`${lang}-category-error`}>
+                    {printError(errors[`${lang}.category`])}
                 </p>}
             </div>
             <div>
@@ -109,22 +109,22 @@ function TextContent({post, errors, lang}) {
                 <textarea
                     rows={3}
                     name={`post[${lang}_attributes][desc]`}
-                    id="desc"
+                    id={`${lang}-desc`}
                     // required
                     className={classNames(
-                        errors.desc ? "border border-red-600" : "border-0",
+                        errors[`${lang}.desc`] ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
                     placeholder="Description"
                     defaultValue={post?.desc || ''}
                 />
-                {errors?.desc && <p className="my-2 text-sm text-red-600" id="desc-error">
-                    {printError(errors.desc)}
+                {errors[`${lang}.desc`] && <p className="my-2 text-sm text-red-600" id={`${lang}-desc-error`}>
+                    {printError(errors[`${lang}.desc`])}
                 </p>}
             </div>
             <EditorComponent inputName={`post[${lang}_attributes][content]`}
                              initialValue={post?.content}
-                             error={errors?.content}/>
+                             error={errors[`${lang}.content`]}/>
             <hr/>
         </div>
     )
