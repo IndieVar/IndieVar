@@ -83,7 +83,7 @@ function TextContent({post, errors, lang}) {
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
                     placeholder="Title"
-                    defaultValue={post?.title || ''}
+                    defaultValue={post[lang]?.title || ''}
                 />
                 {errors[`${lang}.title`] && <p className="my-2 text-sm text-red-600" id={`${lang}-title-error`}>
                     {printError(errors[`${lang}.title`])}
@@ -100,7 +100,7 @@ function TextContent({post, errors, lang}) {
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
                     placeholder="Category"
-                    defaultValue={post?.category || ''}
+                    defaultValue={post[lang]?.category || ''}
                 />
                 {errors[`${lang}.category`] && <p className="my-2 text-sm text-red-600" id={`${lang}-category-error`}>
                     {printError(errors[`${lang}.category`])}
@@ -118,14 +118,14 @@ function TextContent({post, errors, lang}) {
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
                     placeholder="Description"
-                    defaultValue={post?.desc || ''}
+                    defaultValue={post[lang]?.desc || ''}
                 />
                 {errors[`${lang}.desc`] && <p className="my-2 text-sm text-red-600" id={`${lang}-desc-error`}>
                     {printError(errors[`${lang}.desc`])}
                 </p>}
             </div>
             <EditorComponent inputName={`post[${lang}_attributes][content]`}
-                             initialValue={post?.content}
+                             initialValue={post[lang]?.content}
                              error={errors[`${lang}.content`]}/>
             <hr/>
         </div>

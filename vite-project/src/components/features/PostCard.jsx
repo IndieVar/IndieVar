@@ -3,9 +3,9 @@ import React from "react";
 import {IoEyeOutline} from "react-icons/io5";
 import {useTranslation} from "react-i18next";
 
-export default function PostCard({post}) {
+export default function PostCard({post, lang}) {
     const {i18n} = useTranslation();
-    const locale = i18n.language
+    const locale = lang || i18n.language
     return (
         <article className="flex flex-col items-start justify-between relative rounded-lg">
             <div className="relative w-full">

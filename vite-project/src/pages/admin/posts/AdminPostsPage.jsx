@@ -3,6 +3,7 @@ import {useTranslation} from "react-i18next";
 import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
 import {useAlert} from "../../../../app/hooks.js";
 import PostCard from "../../../components/features/PostCard.jsx";
+import React, {useEffect, useState} from "react";
 
 export default function AdminPostsPage() {
     const posts = useLoaderData()
@@ -35,14 +36,24 @@ export default function AdminPostsPage() {
     )
 }
 
-export function PostComponent({post}) {
+export function PostComponent({post, locale}) {
+    const [lang, setLang] = useState()
     useAlert()
 
     if (!post) return
 
+    useEffect(() => {
+        setLang(locale)
+    }, [locale]);
+
     return (
         <div className={'group relative bg-white p-6'}>
             <div className="pb-6 flex justify-end items-center divide-x">
+                {/*Lang*/}
+                <button onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
+                        className={"mr-3 text-gray-500 hover:text-gray-700 hover:underline"}>
+                    {lang === 'ru' ? 'En' : 'Ru'}
+                </button>
                 {/*Edit*/}
                 <NavLink to={`/admin/posts/${post.id}/update`} className={"text-gray-500 hover:text-blue-700"}>
                     <MdOutlineEditNote className={"w-6 h-6 mx-3"}/>
@@ -55,7 +66,7 @@ export function PostComponent({post}) {
                     </button>
                 </Form>
             </div>
-            <PostCard post={post}/>
+            <PostCard post={post} lang={lang}/>
         </div>
     )
 }
