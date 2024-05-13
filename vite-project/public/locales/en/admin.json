@@ -1,0 +1,21 @@
+{
+  "navigations": {
+    "dashboard": "Dashboard",
+    "posts": "Posts",
+    "quotes": "Quotes",
+    "sign_out": "Sign out"
+  },
+  "back": "Back",
+  "confirm": "Are you sure?",
+  "create": "Create",
+  "posts": {
+    "all_posts": "All posts",
+    "new_post": "Create new post",
+    "edit_post": "Edit post"
+  },
+  "quotes": {
+    "all_quotes": "All quotes",
+    "new_quote": "Create new quote",
+    "edit_quote": "Edit quote"
+  }
+}

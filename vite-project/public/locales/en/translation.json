@@ -24,7 +24,8 @@
     "fly": "Fly.io is a global application deployment platform using a distributed network of servers around the world, providing high performance, low latency and easy scalability. Its benefits include automatic traffic distribution, quick startup, support for multiple programming languages, and the ability to run applications close to end users for optimal performance."
   },
   "blog": {
-    "title": "From the blog",
+    "component": "From the blog",
+    "page_title": "Blog by indie web-developer",
     "subtitle": "Learn more about me and my vision for web development."
   },
   "footer": {

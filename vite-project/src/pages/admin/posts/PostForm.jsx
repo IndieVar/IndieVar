@@ -6,8 +6,10 @@ import {useAuth} from "../../../providers/AuthProvider.jsx";
 import Loading from "../../../components/Loading.jsx";
 import UploadImage from "../../../components/features/UploadImage.jsx";
 import EditorComponent from "../../../components/features/EditorComponent.jsx";
+import {useTranslation} from "react-i18next";
 
 export function PostForm() {
+    const { t} = useTranslation('admin')
     const [isLoading, setIsLoading] = useState(true)
     const {currentUser} = useAuth()
     const post = useLoaderData()
@@ -27,7 +29,7 @@ export function PostForm() {
             <div className="mb-8 md:flex md:items-center md:justify-between">
                 <div className="min-w-0 flex-1">
                     <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                        {post ? 'Edit post' : 'Create new post'}
+                        {post ? t('posts.edit_post') : t('posts.new_post')}
                     </h2>
                 </div>
                 <div className="mt-4 flex md:ml-4 md:mt-0">
@@ -35,7 +37,7 @@ export function PostForm() {
                         to={"/admin/posts"}
                         className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                     >
-                        Back
+                        {t('back')}
                     </NavLink>
                 </div>
             </div>
@@ -57,7 +59,7 @@ export function PostForm() {
                         type="submit"
                         className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                        Post
+                        {t('create')}
                     </button>
                 </div>
             </Form>

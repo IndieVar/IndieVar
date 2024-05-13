@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_URL} from "../../../app/constants.js";
 import {useLoaderData} from "react-router-dom";
 import PostCard from "../../components/features/PostCard.jsx";
+import {useTranslation} from "react-i18next";
 
 export const postsLoader = async () => {
     const {data} = await axios.get(`${API_URL}/posts`);
@@ -10,13 +11,16 @@ export const postsLoader = async () => {
 
 export default function PostsPage() {
     const posts = useLoaderData();
+    const {t} = useTranslation()
 
     return (
         <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-12">
             <div className="mx-auto max-w-2xl lg:mx-0">
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">From the blog</h2>
+                <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                    {t('blog.page_title')}
+                </h1>
                 <p className="mt-2 text-lg leading-8 text-gray-600">
-                    Learn how to grow your business with our expert advice.
+                    {t('blog.subtitle')}
                 </p>
             </div>
             <div

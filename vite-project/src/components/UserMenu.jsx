@@ -6,15 +6,17 @@ import axios from "axios";
 import {AUTH_API_URL, authHeader} from "../../app/constants.js";
 import {BellIcon} from "@heroicons/react/24/outline/index.js";
 import {avatarUrl, classNames} from "../../app/functions.js";
+import {useTranslation} from "react-i18next";
 
 const userNavigation = [
-    {name: 'Dashboard', href: '/admin/dashboard'},
+    {name: 'dashboard', href: '/admin/dashboard'},
 ]
 
 export default function UserMenu() {
     const {isLoggedIn, currentUser, logout} = useAuth();
     if (!isLoggedIn) return
 
+    const {t} = useTranslation('admin')
     const navigate = useNavigate();
     const navItemClassName = 'block px-3 py-1 text-sm leading-6 text-gray-900 hover:bg-gray-100 w-full text-start'
 
@@ -63,14 +65,14 @@ export default function UserMenu() {
                                                 navItemClassName
                                             )}
                                         >
-                                            {item.name}
+                                            {t('navigations.' + item.name)}
                                         </NavLink>
                                         <hr/>
                                         <button
                                             className={navItemClassName}
                                             onClick={() => logoutHandler()}
                                         >
-                                            Sign Out
+                                            {t('navigations.sign_out')}
                                         </button>
                                     </>
                                 )}
