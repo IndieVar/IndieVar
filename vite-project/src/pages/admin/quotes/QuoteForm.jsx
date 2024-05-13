@@ -5,6 +5,7 @@ import {classNames, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
 import {useEffect, useState} from "react";
 import Loading from "../../../components/Loading.jsx";
+import {useTranslation} from "react-i18next";
 
 export const quoteLoader = async ({params}) => {
     const {data} = await axios.get(`${API_URL}/quotes/${params.id}`);
@@ -12,6 +13,7 @@ export const quoteLoader = async ({params}) => {
 }
 
 export function QuoteForm() {
+    const {t} = useTranslation('admin')
     const [isLoading, setIsLoading] = useState(true)
     const quote = useLoaderData()
     const {state} = useLocation()
@@ -29,7 +31,7 @@ export function QuoteForm() {
             <div className="mb-8 md:flex md:items-center md:justify-between">
                 <div className="min-w-0 flex-1">
                     <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                        {quote ? 'Edit quote' : 'Create new quote'}
+                        {quote ? t('quotes.edit_quote') : t('quotes.new_quote')}
                     </h2>
                 </div>
                 <div className="mt-4 flex md:ml-4 md:mt-0">
@@ -37,7 +39,7 @@ export function QuoteForm() {
                         to={"/admin/quotes"}
                         className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                     >
-                        Back
+                        {t('back')}
                     </NavLink>
                 </div>
             </div>
@@ -87,7 +89,7 @@ export function QuoteForm() {
                         type="submit"
                         className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                        Post
+                        {t('create')}
                     </button>
                 </div>
             </Form>

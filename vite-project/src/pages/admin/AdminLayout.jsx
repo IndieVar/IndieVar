@@ -2,9 +2,6 @@ import {Fragment, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {
     Bars3Icon,
-    CalendarIcon,
-    ChartPieIcon,
-    DocumentDuplicateIcon,
     HomeIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
@@ -13,28 +10,27 @@ import {TbBlockquote} from "react-icons/tb";
 import {Navigate, NavLink, Outlet} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 import {BsChatQuote} from "react-icons/bs";
+import {useTranslation} from "react-i18next";
 
 const navigation = [
-    {name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon},
-    {name: 'Posts', href: '/admin/posts', icon: TbBlockquote},
-    {name: 'Quotes', href: '/admin/quotes', icon: BsChatQuote},
-    {name: 'Calendar', href: '#', icon: CalendarIcon},
-    {name: 'Documents', href: '#', icon: DocumentDuplicateIcon},
-    {name: 'Reports', href: '#', icon: ChartPieIcon},
+    {name: 'dashboard', href: '/admin/dashboard', icon: HomeIcon},
+    {name: 'posts', href: '/admin/posts', icon: TbBlockquote},
+    {name: 'quotes', href: '/admin/quotes', icon: BsChatQuote},
 ]
 
 export default function AdminLayout() {
     const {currentUser} = useAuth()
     if (currentUser?.role !== 'admin') return <Navigate to={'/login'} replace/>;
 
+    const {t} = useTranslation('admin')
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     return (
         <>
             <div className={"min-h-screen"}>
-                <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
+                <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} t={t}/>
                 {/* Static sidebar for desktop */}
-                <StaticSideBar/>
+                <StaticSideBar t={t}/>
 
                 <main className="p-6 pl-12 relative">
                     <button type="button"
@@ -50,7 +46,7 @@ export default function AdminLayout() {
     )
 }
 
-const SideBar = ({sidebarOpen, setSidebarOpen}) => {
+const SideBar = ({sidebarOpen, setSidebarOpen, t}) => {
     return (
         <Transition.Root show={sidebarOpen} as={Fragment}>
             <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
@@ -112,7 +108,7 @@ const SideBar = ({sidebarOpen, setSidebarOpen}) => {
                                                     )}
                                                 >
                                                     <item.icon className="h-6 w-6 shrink-0" aria-hidden="true"/>
-                                                    {item.name}
+                                                    {t('navigations.' + item.name)}
                                                 </NavLink>
                                             </li>
                                         ))}
@@ -127,7 +123,7 @@ const SideBar = ({sidebarOpen, setSidebarOpen}) => {
     )
 }
 
-const StaticSideBar = () => {
+const StaticSideBar = ({t}) => {
     return (
         <div
             className="hidden mt-20 lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:block lg:w-20 lg:overflow-y-auto lg:bg-gray-900 lg:pb-4">
@@ -145,7 +141,7 @@ const StaticSideBar = () => {
                                 )}
                             >
                                 <item.icon className="h-6 w-6 shrink-0" aria-hidden="true"/>
-                                <span className="sr-only">{item.name}</span>
+                                <span className="sr-only">{t('navigations.' + item.name)}</span>
                             </NavLink>
                         </li>
                     ))}
