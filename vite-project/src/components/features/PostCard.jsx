@@ -8,7 +8,7 @@ export default function PostCard({post, lang}) {
     const {i18n} = useTranslation();
     const locale = lang || i18n.language
     return (
-        <article className="flex flex-col items-start justify-between relative rounded-lg hover:shadow">
+        <article className="flex flex-col items-start justify-between relative rounded-lg hover:shadow-md">
             <div className="relative w-full">
                 {/*Cover*/}
                 <NavLink

@@ -24,7 +24,7 @@ export default function PostsPage() {
                 </p>
             </div>
             <div
-                className="overflow-hidden mx-auto mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-2xl gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none">
+                className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none md:grid-cols-2 lg:grid-cols-3">
                 {posts.map((post) => (
                     <PostCard key={post.id} post={post}/>
                 ))}

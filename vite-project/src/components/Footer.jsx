@@ -50,7 +50,7 @@ export default function Footer() {
 
     return (
         <footer className="bg-white" aria-labelledby="footer-heading">
-            <div className="mx-auto max-w-7xl px-6 pb-8 pt-24 lg:px-8">
+            <div className="mx-auto max-w-7xl px-6 pb-8 pt-24 sm:px-16 xl:px-8">
                 <div className="border-t border-gray-900/10 pt-6 lg:flex lg:items-center lg:justify-between">
                     <div>
                         <h3 className="text-sm font-semibold leading-6 text-gray-900">{t('footer.title')}</h3>
