@@ -11,11 +11,13 @@ import {Navigate, NavLink, Outlet} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 import {BsChatQuote} from "react-icons/bs";
 import {useTranslation} from "react-i18next";
+import {FaUserCog} from "react-icons/fa";
 
 const navigation = [
     {name: 'dashboard', href: '/admin/dashboard', icon: HomeIcon},
     {name: 'posts', href: '/admin/posts', icon: TbBlockquote},
     {name: 'quotes', href: '/admin/quotes', icon: BsChatQuote},
+    {name: 'profile', href: '/admin/profile', icon: FaUserCog},
 ]
 
 export default function AdminLayout() {

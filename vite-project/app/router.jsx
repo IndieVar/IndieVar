@@ -14,6 +14,7 @@ import {QuoteForm, quoteLoader} from "../src/pages/admin/quotes/QuoteForm.jsx";
 import AdminLayout from "../src/pages/admin/AdminLayout.jsx";
 import AdminPostsPage, {PostComponent} from "../src/pages/admin/posts/AdminPostsPage.jsx";
 import {PostForm} from "../src/pages/admin/posts/PostForm.jsx";
+import ProfilePage from "../src/pages/admin/profile/ProfilePage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,6 +28,7 @@ export const router = createBrowserRouter(
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<AdminLayout/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
+                        <Route path='/admin/profile' element={<ProfilePage/>}/>
                         {/*Quotes*/}
                         <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>
                         <Route path='/admin/quotes/new' element={<QuoteForm/>} action={quotesAction}/>
