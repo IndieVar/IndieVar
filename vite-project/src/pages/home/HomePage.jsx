@@ -1,4 +1,3 @@
-
 import HeroComponent from "./HeroComponent.jsx";
 import {API_URL} from "../../../app/constants.js";
 import axios from "axios";
@@ -12,13 +11,13 @@ export const homeLoader = async () => {
 }
 
 export default function HomePage() {
-    const quote = useLoaderData()
+    const data = useLoaderData()
 
     return (
         <>
-            <HeroComponent quote={quote}/>
+            <HeroComponent quote={data.quote}/>
             <TechnologyComponent/>
-            <BlogComponent/>
+            <BlogComponent posts={JSON.parse(data.posts)}/>
         </>
     )
 }
