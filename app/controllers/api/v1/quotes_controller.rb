@@ -3,13 +3,6 @@ class Api::V1::QuotesController < ApplicationController
   skip_before_action :verify_authenticity_token, raise: false
   before_action :authenticate_devise_api_token!, only: %i[create update destroy]
 
-  # GET /random_quote
-  def random
-    @quote = Quote.order("RANDOM()").limit(1).first
-
-    render json: @quote
-  end
-
   # PUT /quotes/:id/update_views
   def update_views
     if @quote.update(views: @quote.views + 1)

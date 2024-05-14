@@ -12,7 +12,7 @@ class Api::V1::PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.latest
 
     render json: @posts, include: [:user, :en, :ru]
   end

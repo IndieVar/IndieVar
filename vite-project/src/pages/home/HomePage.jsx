@@ -6,8 +6,8 @@ import {useLoaderData} from "react-router-dom";
 import TechnologyComponent from "./TechnologyComponent.jsx";
 import BlogComponent from "./BlogComponent.jsx";
 
-export const randomQuoteLoader = async ({request, params}) => {
-    const {data} = await axios.get(`${API_URL}/random_quote`);
+export const homeLoader = async () => {
+    const {data} = await axios.get(`${API_URL}/home`);
     return data
 }
 

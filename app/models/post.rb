@@ -9,4 +9,6 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :ru
 
   validates :cover, presence: true if Rails.env.production?
+
+  scope :latest, -> { order(created_at: :desc) }
 end
