@@ -1,8 +1,8 @@
 import {avatarUrl, dateFormat, imageUrl} from "../../../app/functions.js";
 import React from "react";
-import {IoEyeOutline} from "react-icons/io5";
 import {useTranslation} from "react-i18next";
 import {NavLink} from "react-router-dom";
+import ViewsCount from "./ViewsCount.jsx";
 
 export default function PostCard({post, lang}) {
     const {i18n} = useTranslation();
@@ -60,11 +60,7 @@ export default function PostCard({post, lang}) {
                     </div>
                 </div>
             </div>
-            {/*Views*/}
-            <div className={"absolute bottom-4 inset-x-1/2 w-full flex items-center space-x-2 text-gray-500 text-xs"}>
-                <span>{post.views}</span>
-                <IoEyeOutline className={"w-4 h-4"}/>
-            </div>
+            <ViewsCount count={post.views}/>
         </article>
     )
 }
