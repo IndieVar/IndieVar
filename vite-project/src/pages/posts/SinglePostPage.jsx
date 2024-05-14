@@ -26,7 +26,7 @@ export default function SinglePostPage() {
     }, []);
 
     return (
-        <div className="relative isolate overflow-hidden bg-white px-6 pt-24 pb-12 lg:overflow-visible lg:px-0">
+        <div className="relative isolate overflow-hidden bg-white px-6 pt-2 sm:pt-14 pb-6 -mb-20 lg:overflow-visible lg:px-0">
             <div className="absolute inset-0 -z-10 overflow-hidden">
                 <svg
                     className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
@@ -53,10 +53,16 @@ export default function SinglePostPage() {
                     <rect width="100%" height="100%" strokeWidth={0} fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)"/>
                 </svg>
             </div>
+
             <div
-                className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
+                className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+                <img
+                    className="float-right m-3 max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 w-[30rem]"
+                    src={imageUrl(post.cover.large.url)}
+                    alt={post[locale].title}
+                />
                 <div
-                    className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+                    className="flex-col mt-4 space-y-4 lg:mx-auto lg:w-full lg:max-w-7xl lg:px-8">
                     <div className="lg:pr-4">
                         <div className="lg:max-w-lg">
                             <p className="text-base font-semibold leading-7 text-indigo-600">
@@ -70,31 +76,20 @@ export default function SinglePostPage() {
                             </p>
                         </div>
                     </div>
-                </div>
-                <div
-                    className="sm:ml-12 -mt-12 sm:p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-                    <img
-                        className="max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 w-[30rem]"
-                        src={imageUrl(post.cover.large.url)}
-                        alt={post[locale].title}
-                    />
-                </div>
-                <div
-                    className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                     <UnsafeComponent html={post[locale].content}/>
                 </div>
-                {/*Author*/}
-                <div className="lg:ml-8 relative flex items-center w-full">
-                    <img
-                        src={avatarUrl(post.user?.avatar)}
-                        alt="User avatar" className="h-10 w-10 rounded-full bg-gray-100 mr-4"/>
-                    <div className="text-sm leading-6">
-                        <p className="font-semibold text-gray-900">
-                            <span className="absolute inset-0"/>
-                            {post.user.name}
-                        </p>
-                        <p className="text-gray-600">{"Lead developer"}</p>
-                    </div>
+            </div>
+            {/*Author*/}
+            <div className="lg:ml-8 my-6 relative flex items-center w-full">
+                <img
+                    src={avatarUrl(post.user?.avatar)}
+                    alt="User avatar" className="h-10 w-10 rounded-full bg-gray-100 mr-4"/>
+                <div className="text-sm leading-6">
+                    <p className="font-semibold text-gray-900">
+                        <span className="absolute inset-0"/>
+                        {post.user.name}
+                    </p>
+                    <p className="text-gray-600">{"Lead developer"}</p>
                 </div>
             </div>
             {/*Views*/}
