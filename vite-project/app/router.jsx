@@ -2,7 +2,7 @@ import * as React from "react";
 import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
 import Layout from "../src/pages/Layout.jsx";
 import ErrorPage from "../src/pages/ErrorPage.jsx";
-import HomePage, {randomQuoteLoader} from "../src/pages/home/HomePage.jsx";
+import HomePage, {homeLoader} from "../src/pages/home/HomePage.jsx";
 import PostsPage, {postsLoader} from "../src/pages/posts/PostsPage.jsx";
 import SinglePostPage, {singlePostLoader} from "../src/pages/posts/SinglePostPage.jsx";
 import DashboardPage from "../src/pages/admin/dashboard/DashboardPage.jsx";
@@ -14,6 +14,7 @@ import {QuoteForm, quoteLoader} from "../src/pages/admin/quotes/QuoteForm.jsx";
 import AdminLayout from "../src/pages/admin/AdminLayout.jsx";
 import AdminPostsPage, {PostComponent} from "../src/pages/admin/posts/AdminPostsPage.jsx";
 import {PostForm} from "../src/pages/admin/posts/PostForm.jsx";
+import ProfilePage from "../src/pages/admin/profile/ProfilePage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -21,12 +22,13 @@ export const router = createBrowserRouter(
             <Route element={<AuthProvider/>} errorElement={<ErrorPage/>}
                    loader={currentUserLoader}>
                 <Route element={<Layout/>}>
-                    <Route path="/" element={<HomePage/>} loader={randomQuoteLoader}/>
+                    <Route path="/" element={<HomePage/>} loader={homeLoader}/>
                     <Route path="/posts" element={<PostsPage/>} loader={postsLoader}/>
                     <Route path="/posts/:id" element={<SinglePostPage/>} loader={singlePostLoader}/>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<AdminLayout/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
+                        <Route path='/admin/profile' element={<ProfilePage/>}/>
                         {/*Quotes*/}
                         <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>
                         <Route path='/admin/quotes/new' element={<QuoteForm/>} action={quotesAction}/>

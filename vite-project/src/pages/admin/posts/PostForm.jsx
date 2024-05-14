@@ -59,7 +59,7 @@ export function PostForm() {
                         type="submit"
                         className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                        {t('create')}
+                        {t('post')}
                     </button>
                 </div>
             </Form>
@@ -77,13 +77,13 @@ function TextContent({post, errors, lang}) {
                 <input
                     name={`post[${lang}_attributes][title]`}
                     id={`${lang}-title`}
-                    // required
+                    required
                     className={classNames(
                         errors[`${lang}.title`] ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
                     placeholder="Title"
-                    defaultValue={post?.title || ''}
+                    defaultValue={post ? post[lang]?.title : ''}
                 />
                 {errors[`${lang}.title`] && <p className="my-2 text-sm text-red-600" id={`${lang}-title-error`}>
                     {printError(errors[`${lang}.title`])}
@@ -94,13 +94,13 @@ function TextContent({post, errors, lang}) {
                 <input
                     name={`post[${lang}_attributes][category]`}
                     id={`${lang}-category`}
-                    // required
+                    required
                     className={classNames(
                         errors[`${lang}.category`] ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
                     placeholder="Category"
-                    defaultValue={post?.category || ''}
+                    defaultValue={post ? post[lang]?.category : ''}
                 />
                 {errors[`${lang}.category`] && <p className="my-2 text-sm text-red-600" id={`${lang}-category-error`}>
                     {printError(errors[`${lang}.category`])}
@@ -112,20 +112,20 @@ function TextContent({post, errors, lang}) {
                     rows={3}
                     name={`post[${lang}_attributes][desc]`}
                     id={`${lang}-desc`}
-                    // required
+                    required
                     className={classNames(
                         errors[`${lang}.desc`] ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
                     placeholder="Description"
-                    defaultValue={post?.desc || ''}
+                    defaultValue={post ? post[lang]?.desc : ''}
                 />
                 {errors[`${lang}.desc`] && <p className="my-2 text-sm text-red-600" id={`${lang}-desc-error`}>
                     {printError(errors[`${lang}.desc`])}
                 </p>}
             </div>
             <EditorComponent inputName={`post[${lang}_attributes][content]`}
-                             initialValue={post?.content}
+                             initialValue={post ? post[lang]?.content : ''}
                              error={errors[`${lang}.content`]}/>
             <hr/>
         </div>

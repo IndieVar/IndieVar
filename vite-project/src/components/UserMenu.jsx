@@ -10,6 +10,7 @@ import {useTranslation} from "react-i18next";
 
 const userNavigation = [
     {name: 'dashboard', href: '/admin/dashboard'},
+    {name: 'profile', href: '/admin/profile'},
 ]
 
 export default function UserMenu() {
@@ -57,7 +58,6 @@ export default function UserMenu() {
                         {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                                 {({active}) => (
-                                    <>
                                         <NavLink
                                             to={item.href}
                                             className={classNames(
@@ -67,17 +67,16 @@ export default function UserMenu() {
                                         >
                                             {t('navigations.' + item.name)}
                                         </NavLink>
-                                        <hr/>
-                                        <button
-                                            className={navItemClassName}
-                                            onClick={() => logoutHandler()}
-                                        >
-                                            {t('navigations.sign_out')}
-                                        </button>
-                                    </>
                                 )}
                             </Menu.Item>
                         ))}
+                            <hr/>
+                            <button
+                                className={navItemClassName}
+                                onClick={() => logoutHandler()}
+                            >
+                                {t('navigations.sign_out')}
+                            </button>
                     </Menu.Items>
                 </Transition>
             </Menu>

@@ -3,6 +3,7 @@ import axios from "axios";
 import {API_URL} from "../../../app/constants.js";
 import {useTranslation} from "react-i18next";
 import {FaBattleNet} from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 export default function HeroComponent({quote}) {
     const {i18n, t} = useTranslation();
@@ -36,9 +37,11 @@ export default function HeroComponent({quote}) {
                                     >
                                         {t('hero.consultation')}
                                     </a>
-                                    <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+                                    <Link to={"https://github.com/IndieVar/IndieVar"} target={'_blank'}
+                                             className="font-semibold leading-6 text-gray-700 hover:text-gray-900 hover:underline"
+                                    >
                                         View on GitHub <span aria-hidden="true">→</span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

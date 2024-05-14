@@ -4,6 +4,7 @@ import {PhotoIcon} from "@heroicons/react/20/solid/index.js";
 
 export default function UploadImage({inputName, image, error}) {
     const [file, setFile] = useState();
+
     function handleChange(e) {
         setFile(URL.createObjectURL(e.target.files[0]));
     }
@@ -18,9 +19,12 @@ export default function UploadImage({inputName, image, error}) {
                     error && !file ? "border-red-600" : "border-dashed border-gray-900/25 ",
                     "mt-2 flex justify-center rounded-lg border px-6 py-10")}>
                 <div className="text-center">
-                    {file && <img src={file} className={"h-56 w-auto"}/>}
-                    {!file && image && <img src={imageUrl(image.medium.url)} className={"h-56 w-auto"}/>}
-                    {!file && !image && <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true"/>}
+                    {file &&
+                        <img src={file} className={"h-56 w-auto"}/>}
+                    {!file && image && image?.url !== null &&
+                        <img src={imageUrl(image?.medium?.url)} className={"h-56 w-auto"}/>}
+                    {!file && (!image || image?.url === null) &&
+                        <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true"/>}
                     <div className="mt-4 flex text-sm leading-6 text-gray-600">
                         <label
                             htmlFor="image"
