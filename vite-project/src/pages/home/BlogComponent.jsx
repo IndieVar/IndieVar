@@ -1,5 +1,6 @@
 import {useTranslation} from "react-i18next";
 import PostCard from "../../components/features/PostCard.jsx";
+import {NavLink} from "react-router-dom";
 
 export default function BlogComponent({posts}) {
     const {t} = useTranslation()
@@ -18,6 +19,13 @@ export default function BlogComponent({posts}) {
                     {posts.map((post) => (
                         <PostCard key={post.id} post={post} />
                     ))}
+                </div>
+                <div className={"flex justify-center mt-8"}>
+                    <NavLink to={"/posts"}
+                             className="font-semibold leading-6 text-gray-700 hover:text-gray-900 hover:underline"
+                    >
+                        All posts <span aria-hidden="true">→</span>
+                    </NavLink>
                 </div>
             </div>
         </div>
