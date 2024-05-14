@@ -2,7 +2,7 @@ import axios from "axios";
 import {API_URL} from "../../../app/constants.js";
 import {useLoaderData} from "react-router-dom";
 import UnsafeComponent from "../../components/features/UnsafeComponent.jsx";
-import {imageUrl} from "../../../app/functions.js";
+import {avatarUrl, imageUrl} from "../../../app/functions.js";
 import {useTranslation} from "react-i18next";
 import React, {useEffect} from "react";
 import ViewsCount from "../../components/features/ViewsCount.jsx";
@@ -26,7 +26,7 @@ export default function SinglePostPage() {
     }, []);
 
     return (
-        <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
+        <div className="relative isolate overflow-hidden bg-white px-6 pt-24 pb-12 lg:overflow-visible lg:px-0">
             <div className="absolute inset-0 -z-10 overflow-hidden">
                 <svg
                     className="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]"
@@ -82,6 +82,19 @@ export default function SinglePostPage() {
                 <div
                     className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                     <UnsafeComponent html={post[locale].content}/>
+                </div>
+                {/*Author*/}
+                <div className="lg:ml-8 relative flex items-center w-full">
+                    <img
+                        src={avatarUrl(post.user?.avatar)}
+                        alt="User avatar" className="h-10 w-10 rounded-full bg-gray-100 mr-4"/>
+                    <div className="text-sm leading-6">
+                        <p className="font-semibold text-gray-900">
+                            <span className="absolute inset-0"/>
+                            {post.user.name}
+                        </p>
+                        <p className="text-gray-600">{"Lead developer"}</p>
+                    </div>
                 </div>
             </div>
             {/*Views*/}

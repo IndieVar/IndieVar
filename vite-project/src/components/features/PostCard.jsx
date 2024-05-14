@@ -54,7 +54,7 @@ export default function PostCard({post, lang}) {
                     <div className="text-sm leading-6">
                         <p className="font-semibold text-gray-900">
                             <span className="absolute inset-0"/>
-                            {post.user.fullname}
+                            {post.user.name}
                         </p>
                         <p className="text-gray-600">{"Lead developer"}</p>
                     </div>
