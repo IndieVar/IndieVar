@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
-  mount_uploader :cover, CoverUploader
+  mount_uploader :cover, ImageUploader
 
   has_one :en, class_name: "I18n::EnPost", foreign_key: :post_id, dependent: :destroy
   accepts_nested_attributes_for :en

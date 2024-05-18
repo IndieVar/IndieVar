@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   after_initialize :set_default_role, if: :new_record?
 
+  mount_uploader :avatar, ImageUploader
+
   def set_default_role
     self.role ||= :user
   end

@@ -9,7 +9,7 @@ import EditorComponent from "../../../components/features/EditorComponent.jsx";
 import {useTranslation} from "react-i18next";
 
 export function PostForm() {
-    const { t} = useTranslation('admin')
+    const {t} = useTranslation('admin')
     const [isLoading, setIsLoading] = useState(true)
     const {currentUser} = useAuth()
     const post = useLoaderData()
@@ -47,9 +47,11 @@ export function PostForm() {
                   onSubmit={() => setIsLoading(true)}
             >
                 <input type="hidden" name={"post[user_id]"} defaultValue={currentUser?.id}/>
-                <UploadImage inputName={"post[cover]"}
-                             image={post?.cover}
-                             error={errors?.cover}/>
+                <UploadImage
+                    label={"Cover photo"}
+                    inputName={"post[cover]"}
+                    image={post?.cover}
+                    error={errors?.cover}/>
                 <hr/>
                 {langs.map((lang) => (
                     <TextContent key={lang} lang={lang} post={post} errors={errors}/>
@@ -71,7 +73,8 @@ function TextContent({post, errors, lang}) {
 
     return (
         <div className={"space-y-6"}>
-            <label className="font-semibold text-gray-500 text-center text-xl">{lang === 'en' ? 'English' : 'Russian'}</label>
+            <label
+                className="font-semibold text-gray-500 text-center text-xl">{lang === 'en' ? 'English' : 'Russian'}</label>
             <div>
                 <label htmlFor="title" className={"font-semibold text-gray-500"}>Title</label>
                 <input

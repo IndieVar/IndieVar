@@ -32,7 +32,7 @@ export default function ScrollToTop() {
     return (
         <>
             <motion.button
-                className={"fixed bottom-5 right-5 p-2.5 border border-gray-500 hover:border-gray-900 rounded-full " +
+                className={"fixed z-30 bottom-5 right-5 p-2.5 border border-gray-500 hover:border-gray-900 rounded-full " +
                     "cursor-pointer text-gray-500 hover:text-black hover:bg-gray-100"}
                 variants={ScrollToTopContainerVariants}
                 initial="hide"
