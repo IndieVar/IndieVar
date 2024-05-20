@@ -6,7 +6,6 @@ import {Form, useLocation} from "react-router-dom";
 import {useAlert} from "../../../../app/hooks.js";
 import Loading from "../../../components/Loading.jsx";
 import {classNames, printError} from "../../../../app/functions.js";
-import EditorComponent from "../../../components/features/EditorComponent.jsx";
 
 export default function ProfilePage() {
     const {currentUser} = useAuth()
@@ -33,8 +32,8 @@ export default function ProfilePage() {
                 </div>
             </div>
             <div>
-                <Form method={"patch"}
-                      action={"/current_user/update"}
+                <Form method={"put"}
+                      action={"/admin/profile"}
                       encType={"multipart/form-data"}
                       onSubmit={() => setIsLoading(true)}
                 >
@@ -69,7 +68,7 @@ function TextContent({user, errors}) {
                 <input
                     name={"user[name]"}
                     id={"name"}
-                    required
+                    // required
                     className={classNames(
                         errors.name ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -86,7 +85,7 @@ function TextContent({user, errors}) {
                 <input
                     name={"user[email]"}
                     id={"email"}
-                    required
+                    // required
                     className={classNames(
                         errors.email ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -101,9 +100,9 @@ function TextContent({user, errors}) {
             <div>
                 <label htmlFor="password" className={"font-semibold text-gray-500"}>Password</label>
                 <input
-                    password={"user[password]"}
+                    name={"user[password]"}
                     id={"password"}
-                    required
+                    // required
                     className={classNames(
                         errors.password ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
