@@ -14,7 +14,6 @@ export default function ProfilePage() {
     const [isLoading, setIsLoading] = useState(true)
     const {state} = useLocation()
     const errors = state?.errors || false
-    console.log(errors)
     useAlert()
 
     useEffect(() => {

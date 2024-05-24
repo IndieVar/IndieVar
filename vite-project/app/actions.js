@@ -85,7 +85,7 @@ export const usersAction = async ({request, params}) => {
 
     switch (request.method) {
         case 'PUT': {
-            return await axios.put(`${API_URL}/current_user/update`, formData, authHeader)
+            return await axios.put(`${API_URL}/current_user`, formData, authHeader)
                 .then(() => json({
                     data: { alert: "Successfully updated" },
                     redirect: "/admin/profile"

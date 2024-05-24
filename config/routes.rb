@@ -5,8 +5,7 @@ Rails.application.routes.draw do
       # Home
       get 'home', to: 'home#index'
       # Users
-      get 'current_user', to: 'current_user#get'
-      put 'current_user/update', to: 'current_user#update'
+      resource :current_user, only: [:show, :update]
       # Quotes
       resources :quotes
       get 'random_quote', to: 'quotes#random'
