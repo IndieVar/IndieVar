@@ -14,6 +14,7 @@ export default function ProfilePage() {
     const [isLoading, setIsLoading] = useState(true)
     const {state} = useLocation()
     const errors = state?.errors || false
+    console.log(errors)
     useAlert()
 
     useEffect(() => {
@@ -37,7 +38,6 @@ export default function ProfilePage() {
                       encType={"multipart/form-data"}
                       onSubmit={() => setIsLoading(true)}
                 >
-                    <input type="hidden" name={"post[user_id]"} defaultValue={currentUser?.id}/>
                     <UploadImage
                         label={"Avatar"}
                         inputName={"user[avatar]"}
@@ -98,7 +98,7 @@ function TextContent({user, errors}) {
                 </p>}
             </div>
             <div>
-                <label htmlFor="password" className={"font-semibold text-gray-500"}>Password</label>
+                <label htmlFor="password" className={"font-semibold text-gray-500"}>New password</label>
                 <input
                     name={"user[password]"}
                     id={"password"}
@@ -107,11 +107,47 @@ function TextContent({user, errors}) {
                         errors.password ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     )}
-                    placeholder="Password"
+                    placeholder="New password"
                     defaultValue={''}
                 />
                 {errors.password && <p className="my-2 text-sm text-red-600" id={"password-error"}>
                     {printError(errors.password)}
+                </p>}
+            </div>
+            <div>
+                <label htmlFor="password_confirmation" className={"font-semibold text-gray-500"}>Password
+                    confirmation</label>
+                <input
+                    name={"user[password_confirmation]"}
+                    id={"password_confirmation"}
+                    // required
+                    className={classNames(
+                        errors.password_confirmation ? "border border-red-600" : "border-0",
+                        "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    )}
+                    placeholder="Password confirmation"
+                    defaultValue={''}
+                />
+                {errors.password_confirmation &&
+                    <p className="my-2 text-sm text-red-600" id={"password_confirmation-error"}>
+                        {printError(errors.password_confirmation)}
+                    </p>}
+            </div>
+            <div>
+                <label htmlFor="current_password" className={"font-semibold text-gray-500"}>Current password</label>
+                <input
+                    name={"user[current_password]"}
+                    id={"current_password"}
+                    // required
+                    className={classNames(
+                        errors.current_password ? "border border-red-600" : "border-0",
+                        "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    )}
+                    placeholder="Current password"
+                    defaultValue={''}
+                />
+                {errors.current_password && <p className="my-2 text-sm text-red-600" id={"current_password-error"}>
+                    {printError(errors.current_password)}
                 </p>}
             </div>
         </div>

@@ -39,8 +39,8 @@ export default function UserMenu() {
                 <Menu.Button className="-m-1.5 flex items-center p-1.5">
                     <span className="sr-only">Open user menu</span>
                     <img
-                        className="h-8 w-8 rounded-full bg-gray-50"
-                        src={avatarUrl(currentUser?.avatar)}
+                        className="h-8 w-8 object-cover rounded-full bg-gray-50"
+                        src={avatarUrl(currentUser?.avatar.thumb.url)}
                         alt="User avatar"
                     />
                 </Menu.Button>

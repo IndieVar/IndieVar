@@ -26,7 +26,7 @@ export function imageUrl(url) {
 }
 
 export function avatarUrl(url) {
-    if (import.meta.env.DEV && url?.url) return 'http://127.0.0.1:3000/' + url
+    if (import.meta.env.DEV && url) return 'http://127.0.0.1:3000/' + url
     if (import.meta.env.PROD && url) return url
     return defaultAvatar
 }
