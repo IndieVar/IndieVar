@@ -5,6 +5,7 @@ import Footer from "../components/Footer.jsx";
 import Alert from "../components/Alert.jsx";
 import ScrollToTop from "../components/ScrollToTop.jsx";
 import {useEffect} from "react";
+import ContactForm from "../components/ContactForm.jsx";
 
 const Layout = () => {
     useLocalizeDocumentAttributes();
@@ -20,6 +21,7 @@ const Layout = () => {
         <div className={"min-h-screen font-roboto pv-20 overflow-hidden scroll-smooth"}>
             <Header/>
             <div className={"container mx-auto py-20 relative"}>
+                <ContactForm/>
                 <Alert/>
                 <Outlet/>
             </div>
