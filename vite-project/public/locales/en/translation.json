@@ -8,7 +8,8 @@
   "hero": {
     "title": "Web development with Ruby on Rails & React.js",
     "subtitle": "Hello \uD83D\uDC4B\uD83C\uDFFB My name is Alexander and I am an independent Fullstack web developer, ready to provide you with my services \uD83D\uDC68\uD83C\uDFFB\u200D\uD83D\uDCBB",
-    "consultation": "Consultation"
+    "consultation": "Consultation",
+    "show_quote": "Show quote"
   },
   "technology": {
     "title": "Technology",
@@ -26,7 +27,8 @@
   "blog": {
     "component": "From the blog",
     "page_title": "Blog by indie web-developer",
-    "subtitle": "Learn more about me and my vision for web development."
+    "subtitle": "Learn more about me and my vision for web development.",
+    "all_posts": "All posts"
   },
   "footer": {
     "title": "Subscribe to my newsletter",

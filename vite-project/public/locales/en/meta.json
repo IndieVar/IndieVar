@@ -1,3 +1,10 @@
 {
-  "app_title": "IndieVar"
+  "home_page": {
+    "title": "Web development with Ruby on Rails & React.js | IndieVar",
+    "description": "Hello! My name is Alexander and I am an independent Fullstack web developer, ready to provide you with my services."
+  },
+  "blog_page": {
+    "title": "Blog by indie web-developer | IndieVar",
+    "description": "Learn more about me and my vision for web development."
+  }
 }

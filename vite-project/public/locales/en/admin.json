@@ -18,5 +18,8 @@
     "all_quotes": "All quotes",
     "new_quote": "Create new quote",
     "edit_quote": "Edit quote"
+  },
+  "profile": {
+    "title": "Profile setting"
   }
 }

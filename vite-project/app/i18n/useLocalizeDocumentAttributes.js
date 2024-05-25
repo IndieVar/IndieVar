@@ -11,7 +11,7 @@ export default function useLocalizeDocumentAttributes() {
         }
 
 // 👇 Localize document title.
-        document.title = t("app_title");
+//         document.title = t("app_title");
 
     }, [i18n, i18n.resolvedLanguage, t]);
 }

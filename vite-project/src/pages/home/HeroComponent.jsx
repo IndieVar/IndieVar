@@ -6,7 +6,7 @@ import {FaBattleNet} from "react-icons/fa";
 import {Link} from "react-router-dom";
 
 export default function HeroComponent({quote}) {
-    const {i18n, t} = useTranslation();
+    const {t} = useTranslation();
     const [window, setWindow] = useState('quote')
     const windowClass = (active) => (
         active
@@ -79,7 +79,7 @@ export default function HeroComponent({quote}) {
                                                 </div>
                                             </div>
                                             {window === 'quote' &&
-                                                <QuoteComponent quote={quote} locale={i18n.language}/>}
+                                                <QuoteComponent quote={quote}/>}
                                             {window === 'controller' && <ControllerComponent quote={quote}/>}
                                         </div>
                                     </div>
@@ -98,10 +98,11 @@ export default function HeroComponent({quote}) {
     )
 }
 
-function QuoteComponent({quote, locale}) {
+function QuoteComponent({quote}) {
+    const {i18n, t} = useTranslation();
     const quoteHandler = () => {
         axios.put(`${API_URL}/quotes/${quote.id}/update_views`, {})
-        return alert(quote[locale])
+        return alert(quote[i18n.language])
     }
 
     return (
@@ -129,7 +130,7 @@ function QuoteComponent({quote, locale}) {
                       </span>&gt;
                       {"\n"}
                       {"\t"}{"\t"}{"\t"}{"\t"}<span
-                      className="text-gray-400 group-hover:text-blue-500">Показать цитату</span>
+                      className="text-gray-400 group-hover:text-blue-500">{t("hero.show_quote")}</span>
                       {"\n"}
                       {"\t"}{"\t"}{"\t"}&lt;/<span className="text-indigo-400">button</span>&gt;
                   </div>

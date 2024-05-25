@@ -2,7 +2,7 @@ import {useState} from "react";
 import {classNames, imageUrl, printError} from "../../../app/functions.js";
 import {PhotoIcon} from "@heroicons/react/20/solid/index.js";
 
-export default function UploadImage({inputName, image, error}) {
+export default function UploadImage({label, inputName, image, error}) {
     const [file, setFile] = useState();
 
     function handleChange(e) {
@@ -12,7 +12,7 @@ export default function UploadImage({inputName, image, error}) {
     return (
         <div className="col-span-full py-6">
             <label htmlFor="image-photo" className="font-semibold text-gray-500">
-                Cover photo
+                {label}
             </label>
             <div
                 className={classNames(

@@ -79,3 +79,22 @@ export const postsAction = async ({request, params}) => {
     }
 
 }
+
+export const usersAction = async ({request, params}) => {
+    const formData = await request.formData()
+
+    switch (request.method) {
+        case 'PUT': {
+            return await axios.put(`${API_URL}/current_user`, formData, authHeader)
+                .then(() => json({
+                    data: { alert: "Successfully updated" },
+                    redirect: "/admin/profile"
+                }))
+                .catch((err) => json({
+                    data: { errors: err.response.data },
+                    redirect: `/admin/profile`
+                }))
+        }
+    }
+
+}

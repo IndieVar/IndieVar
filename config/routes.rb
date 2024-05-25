@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      devise_for :users, defaults: { format: :json }
       # Home
       get 'home', to: 'home#index'
       # Users
-      devise_for :users
-      get 'current_user', to: 'current_user#get'
+      resource :current_user, only: [:show, :update]
       # Quotes
       resources :quotes
       get 'random_quote', to: 'quotes#random'

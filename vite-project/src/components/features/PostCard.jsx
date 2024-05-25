@@ -49,7 +49,7 @@ export default function PostCard({post, lang}) {
                 {/*Author*/}
                 <div className="relative mt-8 mb-4 flex items-center gap-x-4">
                     <img
-                        src={avatarUrl(post.user?.avatar)}
+                        src={avatarUrl(post.user?.avatar.thumb.url)}
                         alt="User avatar" className="h-10 w-10 rounded-full bg-gray-100"/>
                     <div className="text-sm leading-6">
                         <p className="font-semibold text-gray-900">
