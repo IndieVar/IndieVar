@@ -24,7 +24,7 @@ export default function BlogComponent({posts}) {
                     <NavLink to={"/posts"}
                              className="font-semibold leading-6 text-gray-700 hover:text-gray-900 hover:underline"
                     >
-                        All posts <span aria-hidden="true">→</span>
+                        {t("blog.all_posts")} <span aria-hidden="true">→</span>
                     </NavLink>
                 </div>
             </div>

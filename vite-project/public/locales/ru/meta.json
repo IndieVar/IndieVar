@@ -1,3 +1,10 @@
 {
-  "app_title": "IndieVar"
+  "home_page": {
+    "title": "Веб-разработка на Ruby on Rails & React.js | IndieVar",
+    "description": "Привет! Меня зовут Александр и я независимый Fullstack веб-разработчик, готовый оказать тебе свои услуги."
+  },
+  "blog_page": {
+    "title": "Блог инди веб-разработчика | IndieVar",
+    "description": "Узнайте больше обо мне и моем видении веб-разработки."
+  }
 }
