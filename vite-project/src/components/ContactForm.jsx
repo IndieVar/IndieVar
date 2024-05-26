@@ -1,18 +1,34 @@
 import {XMarkIcon} from "@heroicons/react/24/outline/index.js";
-import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Form} from "react-router-dom";
+import {useEffect, useRef} from "react";
 
-export default function ContactForm() {
+export default function ContactForm({isOpen, setIsOpen}) {
     const {t} = useTranslation("admin")
-    const [isOpen, setIsOpen] = useState(false)
+    const modalRef = useRef();
+
+    const handleClickOutside = (event) => {
+        if (modalRef.current && !modalRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen]);
 
     return (
         <>
             {isOpen && <div
                 className="fixed inset-0 z-50 w-full h-full bg-gray-900/80 flex justify-center items-center"
             >
-                <div className="relative p-4 w-full max-w-md max-h-full">
+                <div className="relative p-4 w-full max-w-md max-h-full" ref={modalRef}>
                     {/* Modal content */}
                     <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         {/* Modal header */}
