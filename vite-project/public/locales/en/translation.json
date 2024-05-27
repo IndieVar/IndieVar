@@ -35,5 +35,14 @@
     "subtitle": "The latest news, articles, and resources, sent to your inbox.",
     "subscribe": "Subscribe",
     "rights": "All rights reserved."
+  },
+  "contact_form": {
+    "open_form_btn": "Consultation",
+    "title": "Contact form",
+    "post": "Post",
+    "alert": {
+      "title": "Your message sent successfully!",
+      "subtitle": "I will answer you at the email you provided as soon as possible!"
+    }
   }
 }

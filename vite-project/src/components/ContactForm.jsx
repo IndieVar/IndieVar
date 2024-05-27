@@ -6,10 +6,12 @@ import {classNames, printError} from "../../app/functions.js";
 import axios from "axios";
 import {API_URL} from "../../app/constants.js";
 import CloseBtn from "./CloseBtn.jsx";
+import {CheckIcon} from "@heroicons/react/20/solid/index.js";
 
 export default function ContactForm({isOpen, setIsOpen}) {
+    const {t} = useTranslation();
     const {modalRef} = useCloseByClickOutside({isOpen, setIsOpen})
-    const [alert, setAlert] = useState('')
+    const [alert, setAlert] = useState(false)
 
     return (
         <>
@@ -23,13 +25,13 @@ export default function ContactForm({isOpen, setIsOpen}) {
                         <div
                             className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                Contact form
+                                {t('contact_form.title')}
                             </h3>
                             <CloseBtn setIsOpen={setIsOpen}/>
                         </div>
                         {/* Modal body */}
-                        {alert && <p>{alert}</p>}
-                        <FormComponent setAlert={setAlert}/>
+                        {alert && <AlertComponent/>}
+                        {!alert && <FormComponent setAlert={setAlert}/>}
                     </div>
                 </div>
             </div>}
@@ -38,7 +40,7 @@ export default function ContactForm({isOpen, setIsOpen}) {
 }
 
 function FormComponent({setAlert}) {
-    const {t} = useTranslation("admin")
+    const {t} = useTranslation()
     const [isLoading, setIsLoading] = useState(true)
     const [formData, setFormData] = useState({
             name: '', email: '', text: ''
@@ -53,7 +55,7 @@ function FormComponent({setAlert}) {
             .then((res) => {
                 setErrors({})
                 setIsLoading(false)
-                setAlert('Sent successfully!')
+                setAlert(true)
             }).catch((err) => {
             setErrors(err.response.data)
         })
@@ -83,7 +85,7 @@ function FormComponent({setAlert}) {
                         name="message[name]"
                         id="name"
                         placeholder="Your name"
-                        // required
+                        required
                         className={classNames(
                             errors.name ? "border border-red-600" : "border-0",
                             "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -107,7 +109,7 @@ function FormComponent({setAlert}) {
                         name="message[email]"
                         id="email"
                         placeholder="Your email"
-                        // required
+                        required
                         className={classNames(
                             errors.email ? "border border-red-600" : "border-0",
                             "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -131,7 +133,7 @@ function FormComponent({setAlert}) {
                         name={"message[text]"}
                         rows={5}
                         placeholder="Write your message here"
-                        // required
+                        required
                         className={classNames(
                             errors.text ? "border border-red-600" : "border-0",
                             "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -149,10 +151,33 @@ function FormComponent({setAlert}) {
                     type="submit"
                     className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                    {t('post')}
+                    {t('contact_form.post')}
                 </button>
             </div>
         </form>
+    )
+}
+
+function AlertComponent() {
+    const {t} = useTranslation();
+
+    return (
+        <div className={"p-10"}>
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                <CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true"/>
+            </div>
+            <div className="mt-3 text-center sm:mt-5">
+                <p className="text-base font-semibold leading-6 text-gray-900">
+                    {t('contact_form.alert.title')}
+                </p>
+                <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                        {t('contact_form.alert.subtitle')}
+                    </p>
+                </div>
+            </div>
+        </div>
+
     )
 }
 
@@ -164,7 +189,7 @@ export function ContactFormBtn({setIsOpen}) {
             onClick={() => setIsOpen(true)}
             className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-            {t('hero.consultation')}
+            {t('contact_form.open_form_btn')}
         </button>
     )
 }
