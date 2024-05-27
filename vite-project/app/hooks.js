@@ -1,5 +1,5 @@
 import {useActionData, useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 
 export const useAlert = () => {
     const actionData = useActionData();
@@ -12,4 +12,26 @@ export const useAlert = () => {
             navigate(redirect, {state: data, replace: true});
         }
     }, [actionData, navigate]);
+}
+
+export const useCloseByClickOutside = ({isOpen, setIsOpen}) => {
+    const modalRef = useRef();
+
+    const handleClickOutside = (event) => {
+        if (modalRef.current && !modalRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isOpen]);
+
+    return {modalRef}
 }

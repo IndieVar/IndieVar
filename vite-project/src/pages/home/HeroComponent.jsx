@@ -4,7 +4,7 @@ import {API_URL} from "../../../app/constants.js";
 import {useTranslation} from "react-i18next";
 import {FaBattleNet} from "react-icons/fa";
 import {Link} from "react-router-dom";
-import ContactForm from "../../components/ContactForm.jsx";
+import ContactForm, {ContactFormBtn} from "../../components/ContactForm.jsx";
 
 export default function HeroComponent({quote}) {
     const [isOpenContactForm, setIsOpenContactForm] = useState(false)
@@ -35,12 +35,7 @@ export default function HeroComponent({quote}) {
                                         {t('hero.subtitle')}
                                     </p>
                                     <div className="mt-10 flex items-center gap-x-6">
-                                        <button
-                                            onClick={() => setIsOpenContactForm(true)}
-                                            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        >
-                                            {t('hero.consultation')}
-                                        </button>
+                                        <ContactFormBtn setIsOpen={setIsOpenContactForm}/>
                                         <Link to={"https://github.com/IndieVar/IndieVar"} target={'_blank'}
                                               className="font-semibold leading-6 text-gray-700 hover:text-gray-900 hover:underline"
                                         >

@@ -2,26 +2,12 @@ import {XMarkIcon} from "@heroicons/react/24/outline/index.js";
 import {useTranslation} from "react-i18next";
 import {Form} from "react-router-dom";
 import {useEffect, useRef} from "react";
+import {useCloseByClickOutside} from "../../app/hooks.js";
 
 export default function ContactForm({isOpen, setIsOpen}) {
     const {t} = useTranslation("admin")
-    const modalRef = useRef();
 
-    const handleClickOutside = (event) => {
-        if (modalRef.current && !modalRef.current.contains(event.target)) {
-            setIsOpen(false);
-        }
-    };
-
-    useEffect(() => {
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isOpen]);
+    const {modalRef} = useCloseByClickOutside({isOpen, setIsOpen})
 
     return (
         <>
@@ -110,5 +96,18 @@ export default function ContactForm({isOpen, setIsOpen}) {
             </div>}
         </>
 
+    )
+}
+
+export function ContactFormBtn({setIsOpen}) {
+    const {t} = useTranslation();
+
+    return (
+        <button
+            onClick={() => setIsOpen(true)}
+            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+            {t('hero.consultation')}
+        </button>
     )
 }
