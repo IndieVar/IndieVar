@@ -38,7 +38,6 @@ export const quotesAction = async ({request, params}) => {
                 }))
         }
     }
-
 }
 
 export const postsAction = async ({request, params}) => {
@@ -77,10 +76,9 @@ export const postsAction = async ({request, params}) => {
                 }))
         }
     }
-
 }
 
-export const usersAction = async ({request, params}) => {
+export const usersAction = async ({request}) => {
     const formData = await request.formData()
 
     switch (request.method) {
@@ -96,5 +94,22 @@ export const usersAction = async ({request, params}) => {
                 }))
         }
     }
+}
 
+export const messagesAction = async ({request}) => {
+    const formData = await request.formData()
+
+    switch (request.method) {
+        case 'POST': {
+            return await axios.post(`${API_URL}/messages`, formData)
+                .then(() => json({
+                    data: { status: "ok" },
+                    redirect: "/"
+                }))
+                .catch((err) => json({
+                    data: { errors: err.response.data },
+                    redirect: `/`
+                }))
+        }
+    }
 }

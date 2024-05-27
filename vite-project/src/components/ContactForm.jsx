@@ -1,13 +1,39 @@
 import {XMarkIcon} from "@heroicons/react/24/outline/index.js";
 import {useTranslation} from "react-i18next";
-import {Form} from "react-router-dom";
-import {useEffect, useRef} from "react";
+import React, {useEffect, useState} from "react";
 import {useCloseByClickOutside} from "../../app/hooks.js";
+import Loading from "./Loading.jsx";
+import {classNames, printError} from "../../app/functions.js";
+import axios from "axios";
+import {API_URL} from "../../app/constants.js";
 
 export default function ContactForm({isOpen, setIsOpen}) {
     const {t} = useTranslation("admin")
-
     const {modalRef} = useCloseByClickOutside({isOpen, setIsOpen})
+    const [isLoading, setIsLoading] = useState(true)
+    const [formData, setFormData] = useState({
+        name: '', email: '', text: ''}
+    )
+    const [errors, setErrors] = useState({})
+    const [alert, setAlert] = useState('')
+
+    const onSubmit = (e) => {
+        setIsLoading(true)
+        e.preventDefault()
+        axios.post(`${API_URL}/messages`, formData)
+            .then((res) => {
+                setErrors({})
+                setIsLoading(false)
+                setAlert('Sent successfully!')
+            }).catch((err) => {
+            setErrors(err.response.data)
+        })
+    }
+
+    useEffect(() => {
+        setIsLoading(false)
+    }, [isLoading]);
+
 
     return (
         <>
@@ -24,73 +50,104 @@ export default function ContactForm({isOpen, setIsOpen}) {
                                 Contact form
                             </h3>
 
-                                <button type="button"
-                                        className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                        onClick={() => setIsOpen(false)}>
-                                    <span className="sr-only">Close sidebar</span>
-                                    <XMarkIcon className="h-6 w-6" aria-hidden="true"/>
-                                </button>
+                            <button type="button"
+                                    className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                    onClick={() => setIsOpen(false)}>
+                                <span className="sr-only">Close sidebar</span>
+                                <XMarkIcon className="h-6 w-6" aria-hidden="true"/>
+                            </button>
                         </div>
                         {/* Modal body */}
-                        <Form className="p-4 md:p-5">
-                            <div className="grid gap-4 mb-4 grid-cols-2">
-                                <div className="col-span-2">
-                                    <label
-                                        htmlFor="name"
-                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    >
-                                        Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        id="name"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="Your name"
-                                        required
-                                    />
+                        {alert && <p>{alert}</p>}
+                        {isLoading && <Loading/>}
+                        {!isLoading && alert.length === 0 &&
+                            <form
+                                onSubmit={onSubmit}
+                                className="p-4 md:p-5"
+                            >
+                                <div className="grid gap-4 mb-4 grid-cols-2">
+                                    <div className="col-span-2">
+                                        <label
+                                            htmlFor="name"
+                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                        >
+                                            Name
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="message[name]"
+                                            id="name"
+                                            placeholder="Your name"
+                                            // required
+                                            className={classNames(
+                                                errors.name ? "border border-red-600" : "border-0",
+                                                "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            )}
+                                            defaultValue={formData.name}
+                                            onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                        />
+                                        {errors?.name && <p className="my-2 text-sm text-red-600" id={"name-error"}>
+                                            {printError(errors.name)}
+                                        </p>}
+                                    </div>
+                                    <div className="col-span-2">
+                                        <label
+                                            htmlFor="email"
+                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                        >
+                                            Email
+                                        </label>
+                                        <input
+                                            type="email"
+                                            name="message[email]"
+                                            id="email"
+                                            placeholder="Your email"
+                                            // required
+                                            className={classNames(
+                                                errors.email ? "border border-red-600" : "border-0",
+                                                "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            )}
+                                            defaultValue={formData.email}
+                                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                        />
+                                        {errors?.email && <p className="my-2 text-sm text-red-600" id={"email-error"}>
+                                            {printError(errors.email)}
+                                        </p>}
+                                    </div>
+                                    <div className="col-span-2">
+                                        <label
+                                            htmlFor="message"
+                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                        >
+                                            Message
+                                        </label>
+                                        <textarea
+                                            id="message"
+                                            name={"message[text]"}
+                                            rows={5}
+                                            placeholder="Write your message here"
+                                            // required
+                                            className={classNames(
+                                                errors.text ? "border border-red-600" : "border-0",
+                                                "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            )}
+                                            defaultValue={formData.text}
+                                            onChange={(e) => setFormData({...formData, text: e.target.value})}
+                                        />
+                                        {errors?.text && <p className="my-2 text-sm text-red-600" id={"text-error"}>
+                                            {printError(errors.text)}
+                                        </p>}
+                                    </div>
                                 </div>
-                                <div className="col-span-2">
-                                    <label
-                                        htmlFor="email"
-                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                <div className="mt-6 flex justify-end">
+                                    <button
+                                        type="submit"
+                                        className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                     >
-                                        Email
-                                    </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="Your email"
-                                        required
-                                    />
+                                        {t('post')}
+                                    </button>
                                 </div>
-                                <div className="col-span-2">
-                                    <label
-                                        htmlFor="message"
-                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                    >
-                                        Message
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        rows={5}
-                                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        placeholder="Write your message here"
-                                        defaultValue={""}
-                                    />
-                                </div>
-                            </div>
-                            <div className="mt-6 flex justify-end">
-                                <button
-                                    type="submit"
-                                    className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                >
-                                    {t('post')}
-                                </button>
-                            </div>
-                        </Form>
+                            </form>}
                     </div>
                 </div>
             </div>}
