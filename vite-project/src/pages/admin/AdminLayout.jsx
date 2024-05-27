@@ -1,4 +1,4 @@
-import {Fragment, useState} from 'react'
+import React, {Fragment, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {
     Bars3Icon,
@@ -12,6 +12,7 @@ import {useAuth} from "../../providers/AuthProvider.jsx";
 import {BsChatQuote} from "react-icons/bs";
 import {useTranslation} from "react-i18next";
 import {FaUserCog} from "react-icons/fa";
+import CloseBtn from "../../components/CloseBtn.jsx";
 
 const navigation = [
     {name: 'dashboard', href: '/admin/dashboard', icon: HomeIcon},
@@ -84,12 +85,8 @@ const SideBar = ({sidebarOpen, setSidebarOpen, t}) => {
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                             >
-                                <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
-                                    <button type="button" className="-m-2.5 p-2.5"
-                                            onClick={() => setSidebarOpen(false)}>
-                                        <span className="sr-only">Close sidebar</span>
-                                        <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true"/>
-                                    </button>
+                                <div className="absolute left-full top-0 flex w-16 justify-center pt-5 -m-2.5">
+                                    <CloseBtn setIsOpen={setSidebarOpen}/>
                                 </div>
                             </Transition.Child>
 
