@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import {Dialog, Popover} from '@headlessui/react'
-import {Bars3Icon, XMarkIcon,} from '@heroicons/react/24/outline'
+import React, {Fragment, useState} from 'react'
+import {Dialog, Popover, Transition} from '@headlessui/react'
+import {Bars3Icon,} from '@heroicons/react/24/outline'
 import {Link, NavLink} from "react-router-dom";
 import LocaleSwitcher from "./LocaleSwitcher.jsx";
 import {useTranslation} from "react-i18next";
@@ -55,50 +55,78 @@ export default function Header() {
                 </div>
             </nav>
             {/*Hidden menu*/}
-            <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-                <div className="fixed inset-0 bg-gray-900/80 h-screen z-50"/>
-                <Dialog.Panel
-                    className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-                    <div className="flex items-center justify-between">
-                        <Link to={"/"} onClick={() => setMobileMenuOpen(false)}
-                              className="-m-1.5 p-1.5">
-                            <span className="text-xl font-semibold text-gray-800">Menu</span>
-                        </Link>
+            <Transition.Root show={mobileMenuOpen} as={Fragment}>
+                <Dialog as="div" onClose={setMobileMenuOpen}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="transition-opacity ease-linear duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="transition-opacity ease-linear duration-300"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                    >
+                        <div className="fixed inset-0 bg-gray-900/80 z-50"/>
+                    </Transition.Child>
+                    <div className="fixed inset-0 flex z-50">
+                        <Transition.Child
+                            as={Fragment}
+                            enter="transition ease-in-out duration-300 transform"
+                            enterFrom="translate-x-full"
+                            enterTo="translate-x-0"
+                            leave="transition ease-in-out duration-300 transform"
+                            leaveFrom="translate-x-0"
+                            leaveTo="translate-x-full"
+                        >
+                            <Dialog.Panel
+                                className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                                <div className="flex items-center justify-between">
+                                    <div className="-m-1.5 p-1.5">
+                                        <span className="text-xl font-semibold text-gray-800">Menu</span>
+                                    </div>
+                                    <CloseBtn setIsOpen={setMobileMenuOpen}/>
+                                </div>
+                                <div className="mt-6 flow-root">
+                                    <div className="-my-6 divide-y divide-gray-500/10">
+                                        <div className="space-y-2 py-6">
+                                            {navigations.map((item) => (
+                                                <NavLink to={item.href} key={item.name}
+                                                         onClick={() => setMobileMenuOpen(false)}
+                                                         className={
+                                                             isActiveLink(item.href) ? linkClassName.mobile.active : linkClassName.mobile.pending
+                                                         }
+                                                >
+                                                    {t(item.name)}
+                                                </NavLink>
+                                            ))}
+                                        </div>
+                                        <div className="py-6">
+                                            <LocaleSwitcher/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Dialog.Panel>
+                        </Transition.Child>
+                    </div>
+                </Dialog>
+            </Transition.Root>
 
-                        <CloseBtn setIsOpen={setMobileMenuOpen}/>
-                    </div>
-                    <div className="mt-6 flow-root">
-                        <div className="-my-6 divide-y divide-gray-500/10">
-                            <div className="space-y-2 py-6">
-                                {navigations.map((item) => (
-                                    <NavLink to={item.href} key={item.name}
-                                             onClick={() => setMobileMenuOpen(false)}
-                                             className={
-                                                 isActiveLink(item.href) ? linkClassName.mobile.active : linkClassName.mobile.pending
-                                             }
-                                    >
-                                        {t(item.name)}
-                                    </NavLink>
-                                ))}
-                            </div>
-                            <div className="py-6">
-                                <LocaleSwitcher/>
-                            </div>
-                        </div>
-                    </div>
-                </Dialog.Panel>
-            </Dialog>
         </header>
-    )
+)
 }
 
 const linkClassName = {
     desktop: {
         active: "text-sm font-semibold leading-6 underline underline-offset-2 text-gray-900",
-        pending: "text-sm font-semibold leading-6 text-gray-500 hover:text-gray-900"
-    },
+            pending
+    :
+        "text-sm font-semibold leading-6 text-gray-500 hover:text-gray-900"
+    }
+,
     mobile: {
         active: "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 bg-gray-50",
-        pending: "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+            pending
+    :
+        "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-500 hover:text-gray-900 hover:bg-gray-50"
     }
 }
