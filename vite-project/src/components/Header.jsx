@@ -7,11 +7,7 @@ import {useTranslation} from "react-i18next";
 import UserMenu from "./UserMenu.jsx";
 import {isActiveLink} from "../../app/functions.js";
 import CloseBtn from "./CloseBtn.jsx";
-
-const navigations = [
-    {name: 'header.navigation.home', href: '/'},
-    {name: 'header.navigation.blog', href: '/posts'},
-]
+import {publicNavigation} from "../../app/navigations.js";
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -39,7 +35,7 @@ export default function Header() {
                     <UserMenu/>
                 </div>
                 <Popover.Group className="hidden lg:flex lg:gap-x-12">
-                    {navigations.map((item) => (
+                    {publicNavigation.map((item) => (
                         <NavLink to={item.href} key={item.name}
                                  className={
                                      isActiveLink(item.href) ? linkClassName.desktop.active : linkClassName.desktop.pending
@@ -89,7 +85,7 @@ export default function Header() {
                                 <div className="mt-6 flow-root">
                                     <div className="-my-6 divide-y divide-gray-500/10">
                                         <div className="space-y-2 py-6">
-                                            {navigations.map((item) => (
+                                            {publicNavigation.map((item) => (
                                                 <NavLink to={item.href} key={item.name}
                                                          onClick={() => setMobileMenuOpen(false)}
                                                          className={

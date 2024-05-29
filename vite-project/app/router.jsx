@@ -9,13 +9,13 @@ import DashboardPage from "../src/pages/admin/dashboard/DashboardPage.jsx";
 import LoginPage from "../src/pages/auth/LoginPage.jsx";
 import AuthProvider, {currentUserLoader} from "../src/providers/AuthProvider.jsx";
 import QuotesPage, {QuoteComponent, quotesLoader} from "../src/pages/admin/quotes/QuotesPage.jsx";
-import {messagesAction, postsAction, quotesAction, usersAction} from "./actions.js";
+import {postsAction, quotesAction, usersAction} from "./actions.js";
 import {QuoteForm, quoteLoader} from "../src/pages/admin/quotes/QuoteForm.jsx";
 import AdminLayout from "../src/pages/admin/AdminLayout.jsx";
 import AdminPostsPage, {PostComponent} from "../src/pages/admin/posts/AdminPostsPage.jsx";
 import {PostForm} from "../src/pages/admin/posts/PostForm.jsx";
 import ProfilePage from "../src/pages/admin/profile/ProfilePage.jsx";
-import ContactForm from "../src/components/ContactForm.jsx";
+import MessagesPage, {messagesLoader} from "../src/pages/admin/messages/MessagesPage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -29,7 +29,7 @@ export const router = createBrowserRouter(
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<AdminLayout/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
-                        {/*<Route path="/admin/messages" element={<MessagesPage/>} action={messagesAction}/>*/}
+                        <Route path="/admin/messages" element={<MessagesPage/>} loader={messagesLoader}/>
                         <Route path='/admin/profile' element={<ProfilePage/>} action={usersAction}/>
                         {/*Quotes*/}
                         <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>

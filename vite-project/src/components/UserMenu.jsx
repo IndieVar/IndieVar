@@ -1,5 +1,5 @@
 import {Menu, Transition} from "@headlessui/react";
-import {Fragment} from "react";
+import React, {Fragment} from "react";
 import {useAuth} from "../providers/AuthProvider.jsx";
 import {NavLink, useNavigate} from "react-router-dom";
 import axios from "axios";
@@ -7,11 +7,7 @@ import {AUTH_API_URL, authHeader} from "../../app/constants.js";
 import {BellIcon} from "@heroicons/react/24/outline/index.js";
 import {avatarUrl, classNames} from "../../app/functions.js";
 import {useTranslation} from "react-i18next";
-
-const userNavigation = [
-    {name: 'dashboard', href: '/admin/dashboard'},
-    {name: 'profile', href: '/admin/profile'},
-]
+import {userNavigation} from "../../app/navigations.js";
 
 export default function UserMenu() {
     const {isLoggedIn, currentUser, logout} = useAuth();
@@ -19,7 +15,7 @@ export default function UserMenu() {
 
     const {t} = useTranslation('admin')
     const navigate = useNavigate();
-    const navItemClassName = 'block px-3 py-1 text-sm leading-6 text-gray-900 hover:bg-gray-100 w-full text-start'
+    const navItemClassName = 'flex items-center w-full space-x-3 px-3 py-1 text-sm leading-6 text-gray-900 hover:bg-gray-100 w-full text-start'
 
     const logoutHandler = () => {
         axios.post(`${AUTH_API_URL}/revoke`, authHeader).then(() => {
@@ -54,10 +50,10 @@ export default function UserMenu() {
                     leaveTo="transform opacity-0 scale-95"
                 >
                     <Menu.Items
-                        className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                        {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                                {({active}) => (
+                        className="absolute right-0 z-10 mt-2.5 min-w-32 max-w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+                            {userNavigation.map((item) => (
+                                <Menu.Item key={item.name}>
+                                    {({active}) => (
                                         <NavLink
                                             to={item.href}
                                             className={classNames(
@@ -65,11 +61,12 @@ export default function UserMenu() {
                                                 navItemClassName
                                             )}
                                         >
+                                            <item.icon className="h-4 w-4 mr-2 shrink-0" aria-hidden="true"/>
                                             {t('navigations.' + item.name)}
                                         </NavLink>
-                                )}
-                            </Menu.Item>
-                        ))}
+                                    )}
+                                </Menu.Item>
+                            ))}
                             <hr/>
                             <button
                                 className={navItemClassName}

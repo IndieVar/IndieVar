@@ -1,6 +1,7 @@
 {
   "navigations": {
     "dashboard": "Dashboard",
+    "messages": "Messages",
     "posts": "Posts",
     "quotes": "Quotes",
     "profile": "Profile",

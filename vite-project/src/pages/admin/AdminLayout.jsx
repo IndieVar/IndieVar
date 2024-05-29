@@ -2,24 +2,13 @@ import React, {Fragment, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {
     Bars3Icon,
-    HomeIcon,
-    XMarkIcon,
 } from '@heroicons/react/24/outline'
 import {classNames, isActiveLink} from "../../../app/functions.js";
-import {TbBlockquote} from "react-icons/tb";
 import {Navigate, NavLink, Outlet} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
-import {BsChatQuote} from "react-icons/bs";
 import {useTranslation} from "react-i18next";
-import {FaUserCog} from "react-icons/fa";
 import CloseBtn from "../../components/CloseBtn.jsx";
-
-const navigation = [
-    {name: 'dashboard', href: '/admin/dashboard', icon: HomeIcon},
-    {name: 'posts', href: '/admin/posts', icon: TbBlockquote},
-    {name: 'quotes', href: '/admin/quotes', icon: BsChatQuote},
-    {name: 'profile', href: '/admin/profile', icon: FaUserCog},
-]
+import {adminNavigation} from "../../../app/navigations.js";
 
 export default function AdminLayout() {
     const {currentUser} = useAuth()
@@ -94,7 +83,7 @@ const SideBar = ({sidebarOpen, setSidebarOpen, t}) => {
                                 className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10">
                                 <nav className="flex flex-1 flex-col mt-10">
                                     <ul role="list" className="-mx-2 flex-1 space-y-1">
-                                        {navigation.map((item) => (
+                                        {adminNavigation.map((item) => (
                                             <li key={item.name}>
                                                 <NavLink
                                                     to={item.href}
@@ -128,7 +117,7 @@ const StaticSideBar = ({t}) => {
             className="hidden mt-20 lg:fixed lg:inset-y-0 lg:left-0 lg:z-20 lg:block lg:w-20 lg:overflow-y-auto lg:bg-gray-900 lg:pb-4">
             <nav className="mt-8">
                 <ul role="list" className="flex flex-col items-center space-y-1">
-                    {navigation.map((item) => (
+                    {adminNavigation.map((item) => (
                         <li key={item.name}>
                             <NavLink
                                 to={item.href}

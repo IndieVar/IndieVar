@@ -1,6 +1,7 @@
 {
   "navigations": {
     "dashboard": "Панель управления",
+    "messages": "Сообщения",
     "posts": "Посты",
     "quotes": "Цитаты",
     "profile": "Профиль",
