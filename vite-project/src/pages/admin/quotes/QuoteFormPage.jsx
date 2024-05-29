@@ -3,7 +3,7 @@ import {API_URL} from "../../../../app/constants.js";
 import {classNames, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
 import {useEffect, useState} from "react";
-import Loading from "../../../components/Loading.jsx";
+import Loading from "../../../components/elements/Loading.jsx";
 import {useTranslation} from "react-i18next";
 import api from "../../../../app/config/api.jsx";
 
@@ -12,7 +12,7 @@ export const quoteLoader = async ({params}) => {
     return data
 }
 
-export function QuoteForm() {
+export function QuoteFormPage() {
     const {t} = useTranslation('admin')
     const [isLoading, setIsLoading] = useState(true)
     const quote = useLoaderData()

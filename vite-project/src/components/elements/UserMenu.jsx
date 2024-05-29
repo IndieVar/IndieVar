@@ -1,13 +1,13 @@
 import {Menu, Transition} from "@headlessui/react";
 import React, {Fragment} from "react";
-import {useAuth} from "../providers/AuthProvider.jsx";
 import {NavLink, useNavigate} from "react-router-dom";
-import axios from "axios";
-import {AUTH_API_URL, authHeader} from "../../app/constants.js";
 import {BellIcon} from "@heroicons/react/24/outline/index.js";
-import {avatarUrl, classNames} from "../../app/functions.js";
 import {useTranslation} from "react-i18next";
-import {userNavigation} from "../../app/navigations.js";
+import {userNavigation} from "../../../app/navigations.js";
+import {useAuth} from "../../providers/AuthProvider.jsx";
+import {AUTH_API_URL} from "../../../app/constants.js";
+import api from "../../../app/config/api.jsx";
+import {avatarUrl, classNames} from "../../../app/functions.js";
 
 export default function UserMenu() {
     const {isLoggedIn, currentUser, logout} = useAuth();
@@ -18,7 +18,7 @@ export default function UserMenu() {
     const navItemClassName = 'flex items-center w-full space-x-3 px-3 py-1 text-sm leading-6 text-gray-900 hover:bg-gray-100 w-full text-start'
 
     const logoutHandler = () => {
-        axios.post(`${AUTH_API_URL}/revoke`, authHeader).then(() => {
+        api.post(`${AUTH_API_URL}/revoke`).then(() => {
             logout()
             return navigate('/')
         })

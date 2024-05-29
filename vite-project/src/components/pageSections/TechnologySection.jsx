@@ -1,7 +1,7 @@
 import {useTranslation} from "react-i18next";
 import {technologyList} from "../../../app/data/technologyList.js";
 
-export default function TechnologyComponent() {
+export default function TechnologySection() {
     const {t} = useTranslation()
 
     return (

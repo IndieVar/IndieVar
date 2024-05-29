@@ -4,9 +4,9 @@ import {API_URL} from "../../../app/constants.js";
 import {useTranslation} from "react-i18next";
 import {FaBattleNet} from "react-icons/fa";
 import {Link} from "react-router-dom";
-import ContactForm, {ContactFormBtn} from "../../components/ContactForm.jsx";
+import ContactForm, {ContactFormBtn} from "../forms/ContactForm.jsx";
 
-export default function HeroComponent({quote}) {
+export default function HeroSection({quote}) {
     const [isOpenContactForm, setIsOpenContactForm] = useState(false)
     const {t} = useTranslation();
     const [window, setWindow] = useState('quote')

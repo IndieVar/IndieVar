@@ -1,6 +1,6 @@
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
-import ContactForm, {ContactFormBtn} from "./ContactForm.jsx";
+import ContactForm, {ContactFormBtn} from "../forms/ContactForm.jsx";
 
 const navigation = {
     social: [

@@ -2,7 +2,7 @@ import {useTranslation} from "react-i18next";
 import PostCard from "../../components/features/PostCard.jsx";
 import {NavLink} from "react-router-dom";
 
-export default function BlogComponent({posts}) {
+export default function BlogSection({posts}) {
     const {t} = useTranslation()
     return (
         <div className="bg-white pt-24">

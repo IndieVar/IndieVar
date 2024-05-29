@@ -1,11 +1,11 @@
-import Header from "../components/Header.jsx";
 import {Outlet, useLocation} from "react-router-dom";
 import useLocalizeDocumentAttributes from "../../app/i18n/useLocalizeDocumentAttributes.js";
-import Footer from "../components/Footer.jsx";
-import Alert from "../components/Alert.jsx";
-import ScrollToTop from "../components/ScrollToTop.jsx";
+import ScrollToTop from "../components/elements/ScrollToTop.jsx";
 import {useEffect} from "react";
-import ContactForm from "../components/ContactForm.jsx";
+import Header from "../components/elements/Header.jsx";
+import ContactForm from "../components/forms/ContactForm.jsx";
+import Alert from "../components/elements/Alert.jsx";
+import Footer from "../components/elements/Footer.jsx";
 
 const Layout = () => {
     useLocalizeDocumentAttributes();

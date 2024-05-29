@@ -1,12 +1,12 @@
 import {useTranslation} from "react-i18next";
 import React, {useEffect, useState} from "react";
-import {useCloseByClickOutside} from "../../app/hooks.js";
-import Loading from "./Loading.jsx";
-import {classNames, printError} from "../../app/functions.js";
 import axios from "axios";
-import {API_URL} from "../../app/constants.js";
-import CloseBtn from "./CloseBtn.jsx";
 import {CheckIcon} from "@heroicons/react/20/solid/index.js";
+import {useCloseByClickOutside} from "../../../app/hooks.js";
+import CloseBtn from "../elements/CloseBtn.jsx";
+import Loading from "../elements/Loading.jsx";
+import {API_URL} from "../../../app/constants.js";
+import {classNames, printError} from "../../../app/functions.js";
 
 export default function ContactForm({isOpen, setIsOpen}) {
     const {t} = useTranslation();
@@ -52,7 +52,7 @@ function FormComponent({setAlert}) {
         setIsLoading(true)
         e.preventDefault()
         axios.post(`${API_URL}/messages`, formData)
-            .then((res) => {
+            .then(() => {
                 setErrors({})
                 setIsLoading(false)
                 setAlert(true)

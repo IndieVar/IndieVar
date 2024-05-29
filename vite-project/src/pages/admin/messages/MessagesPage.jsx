@@ -12,7 +12,6 @@ export const messagesLoader = async () => {
 
 export default function MessagesPage() {
     const messages = useLoaderData()
-    console.log(messages)
 
     return (
         <>
@@ -35,7 +34,7 @@ export default function MessagesPage() {
     )
 }
 
-function MessageComponent({message}) {
+export function MessageComponent({message}) {
 
     if (!message) return
 
@@ -69,12 +68,12 @@ function MessageComponent({message}) {
                         {message.email}
                     </a>
                 </div>
-                <div className={"flex items-center space-x-3"}>
+                <NavLink to={`/admin/messages/${message.id}`} className={"flex items-center space-x-3"}>
                     <span className={"text-gray-500 text-sm"}>Text: </span>
                     <p className="text-base text-gray-700">
                         {message.text}
                     </p>
-                </div>
+                </NavLink>
             </div>
         </div>
     )

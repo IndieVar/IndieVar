@@ -7,7 +7,7 @@ import {classNames, isActiveLink} from "../../../app/functions.js";
 import {Navigate, NavLink, Outlet} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 import {useTranslation} from "react-i18next";
-import CloseBtn from "../../components/CloseBtn.jsx";
+import CloseBtn from "../../components/elements/CloseBtn.jsx";
 import {adminNavigation} from "../../../app/navigations.js";
 
 export default function AdminLayout() {

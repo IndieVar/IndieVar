@@ -1,11 +1,11 @@
 import {useAuth} from "../../../providers/AuthProvider.jsx";
 import {useTranslation} from "react-i18next";
 import React, {useEffect, useState} from "react";
-import UploadImage from "../../../components/features/UploadImage.jsx";
 import {Form, useLocation} from "react-router-dom";
 import {useAlert} from "../../../../app/hooks.js";
-import Loading from "../../../components/Loading.jsx";
+import Loading from "../../../components/elements/Loading.jsx";
 import {classNames, printError} from "../../../../app/functions.js";
+import UploadImage from "../../../components/forms/UploadImage.jsx";
 
 export default function ProfilePage() {
     const {currentUser} = useAuth()

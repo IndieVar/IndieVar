@@ -1,11 +1,11 @@
-import HeroComponent from "./HeroComponent.jsx";
 import {API_URL} from "../../../app/constants.js";
 import axios from "axios";
 import {useLoaderData} from "react-router-dom";
-import TechnologyComponent from "./TechnologyComponent.jsx";
-import BlogComponent from "./BlogComponent.jsx";
 import {useTranslation} from "react-i18next";
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import TechnologySection from "../../components/pageSections/TechnologySection.jsx";
+import HeroSection from "../../components/pageSections/HeroSection.jsx";
+import BlogSection from "../../components/pageSections/BlogSection.jsx";
 
 export const homeLoader = async () => {
     const {data} = await axios.get(`${API_URL}/home`);
@@ -18,9 +18,9 @@ export default function HomePage() {
     return (
         <>
             <Meta/>
-            <HeroComponent quote={data.quote}/>
-            <TechnologyComponent/>
-            <BlogComponent posts={JSON.parse(data.posts)}/>
+            <HeroSection quote={data.quote}/>
+            <TechnologySection/>
+            <BlogSection posts={JSON.parse(data.posts)}/>
         </>
     )
 }

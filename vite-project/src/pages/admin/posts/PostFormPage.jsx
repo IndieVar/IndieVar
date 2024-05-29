@@ -3,12 +3,12 @@ import {classNames, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../../providers/AuthProvider.jsx";
-import Loading from "../../../components/Loading.jsx";
-import UploadImage from "../../../components/features/UploadImage.jsx";
-import EditorComponent from "../../../components/features/EditorComponent.jsx";
+import Loading from "../../../components/elements/Loading.jsx";
 import {useTranslation} from "react-i18next";
+import UploadImage from "../../../components/forms/UploadImage.jsx";
+import EditorComponent from "../../../components/forms/EditorComponent.jsx";
 
-export function PostForm() {
+export function PostFormPage() {
     const {t} = useTranslation('admin')
     const [isLoading, setIsLoading] = useState(true)
     const {currentUser} = useAuth()

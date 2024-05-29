@@ -4,10 +4,10 @@ import {Bars3Icon,} from '@heroicons/react/24/outline'
 import {Link, NavLink} from "react-router-dom";
 import LocaleSwitcher from "./LocaleSwitcher.jsx";
 import {useTranslation} from "react-i18next";
-import UserMenu from "./UserMenu.jsx";
-import {isActiveLink} from "../../app/functions.js";
+import {isActiveLink} from "../../../app/functions.js";
 import CloseBtn from "./CloseBtn.jsx";
-import {publicNavigation} from "../../app/navigations.js";
+import {publicNavigation} from "../../../app/navigations.js";
+import UserMenu from "./UserMenu.jsx";
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
