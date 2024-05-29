@@ -16,6 +16,7 @@ import AdminPostsPage, {PostComponent} from "../src/pages/admin/posts/AdminPosts
 import {PostForm} from "../src/pages/admin/posts/PostForm.jsx";
 import ProfilePage from "../src/pages/admin/profile/ProfilePage.jsx";
 import MessagesPage, {messagesLoader} from "../src/pages/admin/messages/MessagesPage.jsx";
+import SingleMessagePage, {singleMessageLoader} from "../src/pages/admin/messages/SingleMessagePage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -30,6 +31,7 @@ export const router = createBrowserRouter(
                     <Route element={<AdminLayout/>}>
                         <Route path='/admin/dashboard' element={<DashboardPage/>}/>
                         <Route path="/admin/messages" element={<MessagesPage/>} loader={messagesLoader}/>
+                        <Route path="/admin/messages/:id" element={<SingleMessagePage/>} loader={singleMessageLoader}/>
                         <Route path='/admin/profile' element={<ProfilePage/>} action={usersAction}/>
                         {/*Quotes*/}
                         <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>

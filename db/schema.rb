@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_145124) do
     t.string "name"
     t.string "email"
     t.text "text"
+    t.boolean "viewed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

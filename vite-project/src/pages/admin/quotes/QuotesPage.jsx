@@ -1,4 +1,3 @@
-import axios from "axios";
 import {API_URL} from "../../../../app/constants.js";
 import {Form, NavLink, useLoaderData} from "react-router-dom";
 import {useTranslation} from "react-i18next";
@@ -6,9 +5,10 @@ import React, {useEffect, useState} from "react";
 import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
 import {IoEyeOutline} from "react-icons/io5";
 import {useAlert} from "../../../../app/hooks.js";
+import api from "../../../../app/config/api.jsx";
 
 export const quotesLoader = async () => {
-    const {data} = await axios.get(`${API_URL}/quotes`);
+    const {data} = await api.get(`${API_URL}/quotes`);
     return data
 }
 

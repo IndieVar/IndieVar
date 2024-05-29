@@ -24,9 +24,9 @@ export default function AdminLayout() {
                 {/* Static sidebar for desktop */}
                 <StaticSideBar t={t}/>
 
-                <main className="p-6 pl-12 relative">
+                <main className="lg:pl-20 p-6 relative">
                     <button type="button"
-                            className="fixed left-0 inset-y-1/2 p-2.5 text-gray-700 lg:hidden"
+                            className="fixed z-50 left-0 inset-y-0 p-2.5 text-gray-700 lg:hidden"
                             onClick={() => setSidebarOpen(true)}>
                         <span className="sr-only">Open sidebar</span>
                         <Bars3Icon className="h-6 w-6" aria-hidden="true"/>

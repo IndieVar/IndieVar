@@ -1,14 +1,14 @@
 import {Form, NavLink, useLoaderData, useLocation} from "react-router-dom";
-import axios from "axios";
 import {API_URL} from "../../../../app/constants.js";
 import {classNames, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
 import {useEffect, useState} from "react";
 import Loading from "../../../components/Loading.jsx";
 import {useTranslation} from "react-i18next";
+import api from "../../../../app/config/api.jsx";
 
 export const quoteLoader = async ({params}) => {
-    const {data} = await axios.get(`${API_URL}/quotes/${params.id}`);
+    const {data} = await api.get(`${API_URL}/quotes/${params.id}`);
     return data
 }
 

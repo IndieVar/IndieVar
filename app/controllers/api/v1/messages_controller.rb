@@ -12,7 +12,9 @@ class Api::V1::MessagesController < ApplicationController
 
   # GET /messages/1
   def show
-    render json: @message
+    if @message.update(viewed: true)
+      render json: @message
+    end
   end
 
   # POST /messages
@@ -41,13 +43,14 @@ class Api::V1::MessagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_message
-      @message = Message.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def message_params
-      params.require(:message).permit(:name, :email, :text)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_message
+    @message = Message.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def message_params
+    params.require(:message).permit(:name, :email, :text, :viewed)
+  end
 end

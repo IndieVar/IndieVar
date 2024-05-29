@@ -1,13 +1,13 @@
-import axios from "axios";
-import {API_URL, authHeader} from "./constants.js";
+import {API_URL} from "./constants.js";
 import {json, redirect} from "react-router-dom";
+import api from "./config/api.jsx";
 
 export const quotesAction = async ({request, params}) => {
     const formData = await request.formData()
 
     switch (request.method) {
         case 'POST': {
-            return await axios.post(`${API_URL}/quotes`, formData, authHeader)
+            return await api.post(`${API_URL}/quotes`, formData)
                 .then(() => json({
                     data: { alert: "Successfully uploaded" },
                     redirect: "/admin/quotes"
@@ -18,7 +18,7 @@ export const quotesAction = async ({request, params}) => {
                 }))
         }
         case 'PATCH': {
-           return await axios.patch(`${API_URL}/quotes/${params.id}`, formData, authHeader)
+           return await api.patch(`${API_URL}/quotes/${params.id}`, formData)
                .then(() => json({
                    data: { alert: "Successfully updated" },
                    redirect: "/admin/quotes"
@@ -31,7 +31,7 @@ export const quotesAction = async ({request, params}) => {
         case 'DELETE': {
             if (!window.confirm('Are you sure?')) return redirect('/admin/quotes')
 
-            return await axios.delete(`${API_URL}/quotes/${params.id}`, authHeader)
+            return await api.delete(`${API_URL}/quotes/${params.id}`)
                 .then(() => json({
                     data: { alert: "Successfully deleted" },
                     redirect: "/admin/quotes"
@@ -45,7 +45,7 @@ export const postsAction = async ({request, params}) => {
 
     switch (request.method) {
         case 'POST': {
-            return await axios.post(`${API_URL}/posts`, formData, authHeader)
+            return await api.post(`${API_URL}/posts`, formData)
                 .then(() => json({
                     data: { alert: "Successfully uploaded" },
                     redirect: "/admin/posts"
@@ -56,7 +56,7 @@ export const postsAction = async ({request, params}) => {
                 }))
         }
         case 'PATCH': {
-            return await axios.patch(`${API_URL}/posts/${params.id}`, formData, authHeader)
+            return await api.patch(`${API_URL}/posts/${params.id}`, formData)
                 .then(() => json({
                     data: { alert: "Successfully updated" },
                     redirect: "/admin/posts"
@@ -69,7 +69,7 @@ export const postsAction = async ({request, params}) => {
         case 'DELETE': {
             if (!window.confirm('Are you sure?')) return redirect('/admin/posts')
 
-            return await axios.delete(`${API_URL}/posts/${params.id}`, authHeader)
+            return await api.delete(`${API_URL}/posts/${params.id}`)
                 .then(() => json({
                     data: { alert: "Successfully deleted" },
                     redirect: "/admin/posts"
@@ -83,7 +83,7 @@ export const usersAction = async ({request}) => {
 
     switch (request.method) {
         case 'PUT': {
-            return await axios.put(`${API_URL}/current_user`, formData, authHeader)
+            return await api.put(`${API_URL}/current_user`, formData)
                 .then(() => json({
                     data: { alert: "Successfully updated" },
                     redirect: "/admin/profile"
@@ -96,19 +96,16 @@ export const usersAction = async ({request}) => {
     }
 }
 
-export const messagesAction = async ({request}) => {
-    const formData = await request.formData()
+export const messagesAction = async ({request, params}) => {
 
     switch (request.method) {
-        case 'POST': {
-            return await axios.post(`${API_URL}/messages`, formData)
+        case 'DELETE': {
+            if (!window.confirm('Are you sure?')) return redirect('/admin/messages')
+
+            return await api.delete(`${API_URL}/messages/${params.id}`)
                 .then(() => json({
-                    data: { status: "ok" },
-                    redirect: "/"
-                }))
-                .catch((err) => json({
-                    data: { errors: err.response.data },
-                    redirect: `/`
+                    data: { alert: "Successfully deleted" },
+                    redirect: "/admin/messages"
                 }))
         }
     }

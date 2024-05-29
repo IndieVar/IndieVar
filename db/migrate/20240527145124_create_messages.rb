@@ -4,6 +4,7 @@ class CreateMessages < ActiveRecord::Migration[7.1]
       t.string :name
       t.string :email
       t.text :text
+      t.boolean :viewed, default: false
 
       t.timestamps
     end
