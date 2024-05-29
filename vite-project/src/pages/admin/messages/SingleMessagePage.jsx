@@ -2,6 +2,7 @@ import {API_URL} from "../../../../app/constants.js";
 import {Form, useLoaderData} from "react-router-dom";
 import api from "../../../../app/config/api.jsx";
 import {MdPlaylistRemove} from "react-icons/md";
+import {useAlert} from "../../../../app/hooks.js";
 
 export const singleMessageLoader = async ({params}) => {
     const {data} = await api.get(`${API_URL}/messages/${params.id}`);
@@ -10,6 +11,7 @@ export const singleMessageLoader = async ({params}) => {
 
 export default function SingleMessagePage() {
     const message = useLoaderData()
+    useAlert()
 
     return (
         <div className={'group relative border rounded-lg p-6'}>

@@ -4,6 +4,7 @@ import api from "../../../../app/config/api.jsx";
 import {MdPlaylistRemove} from "react-icons/md";
 import {LuMailOpen} from "react-icons/lu";
 import {IoMailUnreadOutline} from "react-icons/io5";
+import {useAlert} from "../../../../app/hooks.js";
 
 export const messagesLoader = async () => {
     const {data} = await api.get(`${API_URL}/messages`);
@@ -35,6 +36,7 @@ export default function MessagesPage() {
 }
 
 export function MessageComponent({message}) {
+    useAlert()
 
     if (!message) return
 
