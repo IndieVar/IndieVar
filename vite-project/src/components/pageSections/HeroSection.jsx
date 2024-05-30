@@ -126,7 +126,7 @@ function QuoteComponent({quote}) {
                       className={"cursor-pointer group"}
                       onClick={() => quoteHandler()}>
                       {"\t"}{"\t"}{"\t"}&lt;<span className="text-indigo-400">
-                      button <span className={'text-white'}>onClick={"{"}() => alert(quote){"}"}</span>
+                      button <span className={'text-white'}>onClick={"{() => alert(quote)}"}</span>
                       </span>&gt;
                       {"\n"}
                       {"\t"}{"\t"}{"\t"}{"\t"}<span
