@@ -37,3 +37,5 @@
 .env
 .env.development
 public/uploads
+
+vite-project/.env*
