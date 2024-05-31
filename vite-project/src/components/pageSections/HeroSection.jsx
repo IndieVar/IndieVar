@@ -57,9 +57,9 @@ export default function HeroSection({quote}) {
                                         className="absolute -inset-y-px left-1/2 -z-10 ml-10 w-[200%] skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-inset ring-white md:ml-20 lg:ml-36"
                                         aria-hidden="true"
                                     />
-                                    <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
+                                    <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0 overflow-x-scroll sm:overflow-hidden">
                                         <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
-                                            <div className="w-screen overflow-hidden rounded-tl-xl bg-gray-900">
+                                            <div className="w-screen overflow-x-scroll sm:overflow-hidden rounded-tl-xl bg-gray-900">
                                                 <div className="flex bg-gray-800/40 ring-1 ring-white/5">
                                                     <div
                                                         className="-mb-px flex text-sm font-medium leading-6 text-gray-400">
