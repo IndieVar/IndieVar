@@ -29,3 +29,10 @@
 !/storage/.keep
 /tmp/storage/*
 !/tmp/storage/.keep
+
+# Ignore assets.
+/node_modules/
+/vite-project/node_modules/
+/app/assets/builds/*
+!/app/assets/builds/.keep
+/public/assets

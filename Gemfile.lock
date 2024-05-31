@@ -110,6 +110,8 @@ GEM
       dry-monads (>= 1.6.0)
       dry-types (>= 1.7.0)
       rails (>= 6.0.0)
+    dockerfile-rails (1.6.14)
+      rails (>= 3.0.0)
     drb (2.2.1)
     dry-configurable (1.1.0)
       dry-core (~> 1.0, < 2)
@@ -270,6 +272,7 @@ DEPENDENCIES
   debug
   devise
   devise-api
+  dockerfile-rails (>= 1.6)
   faker
   image_processing (~> 1.2)
   pg (~> 1.1)

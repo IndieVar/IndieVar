@@ -1,4 +1,3 @@
-'use client'
 import {FaArrowUp} from "react-icons/fa";
 import {useAnimationControls, useScroll, motion} from "framer-motion";
 import {useEffect} from "react";

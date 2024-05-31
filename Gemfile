@@ -14,6 +14,7 @@ gem "devise"
 gem "devise-api"
 gem 'carrierwave', '~> 3.0'
 gem "image_processing", "~> 1.2"
+gem "faker"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -21,7 +22,8 @@ group :development, :test do
 end
 
 group :development do
-  gem "faker"
   # gem "spring"
 end
 
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
