@@ -14,6 +14,7 @@ gem "devise"
 gem "devise-api"
 gem 'carrierwave', '~> 3.0'
 gem "image_processing", "~> 1.2"
+gem 'fog-aws'
 gem "faker"
 
 group :development, :test do
