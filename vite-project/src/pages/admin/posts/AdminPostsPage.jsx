@@ -4,6 +4,16 @@ import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
 import {useAlert} from "../../../../app/hooks.js";
 import PostCard from "../../../components/features/PostCard.jsx";
 import React, {useEffect, useState} from "react";
+import {AiOutlineEyeInvisible} from "react-icons/ai";
+import api from "../../../../app/config/api.jsx";
+import {API_URL} from "../../../../app/constants.js";
+import {IoEyeOutline} from "react-icons/io5";
+
+
+export const postsLoader = async () => {
+    const {data} = await api.get(`${API_URL}/posts`);
+    return data
+}
 
 export default function AdminPostsPage() {
     const posts = useLoaderData()
@@ -38,9 +48,15 @@ export default function AdminPostsPage() {
 
 export function PostComponent({post, locale}) {
     const [lang, setLang] = useState()
+    const [isVisible, setIsVisible] = useState(post?.visible)
     useAlert()
 
     if (!post) return
+
+    async function setVisible() {
+        await api.put(`/posts/${post.id}/set_visible`, {})
+        setIsVisible(!isVisible)
+    }
 
     useEffect(() => {
         setLang(locale)
@@ -53,6 +69,12 @@ export function PostComponent({post, locale}) {
                 <button onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
                         className={"mr-3 text-gray-500 hover:text-gray-700 hover:underline"}>
                     {lang === 'ru' ? 'En' : 'Ru'}
+                </button>
+                {/*Set Visible*/}
+                <button onClick={() => setVisible()}
+                        className={"text-gray-500 hover:text-blue-700"}>
+                    {isVisible && <AiOutlineEyeInvisible className={"w-6 h-6 mx-3 text-gray-500 hover:text-red-700"}/>}
+                    {!isVisible && <IoEyeOutline className={"w-6 h-6 mx-3 text-gray-500 hover:text-blue-700"}/>}
                 </button>
                 {/*Edit*/}
                 <NavLink to={`/admin/posts/${post.id}/update`} className={"text-gray-500 hover:text-blue-700"}>
@@ -68,7 +90,7 @@ export function PostComponent({post, locale}) {
             </div>
             <PostCard post={post} lang={lang}/>
         </div>
-    )
+    );
 }
 
 

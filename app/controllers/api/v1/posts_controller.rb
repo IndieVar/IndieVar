@@ -1,13 +1,13 @@
 class Api::V1::PostsController < ApplicationController
-  before_action :set_post, only: %i[ show update destroy update_views ]
+  before_action :set_post, only: %i[ show update set_visible destroy update_views ]
   skip_before_action :verify_authenticity_token, raise: false
-  before_action :authenticate_devise_api_token!, only: %i[create update destroy]
+  before_action :authenticate_user!, only: %i[index create update destroy set_visible]
 
-  # PUT /posts/:id/update_views
-  def update_views
-    unless @post.update(views: @post.views + 1)
-      render json: @post.errors, status: :unprocessable_entity
-    end
+  # GET /public_posts
+  def public_index
+    @posts = Post.latest.where(visible: true)
+
+    render json: @posts, include: [:user, :en, :ru]
   end
 
   # GET /posts
@@ -47,11 +47,25 @@ class Api::V1::PostsController < ApplicationController
     @post.destroy!
   end
 
+  # PUT /posts/:id/update_views
+  def update_views
+    unless @post.update(views: @post.views + 1)
+      render json: @post.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PUT /posts/:post_id/set_visible
+  def set_visible
+    unless @post.update(visible: !@post.visible)
+      render json: @post.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id] || params[:post_id])
   end
 
   # Only allow a list of trusted parameters through.

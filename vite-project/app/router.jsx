@@ -3,7 +3,7 @@ import {createBrowserRouter, createRoutesFromElements, Route} from "react-router
 import Layout from "../src/pages/Layout.jsx";
 import ErrorPage from "../src/pages/ErrorPage.jsx";
 import HomePage, {homeLoader} from "../src/pages/home/HomePage.jsx";
-import PostsPage, {postsLoader} from "../src/pages/posts/PostsPage.jsx";
+import PostsPage, {publicPostsLoader} from "../src/pages/posts/PostsPage.jsx";
 import SinglePostPage, {singlePostLoader} from "../src/pages/posts/SinglePostPage.jsx";
 import DashboardPage from "../src/pages/admin/dashboard/DashboardPage.jsx";
 import LoginPage from "../src/pages/auth/LoginPage.jsx";
@@ -12,7 +12,7 @@ import QuotesPage, {QuoteComponent, quotesLoader} from "../src/pages/admin/quote
 import {messagesAction, postsAction, quotesAction, usersAction} from "./actions.js";
 import {QuoteFormPage, quoteLoader} from "../src/pages/admin/quotes/QuoteFormPage.jsx";
 import AdminLayout from "../src/pages/admin/AdminLayout.jsx";
-import AdminPostsPage, {PostComponent} from "../src/pages/admin/posts/AdminPostsPage.jsx";
+import AdminPostsPage, {PostComponent, postsLoader} from "../src/pages/admin/posts/AdminPostsPage.jsx";
 import {PostFormPage} from "../src/pages/admin/posts/PostFormPage.jsx";
 import ProfilePage from "../src/pages/admin/profile/ProfilePage.jsx";
 import MessagesPage, {MessageComponent, messagesLoader} from "../src/pages/admin/messages/MessagesPage.jsx";
@@ -25,7 +25,7 @@ export const router = createBrowserRouter(
                    loader={currentUserLoader}>
                 <Route element={<Layout/>}>
                     <Route path="/" element={<HomePage/>} loader={homeLoader}/>
-                    <Route path="/posts" element={<PostsPage/>} loader={postsLoader}/>
+                    <Route path="/posts" element={<PostsPage/>} loader={publicPostsLoader}/>
                     <Route path="/posts/:id" element={<SinglePostPage/>} loader={singlePostLoader}/>
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route element={<AdminLayout/>}>

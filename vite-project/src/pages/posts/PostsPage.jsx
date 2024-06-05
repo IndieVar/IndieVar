@@ -5,8 +5,8 @@ import PostCard from "../../components/features/PostCard.jsx";
 import {useTranslation} from "react-i18next";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 
-export const postsLoader = async () => {
-    const {data} = await axios.get(`${API_URL}/posts`);
+export const publicPostsLoader = async () => {
+    const {data} = await axios.get(`${API_URL}/public_posts`);
     return data
 }
 

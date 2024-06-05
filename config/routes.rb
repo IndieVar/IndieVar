@@ -17,8 +17,11 @@ Rails.application.routes.draw do
       get 'random_quote', to: 'quotes#random'
       put 'quotes/:id/update_views', to: 'quotes#update_views'
       # Posts
-      resources :posts
-      put 'posts/:id/update_views', to: 'posts#update_views'
+      get 'public_posts', to: 'posts#public_index'
+      resources :posts do
+        put 'update_views', to: 'posts#update_views'
+        put 'set_visible', to: 'posts#set_visible'
+      end
     end
   end
 end
