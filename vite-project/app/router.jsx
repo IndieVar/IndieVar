@@ -8,7 +8,7 @@ import SinglePostPage, {singlePostLoader} from "../src/pages/posts/SinglePostPag
 import DashboardPage from "../src/pages/admin/dashboard/DashboardPage.jsx";
 import LoginPage from "../src/pages/auth/LoginPage.jsx";
 import AuthProvider, {currentUserLoader} from "../src/providers/AuthProvider.jsx";
-import QuotesPage, {QuoteComponent, quotesLoader} from "../src/pages/admin/quotes/QuotesPage.jsx";
+import AdminQuotesPage, {QuoteComponent, quotesLoader} from "../src/pages/admin/quotes/AdminQuotesPage.jsx";
 import {messagesAction, postsAction, quotesAction, usersAction} from "./actions.js";
 import {QuoteFormPage, quoteLoader} from "../src/pages/admin/quotes/QuoteFormPage.jsx";
 import AdminLayout from "../src/pages/admin/AdminLayout.jsx";
@@ -38,7 +38,7 @@ export const router = createBrowserRouter(
                         {/*Profile*/}
                         <Route path='/admin/profile' element={<ProfilePage/>} action={usersAction}/>
                         {/*Quotes*/}
-                        <Route path='/admin/quotes' element={<QuotesPage/>} loader={quotesLoader}/>
+                        <Route path='/admin/quotes' element={<AdminQuotesPage/>} loader={quotesLoader}/>
                         <Route path='/admin/quotes/new' element={<QuoteFormPage/>} action={quotesAction}/>
                         <Route path='/admin/quotes/:id/update' element={<QuoteFormPage/>} loader={quoteLoader} action={quotesAction}/>
                         <Route path='/admin/quotes/:id/delete' element={<QuoteComponent/>} action={quotesAction}/>

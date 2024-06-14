@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom/client";
 import "../app/assets/index.css";
 import {router} from "../app/router.jsx";
 import {RouterProvider} from "react-router-dom";
-import "../app/i18n/config.ts";
+import "../app/i18n/config.js";
 
 import TagManager from '@sooro-io/react-gtm-module'
 

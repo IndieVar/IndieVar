@@ -8,6 +8,7 @@ import {AiOutlineEyeInvisible} from "react-icons/ai";
 import api from "../../../../app/config/api.jsx";
 import {API_URL} from "../../../../app/constants.js";
 import {IoEyeOutline} from "react-icons/io5";
+import {supportedLngs} from "../../../../app/i18n/config.js";
 
 
 export const postsLoader = async () => {
@@ -65,11 +66,16 @@ export function PostComponent({post, locale}) {
     return (
         <div className={'group relative bg-white p-6'}>
             <div className="pb-6 flex justify-end items-center divide-x">
-                {/*Lang*/}
-                <button onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
-                        className={"mr-3 text-gray-500 hover:text-gray-700 hover:underline"}>
-                    {lang === 'ru' ? 'En' : 'Ru'}
-                </button>
+                <select name="lang" id="lang"
+                        onChange={(e) => setLang(e.target.value)}
+                        className={"mr-3 text-gray-500 hover:text-gray-900 hover:underline bg-inherit border-0"}
+                >
+                    {Object.entries(supportedLngs).map(([code, name]) => (
+                        <option value={code} key={code}>
+                            {name}
+                        </option>
+                    ))}
+                </select>
                 {/*Set Visible*/}
                 <button onClick={() => setVisible()}
                         className={"text-gray-500 hover:text-blue-700"}>
@@ -82,7 +88,7 @@ export function PostComponent({post, locale}) {
                 </NavLink>
                 {/*Delete*/}
                 <Form method="delete" action={`/admin/posts/${post.id}/delete`}
-                      className={"text-gray-500 hover:text-red-700"}>
+                      className={"text-gray-500 hover:text-red-700 flex items-center"}>
                     <button type="submit">
                         <MdPlaylistRemove className={"w-6 h-6 ml-3"}/>
                     </button>
