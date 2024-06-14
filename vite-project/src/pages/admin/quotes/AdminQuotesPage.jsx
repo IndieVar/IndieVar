@@ -58,6 +58,7 @@ export function QuoteComponent({quote, locale}) {
         <div className={'group relative bg-white p-6'}>
             <div className="pb-6 flex justify-end items-center divide-x">
                 <select name="lang" id="lang"
+                        defaultValue={locale}
                         onChange={(e) => setLang(e.target.value)}
                         className={"mr-3 text-gray-500 hover:text-gray-900 hover:underline bg-inherit border-0"}
                 >
