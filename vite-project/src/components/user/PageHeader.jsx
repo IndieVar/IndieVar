@@ -12,7 +12,7 @@ export default function PageHeader({title, path = undefined, pathTitle = undefin
                 </h1>
             </div>
             <div
-                className="sm:mb-8 flex flex-wrap items-center justify-between sm:flex-nowrap space-x-3 rtl:space-x-reverse">
+                className="flex flex-wrap items-center justify-between sm:flex-nowrap space-x-3 rtl:space-x-reverse">
                 {path && <div className="ml-4 flex items-center">
                     <NavLink
                         to={path}
