@@ -6,6 +6,7 @@ import {useAlert} from "../../../../app/hooks.js";
 import Loading from "../../../components/elements/Loading.jsx";
 import {classNames, printError} from "../../../../app/functions.js";
 import UploadImage from "../../../components/forms/UploadImage.jsx";
+import PageHeader from "../../../components/user/PageHeader.jsx";
 
 export default function ProfilePage() {
     const {currentUser} = useAuth()
@@ -24,13 +25,7 @@ export default function ProfilePage() {
 
     return (
         <div className="lg:ml-12 py-3 border-b border-gray-200 bg-white">
-            <div className="mb-8 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                <div className="min-w-0 flex-1">
-                    <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                        {t('profile.title')}
-                    </h1>
-                </div>
-            </div>
+            <PageHeader title={t('profile.title')}/>
             <div>
                 <Form method={"put"}
                       action={"/admin/profile"}
@@ -42,7 +37,7 @@ export default function ProfilePage() {
                         inputName={"user[avatar]"}
                         image={currentUser?.avatar}
                         error={errors?.avatar}/>
-                    <TextContent user={currentUser} errors={errors} />
+                    <TextContent user={currentUser} errors={errors}/>
                     <div className="mt-6 flex justify-end">
                         <button
                             type="submit"
@@ -137,7 +132,7 @@ function TextContent({user, errors}) {
                 <input
                     name={"user[current_password]"}
                     id={"current_password"}
-                    // required
+                    required
                     className={classNames(
                         errors.current_password ? "border border-red-600" : "border-0",
                         "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

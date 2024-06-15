@@ -1,14 +1,12 @@
 import React, {Fragment, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
-import {
-    Bars3Icon,
-} from '@heroicons/react/24/outline'
+import {Bars3Icon,} from '@heroicons/react/24/outline'
 import {classNames, isActiveLink} from "../../../app/functions.js";
 import {Navigate, NavLink, Outlet} from "react-router-dom";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 import {useTranslation} from "react-i18next";
 import CloseBtn from "../../components/elements/CloseBtn.jsx";
-import {adminNavigation} from "../../../app/navigations.js";
+import {roleNavigation} from "../../../app/navigations.js";
 
 export default function AdminLayout() {
     const {currentUser} = useAuth()
@@ -20,9 +18,9 @@ export default function AdminLayout() {
     return (
         <>
             <div className={"min-h-screen"}>
-                <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} t={t}/>
+                <SideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} t={t} role={currentUser.role}/>
                 {/* Static sidebar for desktop */}
-                <StaticSideBar t={t}/>
+                <StaticSideBar t={t} role={currentUser.role}/>
 
                 <main className="lg:pl-20 p-6 relative">
                     <button type="button"
@@ -38,7 +36,7 @@ export default function AdminLayout() {
     )
 }
 
-const SideBar = ({sidebarOpen, setSidebarOpen, t}) => {
+const SideBar = ({sidebarOpen, setSidebarOpen, t, role}) => {
     return (
         <Transition.Root show={sidebarOpen} as={Fragment}>
             <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
@@ -83,7 +81,7 @@ const SideBar = ({sidebarOpen, setSidebarOpen, t}) => {
                                 className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10">
                                 <nav className="flex flex-1 flex-col mt-10">
                                     <ul role="list" className="-mx-2 flex-1 space-y-1">
-                                        {adminNavigation.map((item) => (
+                                        {roleNavigation[role].map((item) => (
                                             <li key={item.name}>
                                                 <NavLink
                                                     to={item.href}
@@ -111,13 +109,13 @@ const SideBar = ({sidebarOpen, setSidebarOpen, t}) => {
     )
 }
 
-const StaticSideBar = ({t}) => {
+const StaticSideBar = ({t, role}) => {
     return (
         <div
             className="hidden mt-20 lg:fixed lg:inset-y-0 lg:left-0 lg:z-20 lg:block lg:w-20 lg:overflow-y-auto lg:bg-gray-900 lg:pb-4">
             <nav className="mt-8">
                 <ul role="list" className="flex flex-col items-center space-y-1">
-                    {adminNavigation.map((item) => (
+                    {roleNavigation[role].map((item) => (
                         <li key={item.name}>
                             <NavLink
                                 to={item.href}

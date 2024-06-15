@@ -5,6 +5,8 @@ import {MdPlaylistRemove} from "react-icons/md";
 import {LuMailOpen} from "react-icons/lu";
 import {IoMailUnreadOutline} from "react-icons/io5";
 import {useAlert} from "../../../../app/hooks.js";
+import PageHeader from "../../../components/user/PageHeader.jsx";
+import React from "react";
 
 export const messagesLoader = async () => {
     const {data} = await api.get(`${API_URL}/messages`);
@@ -17,13 +19,7 @@ export default function MessagesPage() {
     return (
         <>
             <div className="lg:ml-12 py-3 border-b border-gray-200 bg-white">
-                <div className="mb-8 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                    <div className="min-w-0 flex-1">
-                        <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                            {"All messages"}
-                        </h1>
-                    </div>
-                </div>
+                <PageHeader title={"All messages"}/>
                 <div
                     className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-gray-200 shadow sm:grid sm:grid-cols-2 sm:gap-px sm:divide-y-0">
                     {messages.map((message) => (

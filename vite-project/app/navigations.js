@@ -9,16 +9,20 @@ export const publicNavigation = [
     {name: 'header.navigation.blog', href: '/posts'},
 ]
 
-export const adminNavigation = [
-    {name: 'dashboard', href: '/admin/dashboard', icon: HomeIcon},
-    {name: 'messages', href: '/admin/messages', icon: VscFeedback},
-    {name: 'posts', href: '/admin/posts', icon: TbBlockquote},
-    {name: 'quotes', href: '/admin/quotes', icon: BsChatQuote},
-    {name: 'profile', href: '/admin/profile', icon: FaUserCog},
-]
+export const roleNavigation = {
+    user: [
+        {name: 'dashboard', href: '/admin/dashboard', icon: HomeIcon},
+        {name: 'messages', href: '/admin/messages', icon: VscFeedback},
+        {name: 'profile', href: '/admin/profile', icon: FaUserCog},
+    ],
+    moderator: [
 
-export const userNavigation = [
-    {name: 'dashboard', href: '/admin/dashboard', icon: HomeIcon},
-    {name: 'messages', href: '/admin/messages', icon: VscFeedback},
-    {name: 'profile', href: '/admin/profile', icon: FaUserCog},
-]
+    ],
+    admin: [
+        {name: 'dashboard', href: '/admin/dashboard', icon: HomeIcon},
+        {name: 'messages', href: '/admin/messages', icon: VscFeedback},
+        {name: 'posts', href: '/admin/posts', icon: TbBlockquote},
+        {name: 'quotes', href: '/admin/quotes', icon: BsChatQuote},
+        {name: 'profile', href: '/admin/profile', icon: FaUserCog},
+    ]
+}

@@ -3,7 +3,7 @@ import React, {Fragment} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 import {BellIcon} from "@heroicons/react/24/outline/index.js";
 import {useTranslation} from "react-i18next";
-import {userNavigation} from "../../../app/navigations.js";
+import {roleNavigation} from "../../../app/navigations.js";
 import {useAuth} from "../../providers/AuthProvider.jsx";
 import {AUTH_API_URL} from "../../../app/constants.js";
 import api from "../../../app/config/api.jsx";
@@ -51,29 +51,29 @@ export default function UserMenu() {
                 >
                     <Menu.Items
                         className="absolute right-0 z-10 mt-2.5 min-w-32 max-w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                            {userNavigation.map((item) => (
-                                <Menu.Item key={item.name}>
-                                    {({active}) => (
-                                        <NavLink
-                                            to={item.href}
-                                            className={classNames(
-                                                active ? 'bg-gray-50' : '',
-                                                navItemClassName
-                                            )}
-                                        >
-                                            <item.icon className="h-4 w-4 mr-2 shrink-0" aria-hidden="true"/>
-                                            {t('navigations.' + item.name)}
-                                        </NavLink>
-                                    )}
-                                </Menu.Item>
-                            ))}
-                            <hr/>
-                            <button
-                                className={navItemClassName}
-                                onClick={() => logoutHandler()}
-                            >
-                                {t('navigations.sign_out')}
-                            </button>
+                        {roleNavigation[currentUser.role].map((item) => (
+                            <Menu.Item key={item.name}>
+                                {({active}) => (
+                                    <NavLink
+                                        to={item.href}
+                                        className={classNames(
+                                            active ? 'bg-gray-50' : '',
+                                            navItemClassName
+                                        )}
+                                    >
+                                        <item.icon className="h-4 w-4 mr-2 shrink-0" aria-hidden="true"/>
+                                        {t('navigations.' + item.name)}
+                                    </NavLink>
+                                )}
+                            </Menu.Item>
+                        ))}
+                        <hr/>
+                        <button
+                            className={navItemClassName}
+                            onClick={() => logoutHandler()}
+                        >
+                            {t('navigations.sign_out')}
+                        </button>
                     </Menu.Items>
                 </Transition>
             </Menu>

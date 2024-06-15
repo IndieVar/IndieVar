@@ -1,12 +1,13 @@
-import {Form, NavLink, useLoaderData, useLocation} from "react-router-dom";
+import {Form, useLoaderData, useLocation} from "react-router-dom";
 import {classNames, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useAuth} from "../../../providers/AuthProvider.jsx";
 import Loading from "../../../components/elements/Loading.jsx";
 import {useTranslation} from "react-i18next";
 import UploadImage from "../../../components/forms/UploadImage.jsx";
 import EditorComponent from "../../../components/forms/EditorComponent.jsx";
+import PageHeader from "../../../components/user/PageHeader.jsx";
 
 export function PostFormPage() {
     const {t} = useTranslation('admin')
@@ -24,23 +25,8 @@ export function PostFormPage() {
 
     if (isLoading) return <Loading/>
 
-    return (
-        <div className="lg:ml-12 py-3 border-b border-gray-200 bg-white">
-            <div className="mb-8 md:flex md:items-center md:justify-between">
-                <div className="min-w-0 flex-1">
-                    <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                        {post ? t('posts.edit_post') : t('posts.new_post')}
-                    </h2>
-                </div>
-                <div className="mt-4 flex md:ml-4 md:mt-0">
-                    <NavLink
-                        to={"/admin/posts"}
-                        className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                        {t('back')}
-                    </NavLink>
-                </div>
-            </div>
+    return (<div className="lg:ml-12 py-3 border-b border-gray-200 bg-white">
+            <PageHeader title={post ? t('posts.edit_post') : t('posts.new_post')}/>
             <Form method={post ? 'patch' : 'post'}
                   action={`/admin/posts/${post ? post.id + '/update' : 'new'}`}
                   encType={"multipart/form-data"}
@@ -53,9 +39,7 @@ export function PostFormPage() {
                     image={post?.cover}
                     error={errors?.cover}/>
                 <hr/>
-                {langs.map((lang) => (
-                    <TextContent key={lang} lang={lang} post={post} errors={errors}/>
-                ))}
+                {langs.map((lang) => (<TextContent key={lang} lang={lang} post={post} errors={errors}/>))}
                 <div className="mt-6 flex justify-end">
                     <button
                         type="submit"
@@ -65,14 +49,12 @@ export function PostFormPage() {
                     </button>
                 </div>
             </Form>
-        </div>
-    )
+        </div>)
 }
 
 function TextContent({post, errors, lang}) {
 
-    return (
-        <div className={"space-y-6"}>
+    return (<div className={"space-y-6"}>
             <label
                 className="font-semibold text-gray-500 text-center text-xl">{lang === 'en' ? 'English' : 'Russian'}</label>
             <div>
@@ -81,10 +63,7 @@ function TextContent({post, errors, lang}) {
                     name={`post[${lang}_attributes][title]`}
                     id={`${lang}-title`}
                     required
-                    className={classNames(
-                        errors[`${lang}.title`] ? "border border-red-600" : "border-0",
-                        "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    )}
+                    className={classNames(errors[`${lang}.title`] ? "border border-red-600" : "border-0", "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6")}
                     placeholder="Title"
                     defaultValue={post ? post[lang]?.title : ''}
                 />
@@ -98,10 +77,7 @@ function TextContent({post, errors, lang}) {
                     name={`post[${lang}_attributes][category]`}
                     id={`${lang}-category`}
                     required
-                    className={classNames(
-                        errors[`${lang}.category`] ? "border border-red-600" : "border-0",
-                        "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    )}
+                    className={classNames(errors[`${lang}.category`] ? "border border-red-600" : "border-0", "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6")}
                     placeholder="Category"
                     defaultValue={post ? post[lang]?.category : ''}
                 />
@@ -116,10 +92,7 @@ function TextContent({post, errors, lang}) {
                     name={`post[${lang}_attributes][desc]`}
                     id={`${lang}-desc`}
                     required
-                    className={classNames(
-                        errors[`${lang}.desc`] ? "border border-red-600" : "border-0",
-                        "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    )}
+                    className={classNames(errors[`${lang}.desc`] ? "border border-red-600" : "border-0", "mb-2 mt-1 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6")}
                     placeholder="Description"
                     defaultValue={post ? post[lang]?.desc : ''}
                 />
@@ -131,6 +104,5 @@ function TextContent({post, errors, lang}) {
                              initialValue={post ? post[lang]?.content : ''}
                              error={errors[`${lang}.content`]}/>
             <hr/>
-        </div>
-    )
+        </div>)
 }

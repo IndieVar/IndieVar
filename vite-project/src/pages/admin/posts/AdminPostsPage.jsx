@@ -9,6 +9,7 @@ import api from "../../../../app/config/api.jsx";
 import {API_URL} from "../../../../app/constants.js";
 import {IoEyeOutline} from "react-icons/io5";
 import {supportedLngs} from "../../../../app/i18n/config.js";
+import PageHeader from "../../../components/user/PageHeader.jsx";
 
 
 export const postsLoader = async () => {
@@ -22,21 +23,7 @@ export default function AdminPostsPage() {
 
     return (
         <div className="lg:ml-12 py-3 border-b border-gray-200 bg-white">
-            <div className="mb-8 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                <div className="min-w-0 flex-1">
-                    <h1 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                        {t('posts.all_posts')}
-                    </h1>
-                </div>
-                <div className="ml-4 mt-2 flex-shrink-0">
-                    <NavLink
-                        to={'/admin/posts/new'}
-                        className="relative inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        {t('posts.new_post')}
-                    </NavLink>
-                </div>
-            </div>
+            <PageHeader title={t('posts.all_posts')} path={'/admin/posts/new'} pathTitle={t('posts.new_post')}/>
             <div
                 className="divide-y divide-gray-200 overflow-hidden rounded-lg shadow sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-px sm:divide-y-0">
                 {posts.map((post) => (

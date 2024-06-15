@@ -7,7 +7,7 @@ import {useTranslation} from "react-i18next";
 import {isActiveLink} from "../../../app/functions.js";
 import CloseBtn from "./CloseBtn.jsx";
 import {publicNavigation} from "../../../app/navigations.js";
-import UserMenu from "./UserMenu.jsx";
+import UserMenu from "../user/UserMenu.jsx";
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)

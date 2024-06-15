@@ -4,7 +4,7 @@ import ScrollToTop from "../components/elements/ScrollToTop.jsx";
 import {useEffect} from "react";
 import Header from "../components/elements/Header.jsx";
 import ContactForm from "../components/forms/ContactForm.jsx";
-import Alert from "../components/elements/Alert.jsx";
+import Alert from "../components/user/Alert.jsx";
 import Footer from "../components/elements/Footer.jsx";
 
 const Layout = () => {
