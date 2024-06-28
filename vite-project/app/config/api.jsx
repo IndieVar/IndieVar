@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_URL, TOKEN_PREFIX} from "../constants.js";
+import {API_URL, APP_NAME} from "../constants.js";
 import {redirect} from "react-router-dom";
 
 
@@ -10,7 +10,7 @@ const api = axios.create({
 // Add a request interceptor
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem(`${TOKEN_PREFIX}_token`);
+        const token = localStorage.getItem(`${APP_NAME}_token`);
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -33,13 +33,13 @@ api.interceptors.response.use(
             try {
                 const response = await axios.post(`${API_URL}/users/tokens/refresh`, {}, {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem(`${TOKEN_PREFIX}_refresh_token`)}`
+                        Authorization: `Bearer ${localStorage.getItem(`${APP_NAME}_refresh_token`)}`
                     }
                 });
                 const {token, refresh_token} = response.data;
 
-                localStorage.setItem(`${TOKEN_PREFIX}_token`, token)
-                localStorage.setItem(`${TOKEN_PREFIX}_refresh_token`, refresh_token)
+                localStorage.setItem(`${APP_NAME}_token`, token)
+                localStorage.setItem(`${APP_NAME}_refresh_token`, refresh_token)
 
                 // Retry the original request with the new token
                 originalRequest.headers.Authorization = `Bearer ${token}`;

@@ -1,14 +1,7 @@
-import axios from "axios";
-import {API_URL} from "../../../app/constants.js";
 import {useLoaderData} from "react-router-dom";
 import PostCard from "../../components/features/PostCard.jsx";
 import {useTranslation} from "react-i18next";
 import {Helmet, HelmetProvider} from "react-helmet-async";
-
-export const publicPostsLoader = async () => {
-    const {data} = await axios.get(`${API_URL}/public_posts`);
-    return data
-}
 
 export default function PostsPage() {
     const posts = useLoaderData();

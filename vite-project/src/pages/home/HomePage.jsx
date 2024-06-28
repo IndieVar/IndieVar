@@ -1,16 +1,9 @@
-import {API_URL} from "../../../app/constants.js";
-import axios from "axios";
 import {useLoaderData} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 import TechnologySection from "../../components/pageSections/TechnologySection.jsx";
 import HeroSection from "../../components/pageSections/HeroSection.jsx";
 import BlogSection from "../../components/pageSections/BlogSection.jsx";
-
-export const homeLoader = async () => {
-    const {data} = await axios.get(`${API_URL}/home`);
-    return data
-}
 
 export default function HomePage() {
     const data = useLoaderData()

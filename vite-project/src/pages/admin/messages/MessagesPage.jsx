@@ -1,17 +1,10 @@
-import {API_URL} from "../../../../app/constants.js";
 import {Form, NavLink, useLoaderData} from "react-router-dom";
-import api from "../../../../app/config/api.jsx";
 import {MdPlaylistRemove} from "react-icons/md";
 import {LuMailOpen} from "react-icons/lu";
 import {IoMailUnreadOutline} from "react-icons/io5";
 import {useAlert} from "../../../../app/hooks.js";
 import PageHeader from "../../../components/user/PageHeader.jsx";
 import React from "react";
-
-export const messagesLoader = async () => {
-    const {data} = await api.get(`${API_URL}/messages`);
-    return data
-}
 
 export default function MessagesPage() {
     const messages = useLoaderData()

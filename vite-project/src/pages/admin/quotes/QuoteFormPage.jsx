@@ -1,17 +1,10 @@
 import {Form, useLoaderData, useLocation} from "react-router-dom";
-import {API_URL} from "../../../../app/constants.js";
 import {classNames, printError} from "../../../../app/functions.js";
 import {useAlert} from "../../../../app/hooks.js";
 import React, {useEffect, useState} from "react";
 import Loading from "../../../components/elements/Loading.jsx";
 import {useTranslation} from "react-i18next";
-import api from "../../../../app/config/api.jsx";
 import PageHeader from "../../../components/user/PageHeader.jsx";
-
-export const quoteLoader = async ({params}) => {
-    const {data} = await api.get(`${API_URL}/quotes/${params.id}`);
-    return data
-}
 
 export function QuoteFormPage() {
     const {t} = useTranslation('admin')

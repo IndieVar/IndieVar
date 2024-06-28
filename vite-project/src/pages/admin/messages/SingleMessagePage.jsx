@@ -1,15 +1,8 @@
-import {API_URL} from "../../../../app/constants.js";
 import {Form, useLoaderData} from "react-router-dom";
-import api from "../../../../app/config/api.jsx";
 import {MdPlaylistRemove} from "react-icons/md";
 import {useAlert} from "../../../../app/hooks.js";
 import PageHeader from "../../../components/user/PageHeader.jsx";
 import React from "react";
-
-export const singleMessageLoader = async ({params}) => {
-    const {data} = await api.get(`${API_URL}/messages/${params.id}`);
-    return data
-}
 
 export default function SingleMessagePage() {
     const message = useLoaderData()

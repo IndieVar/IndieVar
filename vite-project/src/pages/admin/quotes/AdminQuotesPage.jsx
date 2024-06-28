@@ -1,18 +1,11 @@
-import {API_URL} from "../../../../app/constants.js";
 import {Form, NavLink, useLoaderData} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import React, {useEffect, useState} from "react";
 import {MdOutlineEditNote, MdPlaylistRemove} from "react-icons/md";
 import {IoEyeOutline} from "react-icons/io5";
 import {useAlert} from "../../../../app/hooks.js";
-import api from "../../../../app/config/api.jsx";
 import {supportedLngs} from "../../../../app/i18n/config.js";
 import PageHeader from "../../../components/user/PageHeader.jsx";
-
-export const quotesLoader = async () => {
-    const {data} = await api.get(`${API_URL}/quotes`);
-    return data
-}
 
 export default function AdminQuotesPage() {
     const quotes = useLoaderData()

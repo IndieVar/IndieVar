@@ -6,16 +6,9 @@ import PostCard from "../../../components/features/PostCard.jsx";
 import React, {useEffect, useState} from "react";
 import {AiOutlineEyeInvisible} from "react-icons/ai";
 import api from "../../../../app/config/api.jsx";
-import {API_URL} from "../../../../app/constants.js";
 import {IoEyeOutline} from "react-icons/io5";
 import {supportedLngs} from "../../../../app/i18n/config.js";
 import PageHeader from "../../../components/user/PageHeader.jsx";
-
-
-export const postsLoader = async () => {
-    const {data} = await api.get(`${API_URL}/posts`);
-    return data
-}
 
 export default function AdminPostsPage() {
     const posts = useLoaderData()

@@ -8,11 +8,6 @@ import React, {useEffect} from "react";
 import ViewsCount from "../../components/features/ViewsCount.jsx";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 
-export const singlePostLoader = async ({params}) => {
-    const {data} = await axios.get(`${API_URL}/posts/${params.id}`);
-    return data
-}
-
 export default function SinglePostPage() {
     const post = useLoaderData();
     const {i18n} = useTranslation();
