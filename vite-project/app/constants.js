@@ -1,4 +1,4 @@
-export const APP_NAME = 'indievar'
+export const APP_NAME = 'indievar_' + import.meta.env.MODE
 
 export const API_URL = import.meta.env.VITE_API_URL;
 

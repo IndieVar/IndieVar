@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  # redirect to client app
   get "*path", to: "fallback#index",
       constraints: ->(req) { !req.url.include?("/api") && !req.xhr? && req.format.html? }
+
+  # WWW redirect
+  match '(*any)', to: redirect(subdomain: ''), via: :all, constraints: { subdomain: 'www' }
 
   namespace :api do
     namespace :v1 do
